@@ -23,18 +23,34 @@ fun main() {
 //    name2 = "xxx"
 //    printLen(name2!!)
 //    callOtherKotlin()
-    testClass(JavaClass::class.java)
-    testClass(KotlinClass::class)
+//    testClass(JavaClass::class.java)
+//    testClass(KotlinClass::class)
     // 在java定义变量名字与Kotlin中关键词冲突(名字一样)的时候, 使用``这个转义
-    println(JavaClass.`in`)
-    println(JavaClass.name)
+//    println(JavaClass.`in`)
+//    println(JavaClass.name)
+//    callJavaStaticMethodAndNonStatic()
 
+//    A.a.putNumber(111)
+    // ka 对象 与 a 对象不是一个哦
+    val ka = KotlinA()
+    ka.putNumber(23232)
+
+    KotlinA.a.putNumber(123)
+}
+
+/**
+ *
+ */
+fun callJavaStaticMethodAndNonStatic() {
+    // 在kotlin中不用关键词new 新建对象
     val main = Main()
     val main2 = Main()
     println(main)
     println(main2)
     println(main2 == main)
+    // 调用实例方法
     main.instanceMethod("this is instance method")
+    // 调用静态方法
     Main.staticMethod("this is static method")
 }
 

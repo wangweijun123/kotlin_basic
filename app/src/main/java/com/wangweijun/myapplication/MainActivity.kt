@@ -20,6 +20,13 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(applicationContext, SecondActivity::class.java))
     }
 
+    fun companionOBJ(view: View) {
+        val ka = KotlinA()
+        ka.putNumber(23232)
+
+        KotlinA.a.putNumber(123)
+    }
+
     fun testClass(clz: Class<JavaClass>) {
         println(clz.simpleName)
     }
@@ -27,4 +34,6 @@ class MainActivity : AppCompatActivity() {
     fun testClass(clz: KClass<KotlinClass>) {
         println(clz.simpleName)
     }
+
+
 }
