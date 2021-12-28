@@ -17,10 +17,18 @@ var name2: String? = null
 @Test
 fun main() {
 //    printLen(name)
-    name2 = "xxx"
     // 把可以为NULL类型强制传入不可为NULL类型的函数,除非你确保可以为NULL类型的参数的值一定不为NULL,否则强制传入
     // 在运行期抛异常NullPointException
-    printLen(name2!!)
+//    name2 = "xxx"
+//    printLen(name2!!)
+    callOtherKotlin()
+}
+
+/**
+ * 直接调用其他Kotlin文件的函数
+ */
+fun callOtherKotlin() {
+    echo("dxx")
 }
 
 /**
