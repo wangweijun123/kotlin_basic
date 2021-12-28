@@ -17,5 +17,5 @@ package com.wangweijun.myapplication
 //val name = "wang"  在编译期间 error, 因为在Test.kt也定义了变量 name
 val myname = "wangduan"
 fun echo(str: String) {
-    print(str)
+    println(str)
 }

@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun javaCallKotlin(view: View) {
+        Test.sayMessage("hi kotlin obj in kotlin")
+        // 注意在kotlin中传java的class的写法 SecondActivity::class.java
         startActivity(Intent(applicationContext, SecondActivity::class.java))
     }
 }
