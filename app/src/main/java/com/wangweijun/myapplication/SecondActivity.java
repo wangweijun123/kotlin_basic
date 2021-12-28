@@ -12,7 +12,7 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_second);
-
+        // java调用kotlin代码,
         UtilsKt.echo("ddddddddddddd");
 
         Test.INSTANCE.sayMessage("hi kotlin obj in java");

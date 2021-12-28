@@ -15,4 +15,12 @@ public class Main {
         String myname = UtilsKt.getMyname();
         out.println("print in java  " + myname);
     }
+
+    public void instanceMethod(String msg) {
+        out.println(msg);
+    }
+
+    public static void staticMethod(String msg) {
+        out.println(msg);
+    }
 }

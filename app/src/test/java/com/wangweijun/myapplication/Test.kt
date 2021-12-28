@@ -1,6 +1,7 @@
 package com.wangweijun.myapplication
 
 import org.junit.Test
+import kotlin.reflect.KClass
 
 /**
  * 在kotlin语言,变量与函数直接定义在文件中
@@ -10,7 +11,7 @@ import org.junit.Test
 val age: Int = 18
 
 // 这种是不可以为NULL的类型
-var name: String = "wangweijun"
+ var name: String = "wangweijun"
 // 这种是可以为NULL的类型, 这是两种不同的类型
 var name2: String? = null
 
@@ -21,7 +22,28 @@ fun main() {
     // 在运行期抛异常NullPointException
 //    name2 = "xxx"
 //    printLen(name2!!)
-    callOtherKotlin()
+//    callOtherKotlin()
+    testClass(JavaClass::class.java)
+    testClass(KotlinClass::class)
+    // 在java定义变量名字与Kotlin中关键词冲突(名字一样)的时候, 使用``这个转义
+    println(JavaClass.`in`)
+    println(JavaClass.name)
+
+    val main = Main()
+    val main2 = Main()
+    println(main)
+    println(main2)
+    println(main2 == main)
+    main.instanceMethod("this is instance method")
+    Main.staticMethod("this is static method")
+}
+
+fun testClass(clz: Class<JavaClass>) {
+    println(clz.simpleName)
+}
+
+fun testClass(clz: KClass<KotlinClass>) {
+    println(clz.simpleName)
 }
 
 /**

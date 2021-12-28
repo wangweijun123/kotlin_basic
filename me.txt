@@ -17,3 +17,7 @@ https://developer.android.google.cn/courses/android-basics-kotlin/course
 
 Kotlin 上的所有例子
 https://github.com/orgs/google-developer-training/repositories?type=all
+
+Kotlin 没有封装类
+Kotlin 类型空值敏感
+Kotlin 没有静态变量与静态的方法
