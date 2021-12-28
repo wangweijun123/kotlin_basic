@@ -21,7 +21,9 @@ fun main() {
     // 把可以为NULL类型强制传入不可为NULL类型的函数,除非你确保可以为NULL类型的参数的值一定不为NULL,否则强制传入
     // 在运行期抛异常NullPointException
 //    name2 = "xxx"
-//    printLen(name2!!)
+    printLen(name2!!)
+//    printLen(null) 编译前报错
+
 //    callOtherKotlin()
 //    testClass(JavaClass::class.java)
 //    testClass(KotlinClass::class)
@@ -31,10 +33,41 @@ fun main() {
 //    callJavaStaticMethodAndNonStatic()
 
 //    A.a.putNumber(111)
+
+//    使用伴生对象()
+
+    val format = C.format("")
+//    println(format.length) // 运行期空指针报错
+    println(format?.length) // is ok 打印null,后面的语句继续执行
+    println("##########")
+
+    // f1 类型 String!
+    val f1 = C.format("")
+    println(f1?.length)
+    // f2 不为NULL的String类型
+   // val f2: String = C.format("") // 运行期异常NullPointException
+// f3 可以为NULL的String类型
+    val f3: String? = C.format("")
+    println(f3?.length) // ? 其实就是加了一个if的判断
+}
+
+/**
+ * kotlin中null测试
+ */
+fun nullTest() {
+    val format = C.format("")
+    println(format)
+    if (format == null) {
+        println("is null")
+    } else {
+        println("not null")
+    }
+}
+
+fun 使用伴生对象() {
     // ka 对象 与 a 对象不是一个哦
     val ka = KotlinA()
     ka.putNumber(23232)
-
     KotlinA.a.putNumber(123)
 }
 
@@ -75,6 +108,12 @@ fun callOtherKotlin() {
 fun printVarInStr() {
     print("my age = $age")
 }
+
+/*fun printVarInStr2() {
+    val age = 18;
+    // 不能用占位符 build error
+    println("my age = %d", age)
+}*/
 
 /**
  * 赋值操作: 不为NULL类型可以为 可以为NULL类型赋值

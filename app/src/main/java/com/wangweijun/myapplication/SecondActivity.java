@@ -16,5 +16,6 @@ public class SecondActivity extends AppCompatActivity {
         UtilsKt.echo("ddddddddddddd");
 
         Test.INSTANCE.sayMessage("hi kotlin obj in java");
+        Test.jvmStaticTest("hi jvmStaticTest in java");
     }
 }

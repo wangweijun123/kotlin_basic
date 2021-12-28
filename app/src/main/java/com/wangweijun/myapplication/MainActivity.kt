@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     fun javaCallKotlin(view: View) {
         Test.sayMessage("hi kotlin obj in kotlin")
+        Test.jvmStaticTest("hi jvmStaticTest in kotlin ")
         testClass(JavaClass::class.java)
         testClass(KotlinClass::class)
         // 注意在kotlin中传java的class的写法 SecondActivity::class.java
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         ka.putNumber(23232)
 
         KotlinA.a.putNumber(123)
+        printLen(null)
     }
 
     fun testClass(clz: Class<JavaClass>) {
@@ -35,5 +37,18 @@ class MainActivity : AppCompatActivity() {
         println(clz.simpleName)
     }
 
+    /**
+     * 参数可以为NULL的String类型, 返回值也可以为NULL的String类型
+     */
+    fun printLen(str: String?): String? {
+        return str
+    }
+
+    /**
+     * 参数是不可以为NULL的String类型, 返回值也是不可以为NULL的String的类型
+     */
+    fun printLen2(str: String): String {
+        return str
+    }
 
 }
