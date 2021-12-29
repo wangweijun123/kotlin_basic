@@ -3,6 +3,8 @@ package com.wangweijun.myapplication
 import com.wangweijun.myapplication.unit3.Animal2
 import com.wangweijun.myapplication.unit3.Dog2
 import com.wangweijun.myapplication.unit3.Zomm2
+import com.wangweijun.myapplication.unit6.PlayerUI
+import com.wangweijun.myapplication.unit6.PlayerViewType
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -97,11 +99,18 @@ fun main() {
 //    println(StringUtils.isEmp2(""))
 
 //    proxyTest()
-    beanTest()
+//    beanTest()
+    musicPlayerTest()
+}
+
+fun musicPlayerTest() {
+//    val user = com.wangweijun.myapplication.unit6.User(1, "dx")
+    val user = com.wangweijun.myapplication.unit6.User(1, "dx", PlayerViewType.VIP)
+    PlayerUI.get().showPlayer(user)
 }
 
 fun beanTest() {
-    val user = User(100, "dx")
+    val user = User(100, "dx", )
     println(user.id)
 }
 
