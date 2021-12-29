@@ -18,5 +18,9 @@ class KotlinA : AInterface {
      */
     companion object {
         val a = KotlinA()
+
+        fun isEmpty(msg: String): Boolean {
+            return "".equals(msg)
+        }
     }
 }

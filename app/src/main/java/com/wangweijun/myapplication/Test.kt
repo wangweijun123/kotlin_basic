@@ -8,6 +8,8 @@ package com.wangweijun.myapplication
  * 私有构造函数
  * private constructor
  * 确实就是单例的写法
+ *
+ * 工具类就以用Object这个呗
  */
 object Test {
     // 编译成了 public final sayMessage(Ljava/lang/String;)V

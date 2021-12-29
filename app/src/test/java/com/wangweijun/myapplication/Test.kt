@@ -55,7 +55,7 @@ fun main() {
 
 //    A.a.putNumber(111)
 
-//    使用伴生对象()
+    使用伴生对象()
 
 //    echo2()
 //    echo2("ddddddddddd")
@@ -81,12 +81,21 @@ fun main() {
     })*/
 
     // 这是创建一个对象
-    val runnable = Runnable {
+    /*val runnable = Runnable {
         println(" run ...")
     }
     val function = runnable::run
-    onlyif(true, function)
+    onlyif(true, function)*/
 
+    // 编译出错
+//    StringUtils.isEmp("xx")
+    val su = StringUtils()
+    println(su.isEmp("xx"))
+    println(StringUtils.isEmp2(""))
+
+    // 私有构造函数SingleKotlin() build error
+    // 只能通过伴生对象获取companion object
+    SingleKotlin.get().test()
 }
 
 fun lambdaTest01() {
@@ -152,6 +161,9 @@ fun 使用伴生对象() {
     val ka = KotlinA()
     ka.putNumber(23232)
     KotlinA.a.putNumber(123)
+
+    val empty = KotlinA.isEmpty("xxx")
+    println("empty = $empty")
 }
 
 /**
