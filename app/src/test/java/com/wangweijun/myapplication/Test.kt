@@ -96,11 +96,17 @@ fun main() {
 //    println(su.isEmp("xx"))
 //    println(StringUtils.isEmp2(""))
 
-    proxyTest()
+//    proxyTest()
+    beanTest()
+}
+
+fun beanTest() {
+    val user = User(100, "dx")
+    println(user.id)
 }
 
 /**
- *
+ * 静态代理
  */
 fun proxyTest() {
     Zomm2(Dog2()).bark()
