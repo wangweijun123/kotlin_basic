@@ -4,12 +4,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import kotlin.reflect.KClass
 
-class MainActivity : AppCompatActivity() {
+/**
+ * AppCompatActivity() 表示调用父类的无参构造函数
+ */
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    init {
+        println("init闭包在构造函数中的被调用")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        findViewById<Button>(R.id.bt).setOnClickListener(this)
     }
 
     fun javaCallKotlin(view: View) {
@@ -75,6 +85,10 @@ class MainActivity : AppCompatActivity() {
         if (isDebug) {
             bolck()
         }
+    }
+
+    override fun onClick(v: View?) {
+        println("实现接口的写法")
     }
 
 

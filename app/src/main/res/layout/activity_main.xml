@@ -28,4 +28,10 @@
         android:layout_height="wrap_content"
         android:text="高阶函数(函数中有函数)"
         android:onClick="gaoJie"/>
+
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="实现接口的写法"/>
 </LinearLayout>
