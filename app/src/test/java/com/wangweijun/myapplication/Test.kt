@@ -5,6 +5,7 @@ import com.wangweijun.myapplication.unit3.Dog2
 import com.wangweijun.myapplication.unit3.Zomm2
 import com.wangweijun.myapplication.unit6.PlayerUI
 import com.wangweijun.myapplication.unit6.PlayerViewType
+import com.wangweijun.myapplication.unit7.loop
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -100,7 +101,8 @@ fun main() {
 
 //    proxyTest()
 //    beanTest()
-    musicPlayerTest()
+//    musicPlayerTest()
+    loop()
 }
 
 fun musicPlayerTest() {
