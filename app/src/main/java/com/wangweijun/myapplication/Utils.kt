@@ -19,3 +19,22 @@ val myname = "wangduan"
 fun echo(str: String) {
     println(str)
 }
+
+/**
+ * 调用带有默认值的参数
+ */
+fun echo2(str: String = "xxxx") {
+    println(str)
+}
+
+/**
+ * 函数重载
+ */
+fun echo2(age: Int, str: String = "xxxx") {
+    println(str)
+}
+
+/**
+ * 如果函数体只有一句话 直接在函数声明后 = 函数体语句
+ */
+fun echo3(age: Int, str: String = "xxxx") = println(str)

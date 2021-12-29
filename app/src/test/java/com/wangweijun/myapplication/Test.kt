@@ -21,7 +21,7 @@ fun main() {
     // 把可以为NULL类型强制传入不可为NULL类型的函数,除非你确保可以为NULL类型的参数的值一定不为NULL,否则强制传入
     // 在运行期抛异常NullPointException
 //    name2 = "xxx"
-    printLen(name2!!)
+//    printLen(name2!!)
 //    printLen(null) 编译前报错
 
 //    callOtherKotlin()
@@ -36,6 +36,17 @@ fun main() {
 
 //    使用伴生对象()
 
+//    echo2()
+//    echo2("ddddddddddd")
+//    Dog().printName(Dog())
+    val dog = Dog()
+    dog.printName(dog)
+}
+
+/**
+ * 自定义返回值类型, 主要是 ? 类型
+ */
+fun definedRetrueType() {
     val format = C.format("")
 //    println(format.length) // 运行期空指针报错
     println(format?.length) // is ok 打印null,后面的语句继续执行
@@ -45,7 +56,7 @@ fun main() {
     val f1 = C.format("")
     println(f1?.length)
     // f2 不为NULL的String类型
-   // val f2: String = C.format("") // 运行期异常NullPointException
+    // val f2: String = C.format("") // 运行期异常NullPointException
 // f3 可以为NULL的String类型
     val f3: String? = C.format("")
     println(f3?.length) // ? 其实就是加了一个if的判断
@@ -102,6 +113,10 @@ fun callOtherKotlin() {
     echo("dxx")
 }
 
+fun callOtherKotlin2() {
+    echo2("ddddddddddd")
+}
+
 /**
  * 在字符串中打印变量需要 $
  */
@@ -131,4 +146,15 @@ fun assign() {
 fun printLen(str: String): String {
 //    println("字符串为：$str")
     return str
+}
+
+// open 与 final 相反, kotlin的class默认背编译成final class
+open class Animal
+class Dog : Animal()
+
+fun Animal.name() = "animal"
+fun Dog.name() = "Dog"
+
+fun Animal.printName(anima: Animal) {
+    println(anima.name())
 }

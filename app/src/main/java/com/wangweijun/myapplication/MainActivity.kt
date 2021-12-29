@@ -27,6 +27,16 @@ class MainActivity : AppCompatActivity() {
 
         KotlinA.a.putNumber(123)
         printLen(null)
+
+
+    }
+
+    fun extendsMethodAndVar(view: View) {
+        val dog = Dog()
+        // 结果system.out: animal
+        // printName 是父类的方法, dog 会被强制转化成 animal对象
+        // 扩展函数是静态的给类添加函数, 不具备多态效应
+        dog.printName(dog)
     }
 
     fun testClass(clz: Class<JavaClass>) {
@@ -50,5 +60,7 @@ class MainActivity : AppCompatActivity() {
     fun printLen2(str: String): String {
         return str
     }
+
+
 
 }

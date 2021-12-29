@@ -20,4 +20,4 @@ https://github.com/orgs/google-developer-training/repositories?type=all
 
 Kotlin 没有封装类
 Kotlin 类型空值敏感
-Kotlin 没有静态变量与静态的方法
+Kotlin 没有静态变量与静态的方法, 没有static关键字, 只有 JVMStatic

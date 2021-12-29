@@ -17,5 +17,11 @@
         android:text="companion object 同伴对象"
         android:onClick="companionOBJ"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="class 类的方法与变量扩展"
+        android:onClick="extendsMethodAndVar"/>
+
 
 </LinearLayout>
