@@ -15,6 +15,27 @@ val age: Int = 18
 // 这种是可以为NULL的类型, 这是两种不同的类型
 var name2: String? = null
 
+// 声明lambda闭包,闭包就是一对花括号{}
+val echo2 = {}
+val echo4 = {
+    println("无参数的闭包")
+}
+// 带参数的闭包 需要 -> 把参数与函数体分开
+// 我的理解 闭包(参数与函数体) 就是 一个函数(参数与函数体)
+val echo3 = { name: String ->
+    println("this name : $name")
+}
+
+/**
+ * 声明一个带有参数为函数的函数, 叫高阶函数： 函数的参数是函数
+ * 参数为函数: () -> Unit 表示无参, 返回值为Unit: 意思是没有返回值,(有一个隐藏的返回值)
+ */
+fun onlyif(isDebug: Boolean, bolck: () -> Unit) {
+    if (isDebug) {
+        bolck()
+    }
+}
+
 @Test
 fun main() {
 //    printLen(name)
@@ -39,8 +60,59 @@ fun main() {
 //    echo2()
 //    echo2("ddddddddddd")
 //    Dog().printName(Dog())
-    val dog = Dog()
-    dog.printName(dog)
+
+//    val dog = Dog()
+//    dog.printName(dog)
+
+//    lambdaTest01()
+//    lambdaTest02()
+    // 调用闭包(如下两种都可以)
+//    echo3.invoke("ddddxxxx")
+//    echo3("1113222")
+//    echo4.invoke()
+
+    // 调用高阶函数
+    /*onlyif(true) {
+        println("这是高阶函数")
+    }*/
+    // 这样也是可以的
+    /*onlyif(true, {
+        println("这是高阶函数")
+    })*/
+
+    // 这是创建一个对象
+    val runnable = Runnable {
+        println(" run ...")
+    }
+    val function = runnable::run
+    onlyif(true, function)
+
+}
+
+fun lambdaTest01() {
+    val thread = Thread({ ->
+        println("ddddddddd")
+    })
+    thread.start()
+    Thread.sleep(100)
+}
+
+fun lambdaTest02() {
+    // 1 如果lambda闭包没有参数,箭头可以省略,see lambdaTest02
+    // 2 如果lambda是函数的最后一个参数,可以将{} 放到()外面
+    // 3 如果函数只有lambda一个参数, 小阔号()可以省略
+    /*val thread2 = Thread({
+        println("22222222222")
+    })
+    val thread3 = Thread() {
+        println("22222222222")
+    }*/
+    // 怎么简单怎么来
+    val thread = Thread {
+        println("22222222222")
+    }
+    thread.start()
+    Thread.sleep(100)
 }
 
 /**

@@ -39,6 +39,13 @@ class MainActivity : AppCompatActivity() {
         dog.printName(dog)
     }
 
+    fun gaoJie(view: View) {
+        // {}里面会被编译成一个对象
+        onlyif(true) {
+            println("这是高阶函数")
+        }
+    }
+
     fun testClass(clz: Class<JavaClass>) {
         println(clz.simpleName)
     }
@@ -61,6 +68,14 @@ class MainActivity : AppCompatActivity() {
         return str
     }
 
+    // 被编译成了 lambda 被编译成了 一个对象
+    // public final onlyif(Boolean, ZLkotlin/jvm/functions/Function0;)V
+    // inline 修饰高阶函数，减少临时对象的创建
+   inline fun onlyif(isDebug: Boolean, bolck: () -> Unit) {
+        if (isDebug) {
+            bolck()
+        }
+    }
 
 
 }

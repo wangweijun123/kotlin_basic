@@ -21,3 +21,5 @@ https://github.com/orgs/google-developer-training/repositories?type=all
 Kotlin 没有封装类
 Kotlin 类型空值敏感
 Kotlin 没有静态变量与静态的方法, 没有static关键字, 只有 JVMStatic
+
+疑问: lambda 闭包会编译成一个 对象

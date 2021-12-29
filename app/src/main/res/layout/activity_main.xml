@@ -23,5 +23,9 @@
         android:text="class 类的方法与变量扩展"
         android:onClick="extendsMethodAndVar"/>
 
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="高阶函数(函数中有函数)"
+        android:onClick="gaoJie"/>
 </LinearLayout>
