@@ -1,5 +1,8 @@
 package com.wangweijun.myapplication
 
+import com.wangweijun.myapplication.unit3.Animal2
+import com.wangweijun.myapplication.unit3.Dog2
+import com.wangweijun.myapplication.unit3.Zomm2
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -55,7 +58,7 @@ fun main() {
 
 //    A.a.putNumber(111)
 
-    使用伴生对象()
+//    使用伴生对象()
 
 //    echo2()
 //    echo2("ddddddddddd")
@@ -89,10 +92,24 @@ fun main() {
 
     // 编译出错
 //    StringUtils.isEmp("xx")
-    val su = StringUtils()
-    println(su.isEmp("xx"))
-    println(StringUtils.isEmp2(""))
+//    val su = StringUtils()
+//    println(su.isEmp("xx"))
+//    println(StringUtils.isEmp2(""))
 
+    proxyTest()
+}
+
+/**
+ *
+ */
+fun proxyTest() {
+    Zomm2(Dog2()).bark()
+}
+
+/**
+ * kotlin class 单例测试
+ */
+fun kotlinSingleTest() {
     // 私有构造函数SingleKotlin() build error
     // 只能通过伴生对象获取companion object
     SingleKotlin.get().test()

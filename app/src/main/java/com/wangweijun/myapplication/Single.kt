@@ -13,7 +13,7 @@ class StringUtils /*private constructor()*/ {
         return "".equals(str)
     }
 
-    // 方便调用 StringUtils.isEmp2("xxxx)
+    // 方便调用 StringUtils.isEmp2("xxxx), 相当于java中public static 方法
     companion object {
         fun isEmp2(str: String): Boolean {
             return "".equals(str)
