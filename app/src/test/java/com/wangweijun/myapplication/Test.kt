@@ -9,6 +9,8 @@ import com.wangweijun.myapplication.unit7.arrayTest
 import com.wangweijun.myapplication.unit7.functionScope
 import com.wangweijun.myapplication.unit7.loop
 import com.wangweijun.myapplication.unit7.myOperator
+import com.wangweijun.myapplication.unit8.Hello
+import com.wangweijun.myapplication.unit8.Person
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -109,8 +111,21 @@ fun main() {
 //    arrayTest()
 //    myOperator()
 
-    functionScope()
-    dengyu()
+//    functionScope()
+//    dengyu()
+    testVarVal()
+}
+
+fun testVarVal() {
+    val hello = Hello()
+    hello.str = "wang"
+    println(hello.str)
+    println(hello.age)
+
+    val person = Person(20)
+    println(person.age)
+    person.oneYearLater()
+    println(person.age)
 }
 
 fun musicPlayerTest() {

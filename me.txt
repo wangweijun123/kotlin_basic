@@ -30,5 +30,6 @@ DSL 领域专用语言
 外部DSL: JSON, XML, CSS, Makefile
 内部DSL: Anko Kolley build.gradle (依赖语言)
 
-
-
+内联的特殊情况
+1 在kotlin中，内部的lambda是不容许中断外部函数执行
+2 inline 的lambda可以中断外部函数
