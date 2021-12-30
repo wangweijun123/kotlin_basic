@@ -11,6 +11,8 @@ import com.wangweijun.myapplication.unit7.loop
 import com.wangweijun.myapplication.unit7.myOperator
 import com.wangweijun.myapplication.unit8.Hello
 import com.wangweijun.myapplication.unit8.Person
+import com.wangweijun.myapplication.unit8.lambdaReturn
+import com.wangweijun.myapplication.unit8.lambdaReturnWithInline
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -113,7 +115,9 @@ fun main() {
 
 //    functionScope()
 //    dengyu()
-    testVarVal()
+//    testVarVal()
+    lambdaReturn()
+    lambdaReturnWithInline()
 }
 
 fun testVarVal() {
