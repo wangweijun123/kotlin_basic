@@ -6,6 +6,7 @@ import com.wangweijun.myapplication.unit3.Zomm2
 import com.wangweijun.myapplication.unit6.PlayerUI
 import com.wangweijun.myapplication.unit6.PlayerViewType
 import com.wangweijun.myapplication.unit7.arrayTest
+import com.wangweijun.myapplication.unit7.functionScope
 import com.wangweijun.myapplication.unit7.loop
 import com.wangweijun.myapplication.unit7.myOperator
 import org.junit.Test
@@ -106,7 +107,9 @@ fun main() {
 //    musicPlayerTest()
 //    loop()
 //    arrayTest()
-    myOperator()
+//    myOperator()
+
+    functionScope()
 }
 
 fun musicPlayerTest() {
@@ -116,7 +119,7 @@ fun musicPlayerTest() {
 }
 
 fun beanTest() {
-    val user = User(100, "dx", )
+    val user = User(100, "dx")
     println(user.id)
 }
 

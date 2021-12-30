@@ -33,3 +33,48 @@ fun <T, E> Iterable<T>.convert(action: (T) -> E): MutableList<E> {
     }
     return list
 }
+
+data class User(var name: String)
+/**
+ * 作用域函数
+ */
+fun functionScope() {
+    // 还是要看kotlin源码以及注释
+    val user = User("wangweijun")
+    // let also run with 这些
+
+    // let 与 run 都会返回闭包的执行的结果, 区别在于let有闭包参数,
+    // 而run没有闭包参数,使用this 获取当前调用对象
+    val r1 = user.let {
+        it.name
+    }
+    println(r1)
+    // 也可以这样写
+    val r11 = user.let { xx ->
+        xx.name
+    }
+    println(r11)
+    val r2 = user.run {
+        this.name
+    }
+    println(r2)
+
+    // also apply
+    println("also apply 函数测试")
+    println("user = $user")
+    val also = user.also {
+        println("it = $it")
+        it.name
+    }
+    println("also = $also")
+
+    val takeIf = user.takeIf {
+        it.name.startsWith("wang", true)
+    }
+    println("takeIf = $takeIf")
+
+    val with = with(user) {
+        this.name
+    }
+    println("with = $with")
+}
