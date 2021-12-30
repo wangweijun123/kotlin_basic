@@ -110,6 +110,7 @@ fun main() {
 //    myOperator()
 
     functionScope()
+    dengyu()
 }
 
 fun musicPlayerTest() {
@@ -282,4 +283,31 @@ fun Dog.name() = "Dog"
 
 fun Animal.printName(anima: Animal) {
     println(anima.name())
+}
+
+/**
+ * 测试 == , ===
+ */
+data class Ji(var name:String, var age: Int) {
+    override fun equals(other: Any?): Boolean {
+        println("equals...")
+//        if (other is Ji)
+        return super.equals(other)
+    }
+}
+fun dengyu() {
+    var a = "www"
+    var b = "www"
+    val r1 = (a == b)
+    println("a == b ? $r1")
+    val r2 = (a === b)
+    println("a === b ? $r2")
+
+    val j1 = Ji("w", 1)
+    val j2 = Ji("w", 1)
+    val r3 = (j1 == j2)
+    println("j1 == j2 ? $r3")
+    println("开始3个等于号的测试")
+    val r4 = (j1 === j2)
+    println("j1 === j2 ? $r4")
 }

@@ -24,3 +24,11 @@ Kotlin 没有静态变量与静态的方法, 没有static关键字, 只有 JVMSt
 
 疑问: lambda 闭包会编译成一个 对象
 如果lambda只有一个参数, 可以不写参数和 ->, 使用内置参数it获取
+
+DSL 领域专用语言
+外部DSL VS  内部DSL
+外部DSL: JSON, XML, CSS, Makefile
+内部DSL: Anko Kolley build.gradle (依赖语言)
+
+
+
