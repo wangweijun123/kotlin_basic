@@ -14,6 +14,7 @@ public class MethodExtendsJava {
     @Test
     public void test() {
         File file = new File("src/1.txt");
+        // 需要把本身传进去
         String s = FilesKt.readText(file, Charsets.UTF_8);
         out.println(s);
     }

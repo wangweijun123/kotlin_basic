@@ -5,6 +5,7 @@ import com.wangweijun.myapplication.unit1.MyKotlinClass
 import com.wangweijun.myapplication.unit3.Animal2
 import com.wangweijun.myapplication.unit3.Dog2
 import com.wangweijun.myapplication.unit3.Zomm2
+import com.wangweijun.myapplication.unit4.infixTest
 import com.wangweijun.myapplication.unit6.PlayerUI
 import com.wangweijun.myapplication.unit6.PlayerViewType
 import com.wangweijun.myapplication.unit7.arrayTest
@@ -78,7 +79,7 @@ fun main() {
 
 //    echo2()
 //    echo2("ddddddddddd")
-//    Dog().printName(Dog())
+    Dog().printName(Dog())
 
 //    val dog = Dog()
 //    dog.printName(dog)
@@ -129,8 +130,8 @@ fun main() {
     // 导入包名.顶级函数名
 //    reifiedGenericTest()
 //    Gson().fromJsonMe<Presenter>("{}")
-
 //    exeM2InMyKotlinClass()
+//    infixTest()
 }
 
 
@@ -344,11 +345,16 @@ fun printLen(str: String): String {
 open class Animal
 class Dog : Animal()
 
+// 静态的给类添加函数, 注意是静态的,不具有运行时多态效应, 但是生成Animal.class不会有name()函数,
+// 因为这是扩展的函数
 fun Animal.name() = "animal"
+//var Animal.age: Int?
+
 fun Dog.name() = "Dog"
 
 fun Animal.printName(anima: Animal) {
-    println(anima.name())
+//    anima.age = 100
+    println(anima.name() /*+ " , age = "+ anima.age*/)
 }
 
 /**
