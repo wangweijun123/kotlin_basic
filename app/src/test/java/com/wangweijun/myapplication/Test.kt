@@ -1,6 +1,7 @@
 package com.wangweijun.myapplication
 
 import com.google.gson.Gson
+import com.wangweijun.myapplication.mycoroutines.launchTest
 import com.wangweijun.myapplication.unit1.MyKotlinClass
 import com.wangweijun.myapplication.unit3.Animal2
 import com.wangweijun.myapplication.unit3.Dog2
@@ -133,7 +134,8 @@ fun main() {
 //    exeM2InMyKotlinClass()
 //    infixTest()
 //    callBibao()
-    xxx()
+//    xxx()
+    launchTest()
 }
 
 fun xxx() {
