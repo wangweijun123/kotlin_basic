@@ -2,6 +2,9 @@
  * kotlin 是jvm上的一种语言
  * 在java能用文件名加kt来调用函数  UtilsKt.echo("wangweij");
  * 猜想 1 kotlin文件被编译成了public class,
+ *
+ * kotlin文件中顶级函数被编译成了pubulic static 类方法
+ * 而 Kotlin class 中fun函数还是实例方法
  * 2 函数编译成了 fun echo(str: String)  -> public static xxx echo(String str) ;
  *
  * 疑问: kotlin 文件反编译变成了啥
@@ -21,7 +24,8 @@ fun echo(str: String) {
 }
 
 /**
- * 调用带有默认值的参数
+ * 调用带有默认值的参数,被编译成 public static静态方法
+ *  public static final void echo2(@NotNull String str)
  */
 fun echo2(str: String = "xxxx") {
     println(str)

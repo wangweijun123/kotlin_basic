@@ -1,5 +1,7 @@
 package com.wangweijun.myapplication
 
+import com.google.gson.Gson
+import com.wangweijun.myapplication.unit1.MyKotlinClass
 import com.wangweijun.myapplication.unit3.Animal2
 import com.wangweijun.myapplication.unit3.Dog2
 import com.wangweijun.myapplication.unit3.Zomm2
@@ -13,6 +15,10 @@ import com.wangweijun.myapplication.unit8.Hello
 import com.wangweijun.myapplication.unit8.Person
 import com.wangweijun.myapplication.unit8.lambdaReturn
 import com.wangweijun.myapplication.unit8.lambdaReturnWithInline
+import com.wangweijun.myapplication.unit9.Presenter
+import com.wangweijun.myapplication.unit9.fromJsonMe
+import com.wangweijun.myapplication.unit9.genericTest
+import com.wangweijun.myapplication.unit9.reifiedGenericTest
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -116,8 +122,44 @@ fun main() {
 //    functionScope()
 //    dengyu()
 //    testVarVal()
-    lambdaReturn()
-    lambdaReturnWithInline()
+//    lambdaReturn()
+//    lambdaReturnWithInline()
+//    kotlinSingleTest()
+//    genericTest()
+    // 导入包名.顶级函数名
+//    reifiedGenericTest()
+//    Gson().fromJsonMe<Presenter>("{}")
+
+//    exeM2InMyKotlinClass()
+}
+
+
+fun addMethodInKotlinClass() {
+    var numm = 11
+    println(numm.aaa())
+}
+
+/**
+ * kotlin class Int类 是 aaa()这个函数的接收者
+ * 说一句白话: 就是给class增加方法
+ */
+fun Int.aaa():Int {
+    // this 表示当前调用这个
+    println("this.dec() = " + this.dec())
+    return 100
+}
+
+fun exeM2InMyKotlinClass() {
+    val myKotlinClass = MyKotlinClass()
+    myKotlinClass.m1()
+    myKotlinClass.m2()
+}
+
+/**
+ * 给自定义的kotlin class 增加方法(没有必要,直接到class中写呀)
+ */
+fun MyKotlinClass.m2() {
+    println("m2")
 }
 
 fun testVarVal() {
@@ -154,9 +196,14 @@ fun proxyTest() {
  * kotlin class 单例测试
  */
 fun kotlinSingleTest() {
-    // 私有构造函数SingleKotlin() build error
+    // 私有构造函数build error
+    // SingleKotlin()
     // 只能通过伴生对象获取companion object
-    SingleKotlin.get().test()
+    val single1 = SingleKotlin.get()
+    val single2 = SingleKotlin.get()
+    val flag = (single1 === single2)
+    println("single1 === single2 ? $flag")
+    single2.test()
 }
 
 fun lambdaTest01() {
