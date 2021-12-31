@@ -79,7 +79,7 @@ fun main() {
 
 //    echo2()
 //    echo2("ddddddddddd")
-    Dog().printName(Dog())
+//    Dog().printName(Dog())
 
 //    val dog = Dog()
 //    dog.printName(dog)
@@ -107,8 +107,8 @@ fun main() {
     val function = runnable::run
     onlyif(true, function)*/
 
-    // 编译出错
-//    StringUtils.isEmp("xx")
+
+   // StringUtils.isEmp("xx") // 编译出错
 //    val su = StringUtils()
 //    println(su.isEmp("xx"))
 //    println(StringUtils.isEmp2(""))
@@ -132,8 +132,30 @@ fun main() {
 //    Gson().fromJsonMe<Presenter>("{}")
 //    exeM2InMyKotlinClass()
 //    infixTest()
+//    callBibao()
+    xxx()
 }
 
+fun xxx() {
+    com.wangweijun.myapplication.Test.sayMessage("hi kotlin obj in kotlin")
+    com.wangweijun.myapplication.Test.jvmStaticTest("hi jvmStaticTest in kotlin ")
+}
+
+/**
+ * 声明一个闭包, 其实声明一个函数是一样的, 有参数(闭包参数不能超过22个)有参数体
+ */
+
+var bibao = { age: Int ->
+    println("this age = $age")
+}
+
+/**
+ * 调用闭包
+ */
+fun callBibao() {
+    bibao.invoke(100)
+    bibao(200)
+}
 
 fun addMethodInKotlinClass() {
     var numm = 11
@@ -237,7 +259,7 @@ fun lambdaTest02() {
  * 自定义返回值类型, 主要是 ? 类型
  */
 fun definedRetrueType() {
-    val format = C.format("")
+    val format = C.format("") // String! 是指java的类型在kotlin中使用,遵循java的语法
 //    println(format.length) // 运行期空指针报错
     println(format?.length) // is ok 打印null,后面的语句继续执行
     println("##########")
@@ -248,7 +270,7 @@ fun definedRetrueType() {
     // f2 不为NULL的String类型
     // val f2: String = C.format("") // 运行期异常NullPointException
 // f3 可以为NULL的String类型
-    val f3: String? = C.format("")
+    val f3: String? = C.format("") // 这样写才完美
     println(f3?.length) // ? 其实就是加了一个if的判断
 }
 

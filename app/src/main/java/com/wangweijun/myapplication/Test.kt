@@ -7,7 +7,7 @@ package com.wangweijun.myapplication
  * field public static final INSTANCE:Lcom/wangweijun/myapplication/Test;
  * 私有构造函数
  * private constructor
- * 确实就是单例的写法
+ * 使用object定义的class 确实就是单例的写法
  *
  * 工具类就以用Object这个呗
  */

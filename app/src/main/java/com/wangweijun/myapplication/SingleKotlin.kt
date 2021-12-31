@@ -40,7 +40,7 @@ class SingleKotlin private constructor(){
         return instance;
         }
         }
-     *
+     * 一定是写在一个类的内部
      */
     companion object {
         fun get(): SingleKotlin {
