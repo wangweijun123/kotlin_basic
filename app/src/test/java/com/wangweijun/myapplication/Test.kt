@@ -137,7 +137,18 @@ fun main() {
 //    infixTest()
 //    callBibao()
 //    xxx()
-    launchTest()
+//    launchTest()
+    whenTest(1)
+}
+const val TYPE_1 = 1
+const val TYPE_2 = 2
+
+fun whenTest(type: Int) {
+    when (type) {
+        TYPE_1 -> println()
+        TYPE_2 -> println()
+        else -> println()
+    }
 }
 
 fun xxx() {
