@@ -26,6 +26,7 @@ import kotlin.reflect.KClass
 
 /**
  * 在kotlin语言,变量与函数直接定义在文件中
+ * 并且编译后都生成了静态的成员
  */
 
 // val 定义的是一个不可变的变量, 但是不是常量
@@ -34,6 +35,7 @@ val age: Int = 18
 // 这种是不可以为NULL的类型
  var name: String = "wangweijun"
 // 这种是可以为NULL的类型, 这是两种不同的类型
+//  private static Ljava/lang/String; name2
 var name2: String? = null
 
 // 声明lambda闭包,闭包就是一对花括号{}
