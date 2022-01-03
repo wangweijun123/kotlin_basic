@@ -1,3 +1,25 @@
+1  反编译工具
+
+写完kotlin，回顾这些
+
+
+E:\new_computer\study\dongnao2\kotlin\1.视频教程\2\43.kotlin项目实战-手机影音（七）
+E:\wangweijun\dongnao\kotlin\1.视频教程\1
+
+
+完结张涛kotlin课程,
+
+单向数据流的原则：只有数据源或数据所有者才应该负责更新其公开的数据
+
+三种启动协程方式: runBlocking, launch, async<->await 不同方式的异同
+单个线程上运行多个协程
+viewModelScope.launch(Dispatchers.IO)指定协程在IO线程上执行
+
+TabLayoutMediator本来是3个参数, 最后一个接口, 在kotlin使用lambda表达式替代
+
+架构组件, kotlin 文档继续
+解决新笔记本的环境搭建
+
 1 kotlin官网基础
 https://kotlinlang.org/docs/basic-syntax.html#print-to-the-standard-output
 
