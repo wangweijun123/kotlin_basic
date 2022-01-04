@@ -14,6 +14,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="计算小费"
+        android:onClick="jumpTipTime"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="companion object 同伴对象"
         android:onClick="companionOBJ"/>
 

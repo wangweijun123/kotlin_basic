@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import com.wangweijun.myapplication.tip.TipTimeActivity
 import kotlin.reflect.KClass
 
 /**
@@ -31,6 +32,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // 注意在kotlin中传java的class的写法 SecondActivity::class.java
         startActivity(Intent(applicationContext, SecondActivity::class.java))
     }
+
+    fun jumpTipTime(view: View) {
+        startActivity(Intent(applicationContext, TipTimeActivity::class.java))
+    }
+
+
 
     fun companionOBJ(view: View) {
         val ka = KotlinA()

@@ -35,7 +35,7 @@ https://developer.android.google.cn/courses/android-basics-kotlin/course
 第 5 单元：数据持久性
 第 6 单元：工作管理器
 
-进度   第 1 单元: 向应用中添加按钮
+进度   第 1 单元: 向应用中添加按钮ni
 
 Kotlin 上的所有例子
 https://github.com/orgs/google-developer-training/repositories?type=all
