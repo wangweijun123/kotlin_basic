@@ -30,6 +30,7 @@ class LoginRepository(val responseParser: LoginResponseParser) {
     /**
      * 版本 2
      * suspend解释: Kotlin 利用此关键字强制从协程内调用函数。
+     * 想使用withContext必须使用suspend
      */
     suspend fun makeLoginRequest2(jsonBody: String): Result<LoginResponse> {
         // Move the execution of the coroutine to the I/O dispatcher

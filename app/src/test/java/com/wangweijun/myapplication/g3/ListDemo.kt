@@ -1,5 +1,7 @@
 package com.wangweijun.myapplication.g3
 
+import com.wangweijun.myapplication.mycoroutines.launchTest
+import com.wangweijun.myapplication.mycoroutines.testGlobalScope
 import org.junit.Test
 
 class ListDemo {
@@ -77,6 +79,7 @@ class Main {
         println("total =  $total")
 
         var total2 = 0
+        // for in
         for (num in guestsPerFamily) {
             total2 += num
         }
@@ -159,7 +162,59 @@ class Main {
         order3.addAll(items)
         order3.print()
     }
+
+    @Test
+    fun testFoodxxx() {
+        // 如果getItem2()返回null, 执行后面Item2("dx", 18), 如果不为NULL
+        // 都会执行 apply 操作,也就是说执行apply操作确保不为null
+        val item2 = (getItem2() ?: Item2("dx", 18)).apply {
+            // 直接使用对象的成员
+            println("before update price $price")
+            price = 200
+        }
+        println("xxxxxxx")
+    }
+
+    @Test
+    fun testFoodxxx22() {
+//        launchTest()
+//        testGlobalScope()
+        paramsCanNull()
+    }
+
+
+    fun getItem2(): Item2? {
+//        return Item2("wang", 10) // before update price 10
+        return null // before update price 18
+    }
+    // lambda 最后一行语句是返回值
+
+    /**
+     * param has default value  can
+     */
+    fun paramsCanNull(name: String? = null) {
+        println(name)
+    }
+
+    @Test
+    fun testReturnObj() {
+        access {
+            println(it)
+        }
+    }
+
+    fun access(action: (Item2) -> Unit) {
+        val item2 = Item2("wwj", 2)
+        println(item2)
+        action(item2)
+    }
 }
+
+class DataBlock<T> {
+
+}
+
+open class Item2(var name: String, var price:Int)
 
 open class Item(val name: String, val price:Int)
 
@@ -179,8 +234,18 @@ class Vegetables(private vararg val toppings: String)  : Item("Vegetables ", 5) 
 }
 
 class Order(val orderNum: Int) {
+    // val 不可变: 不能重新指向
     private val itemList = mutableListOf<Item>()
 
+    // build error, 编译器会自动生产的
+    /*fun getOrderNum(): Int {
+        return orderNum
+    }*/
+
+    /**
+     * 形参是不能加 var val的
+     *
+     */
     fun addItem(newItem: Item): Order {
         itemList.add(newItem)
         return this

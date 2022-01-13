@@ -20,7 +20,6 @@ import com.wangweijun.myapplication.unit8.lambdaReturnWithInline
 import com.wangweijun.myapplication.unit9.Presenter
 import com.wangweijun.myapplication.unit9.fromJsonMe
 import com.wangweijun.myapplication.unit9.genericTest
-import com.wangweijun.myapplication.unit9.reifiedGenericTest
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -56,6 +55,12 @@ val echo3 = { name: String ->
 fun onlyif(isDebug: Boolean, bolck: () -> Unit) {
     if (isDebug) {
         bolck()
+    }
+}
+
+fun onlyif2(isDebug: Boolean, bolck: (String) -> Unit) {
+    if (isDebug) {
+        bolck("xxx")
     }
 }
 
@@ -95,9 +100,9 @@ fun main() {
 //    echo4.invoke()
 
     // 调用高阶函数
-    /*onlyif(true) {
+    onlyif(true) {
         println("这是高阶函数")
-    }*/
+    }
     // 这样也是可以的
     /*onlyif(true, {
         println("这是高阶函数")
@@ -131,14 +136,13 @@ fun main() {
 //    kotlinSingleTest()
 //    genericTest()
     // 导入包名.顶级函数名
-//    reifiedGenericTest()
 //    Gson().fromJsonMe<Presenter>("{}")
 //    exeM2InMyKotlinClass()
 //    infixTest()
 //    callBibao()
 //    xxx()
 //    launchTest()
-    whenTest(1)
+//    whenTest(1)
 }
 const val TYPE_1 = 1
 const val TYPE_2 = 2

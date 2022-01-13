@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import com.wangweijun.myapplication.tip.TipTimeActivity
+import kotlinx.coroutines.*
 import kotlin.reflect.KClass
 
 /**
@@ -106,5 +108,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         println("实现接口的写法")
     }
 
+    fun tesetGlobalScope(view: View) {
+        println("tesetGlobalScope ...  " + Thread.currentThread().name + ", id="+Thread.currentThread().id)
+        GlobalScope.launch(Dispatchers.Main) {
+            // 这里(外层协程)实在主线程执行，第三句执行
+            println("GlobalScope launch...  " + Thread.currentThread().name + ", id="+Thread.currentThread().id)
+            // 里面的携程是在子线程操作 Dispatchers.Default 这里的参数很重要
+            // 携程的异步调用实质是 callback
+            // 使用携程异步编程方案
+            val result = withContext(Dispatchers.Default) {
+                // 这里实在子线程执行 withContext DefaultDispatcher-worker-1, id=111918
+                println("withContext " + Thread.currentThread().name + ", id="+Thread.currentThread().id)
+                delay(10_000)
+                // lambda表达式的最后一行是返回值
+                "xxxxxx"
+            }
+            // 当然这里也是在主线程执行,所以可以操作UI(等待内层携程执行完成才执行)
+            println("result = $result")
+            findViewById<TextView>(R.id.result).text = result
+        }
+        // 这里很快就执行完，在第二句执行
+        println("tesetGlobalScope finished " + Thread.currentThread().name + ", id="+Thread.currentThread().id)
+    }
 
+    fun testWithContext() {
+        // 必须在协程或suspend函数中调用,否则编译出错
+        /*withContext(Dispatchers.IO) {
+
+        }*/
+    }
 }

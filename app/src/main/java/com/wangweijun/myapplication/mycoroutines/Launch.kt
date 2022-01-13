@@ -1,17 +1,14 @@
 package com.wangweijun.myapplication.mycoroutines
 
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 /**
- * 启动线程的三种方式
- * 1 runBlocking: T         用于执行协程任务:通常只用于启动最外层协程
+ * 启动协程的三种方式
+ * 1 runBlocking: T         用于执行协程任务:通常只用于启动最外层协程,从线程切换到携程
  * 2 launch: Job            用于执行协程任务
  * 3 async/await : Deferred 用于执行协程任务, 并得到结果
  *
- * 单个线程上运行多个协程
+ * 单个线程上运行多个协程,多个携程并发执行
  *
  */
 fun launchTest() {
@@ -38,10 +35,10 @@ fun launchTest() {
             return@async "hi dx"
         }
 
-        println("before job2.await()")
+        println("before job3.await()")
         // 协程3 await 会阻塞主协程
-        println("job2的输出 " + job3.await())
-        println("after job2.await()")
+        println("job3的输出 " + job3.await())
+        println("after job3.await()")
 
         delay(1300L)
         println("main:: 主线程等待中")
@@ -49,11 +46,23 @@ fun launchTest() {
         job2.join()
         println("main:: 主线程退出")
     }
-    // //  main, id=1
+    // //  main, id=1, 注意这里需要等待所有携程运行完线程才会退出
     println("launchTest ...  " + Thread.currentThread().name + ", id="+Thread.currentThread().id)
     println("这是最外层launchTest完成")
 }
 
-fun xx() {
+fun testGlobalScope() {
+    // first params： CoroutineContext
+    // 这里没有不能在junit里面测试
+    GlobalScope.launch(Dispatchers.Main) {
+        println("dddddddddddd")
+    }
+}
 
+suspend fun fetchTwoDocs() {
+    coroutineScope {
+        launch {
+
+        }
+    }
 }
