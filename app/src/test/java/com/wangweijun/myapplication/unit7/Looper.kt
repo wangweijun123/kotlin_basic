@@ -1,9 +1,9 @@
-package com.wangweijun.myapplication.unit7
-// Kotlin是原文件, 编译成class, jadx反编译class成java代码, ASM(Javap)看的是字节码
+   package com.wangweijun.myapplication.unit7
+// Kotl in是原文件, 编译成class, jadx反编译class成java代码, ASM(Javap)看的是字节码
 fun loop() {
     // 运算符重载, 使用operator, .. 与 rangeTo 与这个函数映射
     // .. 其实调用了函数 operator fun rangeTo
-    // public operator fun rangeTo(other: Int): IntRange
+     // public operator fun rangeTo(other: Int): IntRange
     for (i in 1..10) {
         print("$i ")
     }

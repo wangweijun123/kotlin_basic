@@ -119,7 +119,7 @@ fun main() {
    // StringUtils.isEmp("xx") // 编译出错
 //    val su = StringUtils()
 //    println(su.isEmp("xx"))
-//    println(StringUtils.isEmp2(""))
+    println(StringUtils.isEmp2(""))
 
 //    proxyTest()
 //    beanTest()
