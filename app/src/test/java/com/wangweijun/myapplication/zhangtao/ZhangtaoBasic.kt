@@ -179,4 +179,8 @@ class ZhangtaoBasic {
         }
         print(message)
     }
+
+    @Test
+    fun testRunCatch() {
+    }
 }
