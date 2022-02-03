@@ -111,6 +111,8 @@ class ZT02 {
                 println("i can not walk")
             }
         }
+
+        fun walk2();
     }
 
     class BehaviorImpl : Behavior {
@@ -120,6 +122,9 @@ class ZT02 {
                 return field
             }
 
+        override fun walk2() {
+            println(" has not impl")
+        }
     }
 
     @Test

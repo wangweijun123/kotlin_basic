@@ -1,6 +1,8 @@
 package com.wangweijun.myapplication.unit4
 
 sealed class CompareResult {
+    // 嵌套类生成了static class   ----> public static final class LESS
+    // object的 public static final CompareResult.LESS INSTANCE;
     object LESS : CompareResult() {
         override fun toString(): String {
             return "小于"
