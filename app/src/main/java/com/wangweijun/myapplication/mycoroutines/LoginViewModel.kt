@@ -20,6 +20,7 @@ class LoginViewModel(val loginRepository: LoginRepository): ViewModel() {
         // public val ViewModel.viewModelScope: CoroutineScope
         // 所有协程必须在一个作用域内运行, 一个CoroutineScope管理着多个协程
         // 创建协程, 指定此协程在Dispatchers.IO线程上执行
+        // viewmodel 因用户离开屏幕而被销毁,则viewModleScope自动销毁,且所有运行的协程都会取消
         viewModelScope.launch(Dispatchers.IO) {
             val jsonBody = "{ username: \"$username\", token: \"$token\"}"
             loginRepository.makeLoginRequest2(jsonBody)
@@ -42,16 +43,18 @@ class LoginViewModel(val loginRepository: LoginRepository): ViewModel() {
         // 注意: 现在没有传参 Dispatchers.IO, 因为makeLoginRequest2有io
         // 如果您未将 Dispatcher 传递至 launch，则从 viewModelScope
         // 启动的所有协程都会在主线程中运行
+        // 则从 viewModelScope 启动的所有协程都会在主线程中运行
         viewModelScope.launch {
             val jsonBody = "{ username: \"$username\", token: \"$token\"}"
 
             // Make the network call and suspend execution until it finishes
             // 注意: 此处仍需要协程，因为 makeLoginRequest 是一个 suspend 函数，
             // 而所有 suspend 函数都必须在协程中执行
+           // makeLoginRequest2 是一个suspend函数
             val result = loginRepository.makeLoginRequest2(jsonBody)
 
             // Display result of the network request to the user
-            when (result) {
+            when (result) { // 在这里可以显示ui
                 is Result.Success<LoginResponse> -> println("success")// happy
                 else -> println(" Show error in UI")
             }

@@ -1,6 +1,8 @@
 package com.wangweijun.myapplication.unit9
 
 import com.google.gson.Gson
+import org.junit.Test
+
 // app\build\tmp\kotlin-classes\debugUnitTest\com\wangweijun\myapplication\unit9\ReifiiedGenericDemoKt.class
 // 扩展函数
 // asm byte view 与 javap -c 返汇编差不多结果
@@ -32,17 +34,24 @@ class View<T>(val clz: Class<T>) {
         inline operator fun <reified T> invoke() = View(T::class.java)
     }
 }
+class DemoTest{
+    @Test
+    fun main() {
+        reifiedGenericTest()
+    }
 
-fun reifiedGenericTest() {
-    val p1 = View<Presenter>().presenter
-    val p2 = View(Presenter::class.java).presenter
-    val p3 = View.Companion.invoke<Presenter>().presenter
-    val flag1 = p1 === p2
-    val flag2 = p1 === p3
-    println("p1 === p2 ? $flag1") // false
-    println("p1 === p3 ? $flag2") // false
+    fun reifiedGenericTest() {
+        val p1 = View<Presenter>().presenter
+        val p2 = View(Presenter::class.java).presenter
+        val p3 = View.Companion.invoke<Presenter>().presenter
+        val flag1 = p1 === p2
+        val flag2 = p1 === p3
+        println("p1 === p2 ? $flag1") // false
+        println("p1 === p3 ? $flag2") // false
 
-    // 真的可以给class(JDK增加函数)
+        // 真的可以给class(JDK增加函数)
 //    Gson().fromJsonMe<Presenter>("{}")
 //
+    }
 }
+
