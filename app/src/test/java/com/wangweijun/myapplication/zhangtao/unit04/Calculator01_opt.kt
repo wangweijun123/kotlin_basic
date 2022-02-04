@@ -47,7 +47,7 @@ class Main {
         //                           ↓
         val operation = Operation.valueOf(inputList[1])
         val right = inputList[2].toInt()
-
+        // enum有问题
         return when (operation) {
             Operation.ADD -> left + right
             Operation.MINUS -> left - right

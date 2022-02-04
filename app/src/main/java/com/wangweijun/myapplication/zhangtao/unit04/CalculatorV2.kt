@@ -1,5 +1,4 @@
 package com.wangweijun.myapplication.zhangtao.unit04
-
 import kotlin.system.exitProcess
 
 class CalculatorV2 {
@@ -41,23 +40,40 @@ class CalculatorV2 {
 
     // 具体计算逻辑
     private fun calculate2(inputList: List<String>): Int? {
+
+        if (inputList.size != 3) return null
+
+        // 第七步，取出数字和操作符
+        var left = inputList.get(0).toInt()
+        var operation = inputList.get(1)
+        var right = inputList.get(2).toInt()
+
+        // 第八步，根据操作符的类型，执行计算
+        when(operation) {
+            "+" -> return left + right
+            "-" -> return left - right
+            "*" -> return left * right
+            "/" -> return left / right
+            else -> return null
+        }
+        /*
         if (inputList.size != 3) return null
 
         // 第七步，取出数字和操作符
         var left = inputList[0].toInt()
-        var operation = Operation.valueOf(inputList[1])
+        var operation = VolumeShaper.Operation.valueOf(inputList[1])
         var right = inputList[2].toInt()
 
         // 第八步，根据操作符的类型，执行计算
         return when(operation) {
-            Operation.ADD -> left + right
-            Operation.MINUS -> left - right
-            Operation.MULTI -> left * right
-            Operation.DIVI -> left / right
-        }
+            VolumeShaper.Operation.ADD -> left + right
+            VolumeShaper.Operation.MINUS -> left - right
+            VolumeShaper.Operation.MULTI -> left * right
+            VolumeShaper.Operation.DIVI -> left / right
+        }*/
     }
 
-    enum class Operation(val value: String) {
+    /*enum class Operation(val value: String) {
         ADD("+"), MINUS("-"), MULTI("*"), DIVI("/")
-    }
+    }*/
 }
