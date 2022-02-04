@@ -37,4 +37,28 @@ class EnumTest {
         BLUE(0x0000FF)
     }
 
+    @Test
+    fun testOperation() {
+        val values = Operation.values()
+        values.forEach {
+            println("it=$it, it.value=${it.value}, it.name=${it.name}")
+            // 有问题
+            /*val operation = Operation.valueOf(it.value)
+            println("operation = $operation")*/
+        }
+        /*val operation = Operation.valueOf("-")
+        when (operation) {
+            Operation.ADD -> println("add")
+            Operation.MINUS -> println("MINUS")
+            Operation.MULTI -> println("MULTI")
+            Operation.DIVI -> println("DIVI")
+        }*/
+    }
+    enum class Operation(val value: String) {
+        ADD("+"),
+        MINUS("-"),
+        MULTI("*"),
+        DIVI("/")
+    }
+
 }
