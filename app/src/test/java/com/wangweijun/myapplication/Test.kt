@@ -140,6 +140,7 @@ fun main() {
 //    launchTest()
     whenTest(1)
 }
+// 常量
 const val TYPE_1 = 1
 const val TYPE_2 = 2
 
@@ -168,6 +169,7 @@ var bibao = { age: Int ->
  * 调用闭包
  */
 fun callBibao() {
+    // 这两个是等价的
     bibao.invoke(100)
     bibao(200)
 }
