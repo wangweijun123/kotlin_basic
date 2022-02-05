@@ -172,7 +172,6 @@ class Main {
             println("before update price $price")
             price = 200
         }
-        println("xxxxxxx")
     }
 
     @Test
