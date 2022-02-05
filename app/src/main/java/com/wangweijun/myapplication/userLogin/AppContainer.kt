@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 
 class AppContainer {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("xxx").build().create(LoginRetrofitService::class.java)
+        .baseUrl("https://www.baidu.com/").build().create(LoginRetrofitService::class.java)
 
     private val remoteDataSource = UserRemoteDataSource(retrofit)
     private val localDataSource = UserLocalDataSource()

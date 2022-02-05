@@ -32,6 +32,35 @@ class CalculatorV2 {
         }
     }
 
+
+    fun parseExpression(input: String): Expression? {
+        // 解析操作符
+        val operation = parseOperator(input) ?: return null
+        // 用操作符分割算式，拿到数字
+        val list = input.split(operation.value)
+        if (list.size != 2) return null
+
+        return Expression(
+            // 算式左边
+            left = list[0].trim(),
+            operator = operation.value,
+            // 算式右边
+            right = list[1].trim()
+        )
+    }
+
+
+    fun parseOperator(input: String): Operation? {
+        return when {
+            input.contains(Operation.ADD.value) -> Operation.ADD
+            input.contains(Operation.MINUS.value) -> Operation.MINUS
+            input.contains(Operation.MULTI.value) -> Operation.MULTI
+            input.contains(Operation.DIVI.value) -> Operation.DIVI
+            else -> null
+        }
+    }
+
+
     fun start() {
 
     }
@@ -44,9 +73,9 @@ class CalculatorV2 {
         if (inputList.size != 3) return null
 
         // 第七步，取出数字和操作符
-        var left = inputList.get(0).toInt()
-        var operation = inputList.get(1)
-        var right = inputList.get(2).toInt()
+        var left = inputList[0].toInt()
+        var operation = inputList[1]
+        var right = inputList[2].toInt()
 
         // 第八步，根据操作符的类型，执行计算
         when(operation) {
@@ -73,7 +102,7 @@ class CalculatorV2 {
         }*/
     }
 
-    /*enum class Operation(val value: String) {
+    enum class Operation(val value: String) {
         ADD("+"), MINUS("-"), MULTI("*"), DIVI("/")
-    }*/
+    }
 }
