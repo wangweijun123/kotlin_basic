@@ -13,6 +13,25 @@ class TextProcessorV2 {
         }
     }
 
+    @Test
+    fun main2() {
+        val text = "Kotlin is my favorite language. I love Kotlin Kotlin Kotlin!"
+        val list = processText2(text)
+        for (item in list) {
+            println(item)
+        }
+    }
+    // Kotlin 库函数
+    private fun processText2(text: String): List<WordFreq> {
+        return text
+            .clean()
+            .split(" ")
+            .filter { it != "" }
+            .groupBy { it }
+            .map { WordFreq(it.key, it.value.size) }
+            .sortedByDescending { it.frequency }
+    }
+
     // 函数式编程的思想
    private fun processText(text: String): List<WordFreq> {
         return text
