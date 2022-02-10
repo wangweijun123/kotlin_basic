@@ -1,5 +1,8 @@
 package com.wangweijun.myapplication.zhangtao.unit05
 
+// in out 修饰泛型，整体原则是
+// in修饰的泛型作为参数，out 作为 返回值，但是有特殊情况...
+// 在特殊场景下，同时作为参数和返回值的泛型参数，我们可以用 @UnsafeVariance 来解决型变冲突
 abstract class BaseSingleton<in P, out T> {
     @Volatile
     private var instance: T? = null
