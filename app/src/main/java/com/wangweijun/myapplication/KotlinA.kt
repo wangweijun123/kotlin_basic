@@ -16,7 +16,13 @@ class KotlinA : AInterface {
      *
      * 所以可以通过类名调用 KotlinA.a.putNumber(123)
      */
+
+
+//    const val HEIGHT = 100 // build error
+    // 如果想在类内部定义常量，必须在 companion object 中定义
     companion object {
+        const val HEIGHT = 100
+
         val a = KotlinA()
 
         fun isEmpty(msg: String): Boolean {
@@ -24,3 +30,5 @@ class KotlinA : AInterface {
         }
     }
 }
+
+const val HEIGHT_OUT = 100

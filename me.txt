@@ -76,3 +76,8 @@ object 三种语义
 inline:
 第一：只修饰高级函数
 第二：只能修饰public函数，private不行
+
+
+
+
+
