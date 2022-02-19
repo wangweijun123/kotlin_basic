@@ -60,7 +60,7 @@ object KtHttpV1 {
     fun <T> create(service: Class<T>): T {
         return Proxy.newProxyInstance(
             service.classLoader,
-            arrayOf(service)
+            arrayOf<Class<*>>(service)
         ) { proxy, method, args ->
             // 方法上的所有注解
             val annotations = method.annotations
