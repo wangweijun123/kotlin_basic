@@ -17,6 +17,6 @@ class UserRemoteDataSource(private val loginService: LoginRetrofitService) {
 
 }
 // 真正的登录服务
-class LoginRetrofitService{
+interface LoginRetrofitService{
 
 }

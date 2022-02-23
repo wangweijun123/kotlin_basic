@@ -50,4 +50,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="实现接口的写法"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动recycleView列表"
+        android:onClick="startRecycleViewAct"/>
 </LinearLayout>

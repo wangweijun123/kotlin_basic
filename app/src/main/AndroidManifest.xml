@@ -23,6 +23,7 @@
         <activity android:name=".SecondActivity" android:exported="false"/>
         <activity android:name=".CoroutineActivity" android:exported="false"/>
         <activity android:name=".tip.TipTimeActivity"/>
+        <activity android:name=".tip.RecycleViewActivity"/>
     </application>
 
 </manifest>
