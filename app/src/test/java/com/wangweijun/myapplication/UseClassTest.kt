@@ -16,4 +16,16 @@ class UseClassTest {
         println("KotlinA.HEIGHT = ${KotlinA.HEIGHT}")
         println("KotlinA.HEIGHT = $HEIGHT_OUT")
     }
+
+    @Test
+    fun testDefaultParams() {
+        val towFa = TowFa(scen = "login", name = "wxk")
+        println(towFa)
+    }
 }
+
+data class TowFa(
+    val scen: String,
+    val age: Int = 100, // 默认参数
+    val name: String
+)
