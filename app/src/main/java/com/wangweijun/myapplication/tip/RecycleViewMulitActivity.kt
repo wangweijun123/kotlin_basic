@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wangweijun.myapplication.R
 import com.wangweijun.myapplication.adapter.CustomAdapter
 import com.wangweijun.myapplication.adapter.CustomAdapterUseBing
+import com.wangweijun.myapplication.adapter.MultiAdapterJava
 import com.wangweijun.myapplication.databinding.ActivityRecycleViewBinding
 import com.wangweijun.myapplication.databinding.ActivityTipTimeBinding
 import java.text.NumberFormat
@@ -17,7 +18,7 @@ import java.text.NumberFormat
  * 布局管理器 LayoutManager
  * @property binding ActivityRecycleViewBinding
  */
-class RecycleViewActivity : AppCompatActivity(){
+class RecycleViewMulitActivity : AppCompatActivity(){
     private lateinit var binding: ActivityRecycleViewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +27,10 @@ class RecycleViewActivity : AppCompatActivity(){
         setContentView(binding.root)
         // recyclerview 已经在xml中设置了layoutmanager布局管理器
         val arrayList = arrayListOf<String>()
-        for (i in 1..20) {
+        for (i in 1..60) {
             arrayList.add("i=$i")
         }
-//        val customAdapter = CustomAdapter(applicationContext, arrayList)
-        val customAdapter = CustomAdapterUseBing(applicationContext, arrayList)
+        val customAdapter = MultiAdapterJava(applicationContext, arrayList)
 
         binding.recyclerView.adapter = customAdapter
     }

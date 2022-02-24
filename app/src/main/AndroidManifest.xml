@@ -24,6 +24,8 @@
         <activity android:name=".CoroutineActivity" android:exported="false"/>
         <activity android:name=".tip.TipTimeActivity"/>
         <activity android:name=".tip.RecycleViewActivity"/>
+        <activity android:name=".tip.RecycleViewMulitActivity"/>
+        <activity android:name="com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity"/>
     </application>
 
 </manifest>

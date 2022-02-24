@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wangweijun.myapplication.R
+import com.wangweijun.myapplication.databinding.ListItemBinding
 
 /**
  * author : user
@@ -16,18 +17,19 @@ import com.wangweijun.myapplication.R
  * version: 1.0
  * desc   :
  */
-class CustomAdapter(private val context: Context, private val dataSet: ArrayList<String>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+class CustomAdapterUseBing(private val context: Context, private val dataSet: ArrayList<String>) : RecyclerView.Adapter<CustomAdapterUseBing.CustomViewHolder>() {
     val tag = "duanxia"
     // ViewHolder 持有view，设置数据，叫绑定数据
     // 列表中的每一个元素都是一个viewholder，应为viewholder持有view, 注意viewholder重用
     // viewholder 是item View的封装容器
-    class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.item_title)
+    class CustomViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
     }
     // 这里叫创建viewholder，注意并没有设置数据, 并不会填充视图，也就是说不会显示
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-        val customViewHolder = CustomViewHolder(itemView)
+        val bind = ListItemBinding.bind(itemView)
+        val customViewHolder = CustomViewHolder(bind)
         Log.i(tag, "onCreateViewHolder  viewholder = $customViewHolder")
         itemView.setOnClickListener {
             // 通过viewholder去拿位置
@@ -39,20 +41,16 @@ class CustomAdapter(private val context: Context, private val dataSet: ArrayList
     // 这是叫绑定数据，你要去设置数据
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         Log.i(tag, "onBindViewHolder position=$position,  holder = $holder")
-        holder.textView.text = dataSet[position]
+        holder.binding.itemTitle.text = dataSet[position]
         if (position % 2 == 0) {
-            holder.textView.setBackgroundColor(context.getColor(R.color.purple_200))
+            holder.binding.itemTitle.setBackgroundColor(context.getColor(R.color.purple_200))
         } else {
-            holder.textView.setBackgroundColor(context.getColor(R.color.teal_700))
+            holder.binding.itemTitle.setBackgroundColor(context.getColor(R.color.teal_700))
         }
     }
 
     override fun getItemCount(): Int {
         Log.i(tag, "ogetItemCount = ${dataSet.size}")
         return dataSet.size
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
     }
 }

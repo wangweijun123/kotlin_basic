@@ -56,4 +56,18 @@
         android:layout_height="wrap_content"
         android:text="启动recycleView列表"
         android:onClick="startRecycleViewAct"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动多类型的recycleView列表"
+        android:onClick="startRecycleViewMulitAct"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动多类型列表(base)"
+        android:onClick="startRecycleViewMulitAct2"/>
+
+
 </LinearLayout>

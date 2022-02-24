@@ -7,7 +7,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.wangweijun.myapplication.tip.RecycleViewActivity
+import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
 import com.wangweijun.myapplication.tip.TipTimeActivity
+import com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity
 import kotlinx.coroutines.*
 import kotlin.reflect.KClass
 
@@ -142,4 +144,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun startRecycleViewAct(view: android.view.View) {
         startActivity(Intent(applicationContext, RecycleViewActivity::class.java))
     }
+
+    fun startRecycleViewMulitAct(view: android.view.View) {
+        startActivity(Intent(applicationContext, RecycleViewMulitActivity::class.java))
+    }
+    fun startRecycleViewMulitAct2(view: android.view.View) {
+        startActivity(Intent(applicationContext, MulitTypeUseBaseActivity::class.java))
+    }
+
+
 }
