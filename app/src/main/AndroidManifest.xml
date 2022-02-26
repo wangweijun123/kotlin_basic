@@ -26,6 +26,7 @@
         <activity android:name=".tip.RecycleViewActivity"/>
         <activity android:name=".tip.RecycleViewMulitActivity"/>
         <activity android:name="com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity"/>
+        <activity android:name=".tip.RecycleViewDiffUtilActivity"/>
     </application>
 
 </manifest>

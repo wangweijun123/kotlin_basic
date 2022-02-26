@@ -60,6 +60,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="启动recycleView列表(diff)"
+        android:onClick="startRecycleViewDiffAct"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="启动多类型的recycleView列表"
         android:onClick="startRecycleViewMulitAct"/>
 
