@@ -1,5 +1,6 @@
 package com.wangweijun.myapplication
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +11,12 @@ import com.wangweijun.myapplication.tip.RecycleViewActivity
 import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
 import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
 import com.wangweijun.myapplication.tip.TipTimeActivity
+import com.wangweijun.myapplication.web.WebActivity
 import com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity
+import io.reactivex.Observable
 import kotlinx.coroutines.*
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
 /**
@@ -23,10 +28,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         println("init闭包在构造函数中的被调用")
     }
 
+    lateinit var mainActivity: MainActivity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         findViewById<Button>(R.id.bt).setOnClickListener(this)
+        mainActivity = this
     }
 
     fun javaCallKotlin(view: View) {
@@ -156,6 +164,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun startRecycleViewMulitAct2(view: android.view.View) {
         startActivity(Intent(applicationContext, MulitTypeUseBaseActivity::class.java))
     }
+
+
+    fun startWebActivity(view: android.view.View) {
+        val pdfUrl = "https://demo.codeseasy.com/downloads/CodesEasy.pdf"
+        val intent = Intent(applicationContext, WebActivity::class.java)
+        intent.putExtra("pdf_url", pdfUrl)
+        startActivity(intent)
+    }
+
 
 
 }

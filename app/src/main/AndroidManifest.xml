@@ -3,6 +3,7 @@
     package="com.wangweijun.myapplication">
     <uses-permission android:name="android.permission.INTERNET"/>
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +12,9 @@
         android:supportsRtl="true"
         android:name=".Myapplication"
         android:theme="@style/Theme.MyApplication">
+        <meta-data android:name="xxxx" android:value="1"/>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -19,6 +23,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".SecondActivity" android:exported="false"/>
         <activity android:name=".CoroutineActivity" android:exported="false"/>
@@ -27,6 +32,9 @@
         <activity android:name=".tip.RecycleViewMulitActivity"/>
         <activity android:name="com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity"/>
         <activity android:name=".tip.RecycleViewDiffUtilActivity"/>
+
+        <activity android:name=".web.WebActivity">
+        </activity>
     </application>
 
 </manifest>

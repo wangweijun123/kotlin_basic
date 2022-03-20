@@ -23,6 +23,17 @@ class Express {
         kotlinExpress(data2)
     }
 
+    @Test
+    fun whenString() {
+        val currentFaceSource = null
+        val transType = when (currentFaceSource) {
+            "KYC" -> "user"
+            "WITHDRAW" -> "withdrawFace"
+            else -> ""
+        }
+        println("transType = $transType")
+    }
+
     fun kotlinExpress(data: Int?) {
         println("####kotlinExpress#### data = $data")
         var i = data ?: 0
