@@ -2,8 +2,14 @@ package com.wangweijun.myapplication.zhangtao.unit09
 
 import org.junit.Test
 
+/**
+ * 阻止外部对集合的修改
+ * 方式1：定义不可变的变量暴露给外部，内部使用可变的集合委托 ::
+ * 方式2: 自定义 get()，好像也差不多
+ *
+ */
 class Model {
-    // 通过属性之间的直接委托
+    // 阻止外部对集合的修改，使用list, 内部通过其他属性(_data可变列表)直接委托 ::
     val data: List<String> by ::_data
     private val _data = mutableListOf<String>()
     fun load() {
@@ -41,5 +47,13 @@ class Main {
         val data = model.data
         (data as? MutableList)?.add("some data")
         println("After:${model.data}")
+    }
+
+    @Test
+    fun testModel2() {
+        val model = Model2()
+        println("Before:${model.data}")
+//        println("Before:${model.data}")
+
     }
 }
