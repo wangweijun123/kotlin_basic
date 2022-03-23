@@ -88,4 +88,16 @@
         android:text="启动定时器"
         android:onClick="startTimer"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="json 测试"
+        android:onClick="startJsonTest"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="json 测试(标准的json)"
+        android:onClick="startJsonTest2"/>
+
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -15,6 +16,8 @@ import com.wangweijun.myapplication.web.WebActivity
 import com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity
 import io.reactivex.Observable
 import kotlinx.coroutines.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
@@ -173,6 +176,59 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(intent)
     }
 
+    fun startJsonTest(view: android.view.View) {
+        val requestParams = """ 
+{
+  "type": "onfido",
+  "asyncReqCount": "10",
+  "asyncReqSeconds": "3",
+  "token": "xxxx",
+  "enableNFC": "true",
+  "face_type": "video",
+  "documentType": "['ID_CARD', 'PASSPORT', 'DRIVERS_LICENSE']",
+  "countryCode": "GB"
+}
+"""
+        val jsonObject = JSONObject(requestParams)
+        val type = jsonObject.optString("type")
+        println("type = $type")
+        val optBoolean = jsonObject.optBoolean("enableNFC")
+        println("enableNFC = $optBoolean")
+        val documentTypeJson = jsonObject.optString("documentType")
 
+        val jsonArray = JSONArray(documentTypeJson)
+
+        val length = jsonArray.length()
+        println("lenght = ${length}")
+        for (index in 0 until length) {
+            println("index = ${index}, value ${jsonArray[index]}")
+        }
+    }
+
+    fun startJsonTest2(view: android.view.View) {
+        val requestParams = """ 
+{
+  "type": "onfido",
+  "asyncReqCount": "10",
+  "asyncReqSeconds": "3",
+  "token": "xxxx",
+  "enableNFC": true,
+  "face_type": "video",
+  "documentType": ['ID_CARD', 'PASSPORT', 'DRIVERS_LICENSE'],
+  "countryCode": "GB"
+}
+"""
+        val jsonObject = JSONObject(requestParams)
+        val type = jsonObject.optString("type")
+        println("type = $type")
+        val optBoolean = jsonObject.optBoolean("enableNFC")
+        println("enableNFC = $optBoolean")
+        val optJSONArray = jsonObject.optJSONArray("documentType")
+        val length = optJSONArray.length()
+        println("lenght = ${length}")
+        for (index in 0 until length) {
+            println("index = ${index}, value ${optJSONArray[index]}")
+        }
+    }
 
 }
