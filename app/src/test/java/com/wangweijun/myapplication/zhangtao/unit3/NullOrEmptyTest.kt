@@ -47,24 +47,39 @@ class NullOrEmptyTest {
         for (i in 0 until length) {
             print("$i ") // 不包括5
         }
-
-        val str2 = """ 
-{
-  "type": "onfido",
-  "asyncReqCount": "10",
-  "asyncReqSeconds": "3",
-  "token": "xxxx",
-  "enableNFC": "true",
-  "face_type": "video",
-  "documentType": "['ID_CARD', 'PASSPORT', 'DRIVERS_LICENSE']",
-  "countryCode": "GB"
-}
-"""
     }
 
     @Test
     fun testJson() {
-
+        var timeInt = 5
+        if (timeInt in 1..4) {
+            println("$timeInt ")
+        } else {
+            println(" 不在这个范围 ")
+        }
     }
 
+    private fun getSafeTime(time: Long?, defaultTime: Long): Long {
+        if (time == null) {
+            return defaultTime
+        }
+        return if (time in 0..300) time else defaultTime
+    }
+
+    /*private fun getSafeTim3(time: Long?, defaultTime: Long): Long {
+        time?:
+        return if (time in 0..300) time else defaultTime
+    }*/
+
+//    private fun getSafeTime2(time: Long?, defaultTime: Long): Long {
+//        var timeInt = time
+//
+//        return if (timeInt in 0..300) timeInt!! else defaultTime
+//    }
+
+    fun testSet() {
+        var filterList: MutableSet<String>? = mutableSetOf()
+        filterList?.contains("item")
+
+    }
 }
