@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import com.wangweijun.myapplication.tip.RecycleViewActivity
 import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
 import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
@@ -52,6 +53,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun jumpTipTime(view: View) {
         startActivity(Intent(applicationContext, TipTimeActivity::class.java))
+
+
     }
 
 
@@ -207,17 +210,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun startJsonTest2(view: android.view.View) {
         val requestParams = """ 
-{
-  "type": "onfido",
-  "asyncReqCount": "10",
-  "asyncReqSeconds": "3",
-  "token": "xxxx",
-  "enableNFC": true,
-  "face_type": "video",
-  "documentType": ['ID_CARD', 'PASSPORT', 'DRIVERS_LICENSE'],
-  "countryCode": "GB"
-}
-"""
+                                {
+                                  "type": "onfido",
+                                  "asyncReqCount": "10",
+                                  "asyncReqSeconds": "3",
+                                  "token": "xxxx",
+                                  "enableNFC": true,
+                                  "face_type": "video",
+                                  "documentType": ['ID_CARD', 'PASSPORT', 'DRIVERS_LICENSE'],
+                                  "countryCode": "GB"
+                                }
+                             """
         val jsonObject = JSONObject(requestParams)
         val type = jsonObject.optString("type")
         println("type = $type")
@@ -228,6 +231,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         println("lenght = ${length}")
         for (index in 0 until length) {
             println("index = ${index}, value ${optJSONArray[index]}")
+        }
+    }
+
+    fun testlifecycleScope(view: android.view.View) {
+        Log.d("wangweijundx", "generateQrcodeAndDisplay id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+        lifecycleScope.launch(Dispatchers.IO) {
+            Log.d("wangweijundx","delay 5 s")
+            delay(5000)
+            Log.d("wangweijundx", "launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+            withContext(Dispatchers.Main) {
+//                ivShareQrcode?.setImageBitmap(qrBitmap)
+                Log.d("wangweijundx", "withContext id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+            }
         }
     }
 
