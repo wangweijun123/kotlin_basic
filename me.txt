@@ -93,3 +93,22 @@ manifest.xml 合并规则
 协程，不会与特定的线程绑定，它可以在不同的线程之间灵活切换
 
 
+adb shell am start
+            -W -a android.intent.action.VIEW
+            -d <URI> <PACKAGE>
+
+adb shell am start -W -a android.intent.action.VIEW -d "example://gizmos" com.wangweijun.myapplication
+
+adb shell am start -W -a android.intent.action.VIEW -d "http://www.example.com/gizmos" com.wangweijun.myapplication
+
+
+########### 删除路径之后，<data>放在一起可以交叉调用 ###############
+
+adb shell am start -W -a android.intent.action.VIEW -d "example://gizmos" com.wangweijun.myapplication
+
+adb shell am start -W -a android.intent.action.VIEW -d "http://www.example.com" com.wangweijun.myapplication
+
+adb shell am start -W -a android.intent.action.VIEW -d "example://www.example.com" com.wangweijun.myapplication
+
+adb shell am start -W -a android.intent.action.VIEW -d "http://gizmos" com.wangweijun.myapplication
+

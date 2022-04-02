@@ -207,6 +207,17 @@ class Main {
         println(item2)
         action(item2)
     }
+
+    @Test
+    fun testWenhaoAnd() {
+        println(changeUrl("duanxia")) // duanxia
+        println(changeUrl(null)) // default
+    }
+
+    private fun changeUrl(url: String?): String =
+        url?.let {
+            url
+        } ?: "default"
 }
 
 class DataBlock<T> {

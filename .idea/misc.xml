@@ -9,6 +9,8 @@
       <map>
         <entry key="..\:/work/github/zhangshaowen/zhangshaowen_bd/kotlin_basic/app/src/main/res/layout/activity_main.xml" value="0.1802536231884058" />
         <entry key="..\:/work/github/zhangshaowen/zhangshaowen_bd/kotlin_basic/app/src/main/res/layout/activity_second.xml" value="0.1802536231884058" />
+        <entry key="app/src/main/res/layout/activity_coroutine.xml" value="0.3223958333333333" />
+        <entry key="app/src/main/res/layout/activity_deep_link.xml" value="0.3223958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main_new.xml" value="0.35" />
         <entry key="app/src/main/res/layout/activity_recycle_view.xml" value="0.3640625" />
@@ -23,6 +25,7 @@
         <entry key="app/src/main/res/layout/list_item_0.xml" value="0.3223958333333333" />
         <entry key="app/src/main/res/layout/list_item_1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item_cardview.xml" value="0.3640625" />
+        <entry key="testdeeplink/src/main/res/layout/activity_main.xml" value="0.25625" />
       </map>
     </option>
   </component>
