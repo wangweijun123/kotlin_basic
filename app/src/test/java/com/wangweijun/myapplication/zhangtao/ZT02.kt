@@ -127,11 +127,43 @@ class ZT02 {
         }
     }
 
+    class BehaviorImpl2 : Behavior {
+        // 重写接口的属性
+        override var canWalk: Boolean = false
+            get() {
+                return field
+            }
+
+        override fun walk2() {
+            println(" has not impl")
+        }
+    }
+
+    class BehaviorImpl3 : Behavior {
+        // 重写接口的属性
+        override var canWalk: Boolean = false
+            get() {
+                return field
+            }
+
+        override fun walk2() {
+            println(" has not impl")
+        }
+    }
+
     @Test
     fun testInterface() {
         val behaviorImpl = BehaviorImpl()
         behaviorImpl.canWalk = true
         behaviorImpl.walk()
+        testInterface(behaviorImpl)
+    }
+
+    fun testInterface(behavior: Behavior) {
+        when (behavior) { // when 对于自己写的实现类没法自动判断是否完备, else 也不用写,很危险
+            is BehaviorImpl -> println("BehaviorImpl")
+            is BehaviorImpl2 -> println("BehaviorImpl2")
+        }
     }
 
     /**
@@ -192,16 +224,39 @@ class ZT02 {
 
     fun isMan(data: Human) = when (data) {
         Human.MAN -> true
-        Human.WOMAN -> false
+        Human.WOMAN -> false // 注释掉不行，必须完备
         // 这里不需要else分支，编译器自动推导出逻辑已完备
     }
 
     @Test
     fun testEnumClass() {
         println(isMan(Human.MAN))
+        // 说明 每一个枚举的值，它在内存当中始终都是同一个对象引用
+        println(Human.MAN == Human.MAN) // true
+        println(Human.MAN === Human.MAN) // true
+
     }
 
+    @Test
+    fun testSealed() {
+        val suc = MyRes.Suc()
+        val suc2 = MyRes.Suc()
+        println("suc === suc2 ? ${suc === suc2}")
+        testRes(suc)
+    }
 
+    fun testRes(myRes: MyRes) {
+        when (myRes) {
+            is MyRes.Suc -> "xxx"
+        }
+    }
+
+    sealed class MyRes {
+        class Suc : MyRes()
+        class Error : MyRes()
+    }
+
+    // 密封类
     sealed class Result<out R> {
         data class Success<out T>(val data: T, val message: String = "") : Result<T>()
 
@@ -210,12 +265,11 @@ class ZT02 {
         data class Loading(val time: Long = System.currentTimeMillis()) : Result<Nothing>()
     }
 
-
-    /*fun display(data: Result) = when(data) {
-        Result.Success -> displaySuccessUI(data)
-        Result.Error -> showErrorMsg(data)
-        Result.Loading -> showLoading()
-    }*/
+//    fun display(data: Result) = when(data) {
+//        Result.Success -> displaySuccessUI(data)
+//        Result.Error -> showErrorMsg(data)
+//        Result.Loading -> showLoading()
+//    }
 
 }
 

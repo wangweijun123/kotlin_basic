@@ -1,5 +1,6 @@
 package com.wangweijun.myapplication.zhangtao.unit05
 
+import com.wangweijun.myapplication.zhangtao.unit05.last.PigManager
 import org.junit.Test
 
 class ObjectTest {
@@ -39,6 +40,13 @@ class ObjectTest {
     fun testSingleton() {
         // 反编译 UserManager.INSTANCE.login();
         UserManager.login()
+    }
+
+    @Test
+    fun testGetUser() {
+        val user = UserManager.getUser()
+        val user2 = UserManager.getUser()
+        println("user === user2 ? ${user === user2}")
     }
 
     @Test

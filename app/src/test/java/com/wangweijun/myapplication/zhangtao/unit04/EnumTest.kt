@@ -1,5 +1,6 @@
 package com.wangweijun.myapplication.zhangtao.unit04
 
+import com.wangweijun.myapplication.zhangtao.unit04.last.v2.CalculatorV2
 import org.junit.Test
 import java.lang.IllegalArgumentException
 
@@ -133,5 +134,9 @@ class EnumTest {
     enum class MyStatus(val value:String) {
         SUCCESS("SUCCESS"), // 枚举值value 必须是大写，而且需要一致
         FAILIED("FAILED2")
+    }
+
+    @Test
+    fun testCC() {
     }
 }

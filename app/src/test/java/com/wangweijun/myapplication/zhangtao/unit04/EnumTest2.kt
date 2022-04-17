@@ -12,7 +12,6 @@ class EnumTest2 {
             Operation2.MINUS -> println("MINUS")
             Operation2.MULTI -> println("MULTI")
             Operation2.DIVI -> println("DIVI")
-            else -> println("not all ")
         }
     }
     enum class Operation2(val value: String) {

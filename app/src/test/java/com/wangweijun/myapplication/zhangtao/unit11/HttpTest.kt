@@ -1,6 +1,8 @@
 package com.wangweijun.myapplication.zhangtao.unit11
 
-import com.wangweijun.myapplication.zhangtao.unit11.annotations.KtHttpV1
+import com.boycoder.kthttp.testKtHttpV3Async
+import com.boycoder.kthttp.testKtHttpV3Sync
+import com.boycoder.kthttp.testKtHttpV4
 import com.wangweijun.myapplication.zhangtao.unit11.annotations.testOkhttpClient
 import com.wangweijun.myapplication.zhangtao.unit11.annotations.testOkhttpClient2
 import org.junit.Test
@@ -23,4 +25,23 @@ class HttpTest {
     fun testHttp2() {
         testOkhttpClient2()
     }
+
+    @Test
+    fun testHttp3() {
+        testKtHttpV3Sync()
+    }
+
+    @Test
+    fun testHttp4() {
+        testKtHttpV3Async()
+        Thread.sleep(5000)
+    }
+
+    @Test
+    fun testHttp5() {
+        testKtHttpV4()
+    }
+
+
+
 }

@@ -20,4 +20,14 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
+
+    fun jumpBNDeepLink(view: android.view.View) {
+        val intent = Intent()
+        intent.setAction("android.intent.action.VIEW")
+        intent.addCategory("android.intent.category.DEFAULT")
+        intent.addCategory("android.intent.category.BROWSABLE")
+        intent.setData(Uri.parse("bnc://app.binance.com/webview/webview?type=default&url=aHR0cHM6Ly93d3cuZGV2ZmRnLm5ldC9qYS90ZXJtcw&needLogin=false"))
+        startActivity(intent)
+
+    }
 }

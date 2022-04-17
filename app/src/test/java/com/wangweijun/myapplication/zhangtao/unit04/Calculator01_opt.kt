@@ -15,12 +15,11 @@ class Main {
     }
 
     fun main() {
-        val arrayOf = arrayOf("1 + 1", "exit")
+        val arrayOf = arrayOf("1 + 3", "exit")
         var index = -1
 
         while (true) {
             println(help)
-
             index ++
             // 第一步，读取输入命令；
             val input = readLineFromArray2(arrayOf, index) ?: continue
@@ -45,7 +44,8 @@ class Main {
         val left = inputList[0].toInt()
         //                           ①
         //                           ↓
-        val operation = Operation.valueOf(inputList[1])
+        val operation = Operation.realValueOf(inputList[1])
+//        val operation = Operation.valueOf(inputList[1]) // 自带的方法有问题的
         val right = inputList[2].toInt()
         // enum有问题
         return when (operation) {
@@ -53,6 +53,7 @@ class Main {
             Operation.MINUS -> left - right
             Operation.MULTI -> left * right
             Operation.DIVI -> left / right
+            else -> {-1}
         }
     }
 
@@ -60,8 +61,51 @@ class Main {
         ADD("+"),
         MINUS("-"),
         MULTI("*"),
-        DIVI("/")
+        DIVI("/");
+
+        companion object {
+            fun realValueOf(value: String): Operation? {
+                values().forEach {
+                    if (value == it.value) {
+                        return  it
+                    }
+                }
+                return ADD
+            }
+        }
     }
 
     private fun readLineFromArray2(data: Array<String>, index: Int) = data[index]
+
+    @Test
+    fun testEnum() {
+        // 正确,Kotlin 提供的 valueOf() 就是用于解析“枚举变量名称”的。
+        val addOp = Operation.valueOf("ADD")
+        // 报错
+        val addOp2 = Operation.valueOf("+")
+    }
+
+    @Test
+    fun testEnumValueOf() {
+        val addOp = OperationLast.realValueOf("+")
+    }
+
+    enum class OperationLast(val value: String) {
+        ADD("+"),
+        MINUS("-"),
+        MULTI("*"),
+        DIVI("/");
+
+        companion object {
+            fun realValueOf(value: String): OperationLast? {
+                values().forEach {
+                    if (value == it.value) {
+                        return it
+                    }
+                }
+                return null
+            }
+        }
+    }
+
 }

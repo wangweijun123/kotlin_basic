@@ -37,7 +37,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.bt).setOnClickListener(this)
+//        findViewById<Button>(R.id.bt).setOnClickListener(this)
+        findViewById<Button>(R.id.bt).setOnClickListener(object: View.OnClickListener{
+            override fun onClick(p0: View?) {
+                TODO("Not yet implemented")
+            }
+        })
+        findViewById<Button>(R.id.bt).setOnClickListener {
+            // todo
+        }
+
         mainActivity = this
     }
 
