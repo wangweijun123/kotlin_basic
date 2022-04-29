@@ -12,6 +12,7 @@ class LastA {
     val lastName: String = ""
 
     // 被翻译成了 static class, 静态的内部类
+    // 嵌套类变成类静态的内部类
     class LastB {
         fun t() {
 //            val my = lastName // build error,无法外部类的成员

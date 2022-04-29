@@ -210,8 +210,9 @@ class ZT02 {
         val (name, age) = tom     // name=Tom, age=18
         println("name is $name, age is $age .")
 
-        val mike = tom.copy(name = "Mike")
+        val mike = tom.copy(name = "Mike") // 创建新对象
         println(mike)             // 输出：Person(name=Mike, age=18)
+        println("tom.hashCode() = ${tom.hashCode()}, mike.hashCode() = ${mike.hashCode()}")
     }
 
     // 密封类，是更强大的枚举类
@@ -231,10 +232,19 @@ class ZT02 {
     @Test
     fun testEnumClass() {
         println(isMan(Human.MAN))
+        // 枚举也有它的局限性
         // 说明 每一个枚举的值，它在内存当中始终都是同一个对象引用
         println(Human.MAN == Human.MAN) // true
         println(Human.MAN === Human.MAN) // true
 
+    }
+
+    @Test
+    fun testEnumClassValueOf() {
+        // valueOf 特别注意，传进去的只能是枚举字符串，否则抛出异常
+        val valueOf = Human.valueOf("MAN")
+        println(valueOf == Human.MAN) // true
+        assert(valueOf == Human.MAN)
     }
 
     @Test
@@ -271,5 +281,17 @@ class ZT02 {
 //        Result.Loading -> showLoading()
 //    }
 
+    @Test
+    fun testBoolean() {
+        val flag: Boolean = true // kotlin 中没有原始类型，一切是对象，java有原始类型哦,
+        if (flag) {
+            println(" is true")
+        } else {
+            println(" is false")
+        }
+        if (flag == true) {
+
+        }
+    }
 }
 

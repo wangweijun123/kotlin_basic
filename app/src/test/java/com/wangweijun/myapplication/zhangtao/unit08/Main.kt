@@ -17,6 +17,11 @@ class Main {
             WordFreq("a", 1),
             WordFreq("c", 3)
         )
+        // for 循环迭代数组或者list，
+//        originList.size
+        for (item in originList) {
+            println("$item")
+        }
         println(originList)
         val newList = originList.sortedByDescending { it.frequency }
         println("倒序 = $newList")

@@ -51,6 +51,7 @@ class ZhangtaoBasic {
     @Test
     fun arrayTest() {
         val a = arrayOf("4", "0", "7", "i", "f", "w", "0", "9")
+//        a.size
         val index = arrayOf(5, 3, 9, 4, 8, 3, 1, 9, 2, 1, 7)
         index.filter {
             it < a.size
@@ -111,6 +112,8 @@ class ZhangtaoBasic {
         println(helloFunction3(name = "wxj", smallName = "yaya"))
         println(helloFunction3(smallName = "baby"))
         println(helloFunction3(age = 11))
+        // 传入形参的名字, 那肯定是给这个形参附值
+        println(helloFunction3(smallName = "yaya", name = "wxj"))
     }
 
     @Test
@@ -181,14 +184,14 @@ class ZhangtaoBasic {
         when(i) {
             1 -> print("一")
             2 -> print("二")
-            else -> print("i 不是一也不是二")
         }
     }
     // 表达式，我的理解就是有返回值
     @Test
     fun whenTest2() {
         val i: Int = 1
-        val message = when(i) { // when 中的情况必须完整，大部分有else，除非枚举完毕
+        // when 中的情况必须完整，覆盖到所有情况,与java中switch case不一样罗，大部分有else，除非枚举完毕
+        val message = when(i) {
             1 -> "一"
             2 -> "二"
             else -> "i 不是一也不是二" // 如果去掉这行，会报错
@@ -211,7 +214,7 @@ class ZhangtaoBasic {
         println("######")
         for (i in 6 downTo 0 step 2) { println(i)}
 
-        println("######")
+        println("###arrayOf3###")
         for (i in arrayOf3) {
             println(i)
         }

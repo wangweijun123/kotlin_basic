@@ -1,11 +1,11 @@
 package com.wangweijun.myapplication.zhangtao.unit10
 
 import org.junit.Test
-
+// class
 class Main5 {
-
+    // public static
     open class Food {}
-
+    // public static final
     class KFC: Food() {}
 
 

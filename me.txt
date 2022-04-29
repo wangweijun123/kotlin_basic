@@ -1,5 +1,14 @@
-二遍进度: 全透明
+二遍进度: 01
 
+
+慢(意思就是一遍弄懂，肯定时间花的多)就是快
+
+最后一遍，搞懂搞明白，不要再来了哈
+
+kotlin 函数式编程：
+kotlin dsl
+kotlin携程：
+android jetpack：
 
 
 
@@ -116,6 +125,8 @@ adb shell am start -W -a android.intent.action.VIEW -d "http://www.example.com" 
 adb shell am start -W -a android.intent.action.VIEW -d "example://www.example.com" com.wangweijun.myapplication
 
 adb shell am start -W -a android.intent.action.VIEW -d "http://gizmos" com.wangweijun.myapplication
+
+
 
 
 

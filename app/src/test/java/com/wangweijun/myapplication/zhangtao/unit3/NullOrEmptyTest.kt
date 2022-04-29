@@ -82,4 +82,18 @@ class NullOrEmptyTest {
         filterList?.contains("item")
 
     }
+
+    @Test
+    fun testStringEmpty() {
+//        val str:CharSequence? = "xx";
+        //
+        val str:CharSequence? = null;
+        if (str?.isEmpty() == true) {  // 空字符串
+            println(" true ")
+        } else { // 值 null 或 有值 xxx
+            println(" false ")
+        }
+        println(" str.isNullOrEmpty() ? ${str.isNullOrEmpty()} ")
+
+    }
 }

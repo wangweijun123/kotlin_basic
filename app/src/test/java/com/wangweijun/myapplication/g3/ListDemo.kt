@@ -21,6 +21,10 @@ class Main {
         println("List: ${numbers.last()}")
         println("${numbers.contains(5)}")
 
+//        numbers = listOf(1, 3, 5, 7) // build error
+
+
+
 //        numbers[0] = 2
     }
 
@@ -31,6 +35,18 @@ class Main {
         println("Add noodles: ${entrees.add("noodles")}")
         println("Entrees: $entrees")
         println(entrees.contains("noodles"))
+    }
+
+    @Test
+    fun testMutableList3() {
+        // val 定义的变量不能再指向别的变量，是这么个意思
+        var entrees = mutableListOf<String>()
+        println("Entrees: $entrees")
+        println("Add noodles: ${entrees.add("noodles")}")
+        println("Entrees: $entrees")
+        println(entrees.contains("noodles"))
+
+        entrees = mutableListOf<String>()
     }
 
     @Test

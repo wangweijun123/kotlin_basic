@@ -15,7 +15,7 @@ class Main {
     }
 
     fun main() {
-        val arrayOf = arrayOf("1 + 3", "exit")
+        val arrayOf: Array<String> = arrayOf("1 + 3", "exit")
         var index = -1
 
         while (true) {
