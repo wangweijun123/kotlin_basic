@@ -1,6 +1,8 @@
 package com.wangweijun.myapplication.zhangtao.unit05
 
+import com.wangweijun.myapplication.zhangtao.unit05.last.LastUserManager
 import com.wangweijun.myapplication.zhangtao.unit05.last.PigManager
+import org.junit.Assert
 import org.junit.Test
 
 class ObjectTest {
@@ -21,18 +23,18 @@ class ObjectTest {
     // 这个匿名内部类，在继承了Man类的同时，还实现了A、B两个接口
         val item = object : Man(), A, B {
             override fun funA() {
-                TODO("Not yet implemented")
+                println("funA")
             }
 
             override fun funB() {
-                TODO("Not yet implemented")
+                println("funB")
             }
 
             override fun findMan() {
-                TODO("Not yet implemented")
+                println("findMan")
             }
-
         }
+        item.findMan()
     }
 
 
@@ -47,6 +49,7 @@ class ObjectTest {
         val user = UserManager.getUser()
         val user2 = UserManager.getUser()
         println("user === user2 ? ${user === user2}")
+        Assert.assertEquals(user, user2)
     }
 
     @Test
@@ -54,9 +57,10 @@ class ObjectTest {
         PPPerson.InnerSingleTon.foo()
         PPPerson.InnerSingleTon2.foo2()
     }
-    @Test
+//    @Test
     fun testSingleton3() {
         val uuuser = UUUser.create("dx")
+        val uuuser2 = UUUser.createJvmStatic("dx")
     }
 
     @Test
@@ -75,7 +79,9 @@ class ObjectTest {
     @Test
     fun testUserManager() {
         // 其实是调用了 SimpleSington.INSTANCE.doAction();
-        UserManager2.getInstance("dx")
+        val instance = UserManager2.getInstance("dx")
+        println("instance = $instance")
+        Assert.assertEquals(UserManager2.getInstance("dx"), UserManager2.getInstance("dx"))
         PersonManager.getInstance("dx")
     }
 
@@ -85,5 +91,10 @@ class ObjectTest {
         UserManager3.getInstance("dxx")
     }
 
+    @Test
+    fun testUserManagerLast() {
+//        val userManager = LastUserManager("xx")
+        val userManager = LastUserManager.getInstance("xxx")
+    }
 
 }

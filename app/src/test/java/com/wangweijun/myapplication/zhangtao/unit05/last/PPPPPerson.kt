@@ -8,12 +8,13 @@ package com.wangweijun.myapplication.zhangtao.unit05.last
  * desc   :
  */
 class PPPPPerson {
-
+    // PPPPPerson 还是一样的
     // 这个object定义的类被编译成了static的单利
     // public static final class InnerSingleton
     object InnerSingleton {
         fun foo() {} // 注意这里还是实例方法
 
+        // static 方法
         @JvmStatic
         fun foo2() {} // 注意这里是java中的静态方法
     }

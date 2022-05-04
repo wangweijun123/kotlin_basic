@@ -13,3 +13,6 @@ package com.wangweijun.myapplication.zhangtao.basic.unit1
 // public static final
 //
 fun myAdd(a: Int, b: Int) = a + b
+
+val addFunction = ::myAdd
+

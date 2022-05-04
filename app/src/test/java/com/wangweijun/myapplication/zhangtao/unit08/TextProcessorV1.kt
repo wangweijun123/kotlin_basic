@@ -2,6 +2,8 @@ package com.wangweijun.myapplication.zhangtao.unit08
 
 import org.junit.Test
 
+const val NUMBER_PHONE = 100
+
 data class WordFreq(val word: String, val frequency: Int)
 
 class TextProcessorV1 {

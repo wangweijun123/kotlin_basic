@@ -24,6 +24,7 @@ class GaojieFunTest {
         myUser?.apply {
             println("name = ${name}")
             println("外层 myuser = ${this}")
+            name = "xxx"
             myUser = null
         }
 
