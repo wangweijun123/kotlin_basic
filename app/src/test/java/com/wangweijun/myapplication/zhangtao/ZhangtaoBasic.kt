@@ -164,6 +164,15 @@ class ZhangtaoBasic {
         return text?.length ?: 0
     }
 
+    data class MyObject(var num: Int)
+
+    @Test
+    fun elvisTestObj() {
+        var myObj: MyObject? = MyObject(1)
+        myObj = null
+        val result = myObj?.num ?: -10
+        println("result = $result")
+    }
     @Test
     fun elvisTest2() {
         println(getString2(null))

@@ -1,13 +1,13 @@
 package com.wangweijun.myapplication
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.wangweijun.myapplication.tip.RecycleViewActivity
 import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
@@ -15,12 +15,10 @@ import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
 import com.wangweijun.myapplication.tip.TipTimeActivity
 import com.wangweijun.myapplication.web.WebActivity
 import com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity
-import io.reactivex.Observable
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
 /**
@@ -43,11 +41,77 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 TODO("Not yet implemented")
             }
         })
+        // lambda表达式 = { gotoPre() }这一块
         findViewById<Button>(R.id.bt).setOnClickListener {
-            // todo
+            gotoPre()
+        }
+        // 与上面等价
+        findViewById<Button>(R.id.bt).setOnClickListener { v: View ->
+            gotoPre()
         }
 
         mainActivity = this
+        setMultiColor()
+    }
+
+    fun gaojie() {
+        findViewById<Button>(R.id.bt).setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                gotoPre()
+            }
+        })
+        findViewById<Button>(R.id.bt).setOnClickListener(View.OnClickListener{ v: View? ->
+            gotoPre()
+            Log.i("ww", "xxx")
+        })
+
+        findViewById<Button>(R.id.bt).setOnClickListener({
+            gotoPre()
+        })
+
+        findViewById<Button>(R.id.bt).setOnClickListener{
+            gotoPre()
+            Log.i("ww", "xxx")
+        }
+    }
+
+    fun gotoPre() {}
+
+    // single abstract method
+    fun asmTest() {
+        // 转换前：
+//        public void setOnClickListener(OnClickListener l)
+
+            // 转换后：
+//        fun setOnClickListener(l: (View) -> Unit)
+        // 实际上是这样：
+//        fun setOnClickListener(l: ((View!) -> Unit)?)
+    }
+
+    private fun setMultiColor() {
+//        val totalCount = 3
+//        val totalPrice = 33.8
+//        val totalCountStr = totalCount.toString() + ""
+//        val totalPriceStr = String.format("%.2f", totalPrice)
+//
+//        val str = ("共 " + totalCountStr + "件商品，"
+//                + "已付款￥" + totalPriceStr + "元")
+//        val style = SpannableStringBuilder(str)
+//        style.setSpan(
+//            ForegroundColorSpan(Color.RED),
+//            1,
+//            totalCountStr + 1,
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//        style.setSpan(
+//            ForegroundColorSpan(Color.RED),
+//            totalCountStr + 9,
+//            str.length - 1,
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+
+        val content = Html.fromHtml(getString(R.string.text_multi_color))
+        findViewById<TextView>(R.id.appeal_tv).text = content
     }
 
     fun javaCallKotlin(view: View) {
@@ -256,4 +320,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // 定义一个变量，不过这个变量代表着一个函数(函数替代接口)
+    var mOnClickListener: ((View) -> Unit)? = null
+
+    fun setOnclickListener(l: (View) -> Unit) {
+        mOnClickListener = l
+    }
 }

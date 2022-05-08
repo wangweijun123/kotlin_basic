@@ -32,4 +32,6 @@
     <string name="content_type2">This is sample data for view type 2 - %d</string>
     <string name="content_type3">This is sample data for view type 3</string>
     <string name="drawable_animal_name">animal%d</string>
+
+    <string name="text_multi_color"><![CDATA[<font color=\'#ffffff\'>Can not verify? </font><font color=\'#FFF7B0\'>Contact us</font>]]></string>
 </resources>

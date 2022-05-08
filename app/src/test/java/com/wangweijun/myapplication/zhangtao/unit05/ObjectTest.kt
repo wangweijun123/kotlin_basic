@@ -97,4 +97,11 @@ class ObjectTest {
         val userManager = LastUserManager.getInstance("xxx")
     }
 
+    @Test
+    fun testUserManagerLast2() {
+        val instance1 = PersonManagerLast.getInstance("xxx")
+        val instance2 = PersonManagerLast.getInstance("xxx")
+        println("name = ${instance1.name}")
+        Assert.assertEquals(instance1, instance2)
+    }
 }
