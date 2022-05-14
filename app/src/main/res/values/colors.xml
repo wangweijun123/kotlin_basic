@@ -15,4 +15,7 @@
     <color name="green_dark">#ff669900</color>
     <color name="red_dark">#ffcc0000</color>
     <color name="blue_dark">#ff0099cc</color>
+
+    <color name="Gray_850">#202630</color>
+    <color name="Gray_50">#EAECEF</color>
 </resources>
