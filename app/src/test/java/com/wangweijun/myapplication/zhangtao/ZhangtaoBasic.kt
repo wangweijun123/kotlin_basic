@@ -237,11 +237,14 @@ class ZhangtaoBasic {
     @Test
     fun fp() {
         listOf(1, 2, 3, 4)
-            .filter { it % 2 == 0 }
+            .filter {
+                it % 2 == 0
+            }
             .forEach {
                 println(it)
             }
     }
+
 
     fun testSum() {
         val sum = (1..10).sum() // 结果 55

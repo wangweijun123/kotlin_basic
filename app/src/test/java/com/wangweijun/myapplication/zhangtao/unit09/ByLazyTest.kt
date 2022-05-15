@@ -4,7 +4,7 @@ import org.junit.Test
 
 class ByLazyTest {
 
-    //            定义懒加载委托
+    //            定义懒加载委托: 缓存一份，缓存什么: 1数据，2对象
 //               ↓   ↓
     val data: String by lazy {
         request()

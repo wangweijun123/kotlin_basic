@@ -1,5 +1,6 @@
 package com.wangweijun.myapplication.zhangtao.unit09
 
+import com.wangweijun.myapplication.zhangtao.unit09.last.Model4
 import org.junit.Test
 
 /**
@@ -39,11 +40,22 @@ class Model3 {
     fun getData(): List<String> = data
 }
 
+
+
 class Main {
+    @Test
+    fun testModel4() {
+        val model4 = Model4()
+        println(model4.data)
+//        model4.data = "duanxia" //build error
+        println(model4.data)
+    }
+
     @Test
     fun testModel() {
         val model = Model()
         println("Before:${model.data}")
+//        model.data.add("xxx") // build error
         val data = model.data
         (data as? MutableList)?.add("some data")
         println("After:${model.data}")

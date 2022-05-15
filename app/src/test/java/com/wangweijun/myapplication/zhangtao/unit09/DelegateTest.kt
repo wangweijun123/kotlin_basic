@@ -2,24 +2,23 @@ package com.wangweijun.myapplication.zhangtao.unit09
 
 import org.junit.Test
 
-class DelegateTest {
+interface DB {
+    fun save()
+}
 
+class SqlDB() : DB {
+    override fun save() { println("save to sql") }
+}
 
-    interface DB {
-        fun save()
-    }
-
-    class SqlDB() : DB {
-        override fun save() { println("save to sql") }
-    }
-
-    class GreenDaoDB() : DB {
-        override fun save() { println("save to GreenDao") }
-    }
-    //               参数  通过 by 将接口实现委托给 db
+class GreenDaoDB() : DB {
+    override fun save() { println("save to GreenDao") }
+}
+// 看起来就是一个包装
+//               参数  通过 by 将接口实现委托给 db
 //                ↓            ↓
-    class UniversalDB(db: DB) : DB by db
+class UniversalDB(db: DB) : DB by db
 
+class DelegateTest {
     /*
         输出：
         save to sql

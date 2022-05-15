@@ -58,4 +58,6 @@ class LastTextProcessorV1 {
         val text = file.readText(Charsets.UTF_8)
         processText(text)
     }
+
+
 }

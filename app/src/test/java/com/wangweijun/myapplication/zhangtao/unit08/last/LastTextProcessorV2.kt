@@ -46,4 +46,22 @@ class LastTextProcessorV2 {
         return list
     }
 
+    @Test
+    fun test2() {
+        val text = "Kotlin is my favorite language. I love Kotlin!"
+        println(processText2(text))
+    }
+    private fun processText2(text: String): List<WordFreq> {
+        return text
+            .clean()
+            .split(" ")
+            .filter { it != "" }
+            .groupBy {
+                it
+            }
+            .map {
+                WordFreq(it.key, it.value.size)
+            }
+            .sortedByDescending { it.frequency }
+    }
 }
