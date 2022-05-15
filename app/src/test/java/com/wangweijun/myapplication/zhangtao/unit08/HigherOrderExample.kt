@@ -1,12 +1,20 @@
 package com.wangweijun.myapplication.zhangtao.unit08
 
-fun foo(block: () -> Unit) {
-    block()
-}
+import org.junit.Assert
+import org.junit.Test
 
-fun main() {
-    var i = 0
-    foo{
-        i++
+class HighOrderTest {
+    fun foo(block: () -> Unit) {
+        println("code in function fooInline")
+        block()
+    }
+
+//    @Test
+    fun main() {
+        var i = 0
+        foo{
+            i++
+//            Assert.assertEquals(1, i)
+        }
     }
 }

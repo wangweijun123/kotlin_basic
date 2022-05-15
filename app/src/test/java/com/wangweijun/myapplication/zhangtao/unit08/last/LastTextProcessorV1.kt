@@ -2,6 +2,7 @@ package com.wangweijun.myapplication.zhangtao.unit08.last
 
 import com.wangweijun.myapplication.zhangtao.unit08.WordFreq
 import org.junit.Test
+import java.io.File
 
 class LastTextProcessorV1 {
     @Test
@@ -50,5 +51,11 @@ class LastTextProcessorV1 {
             it.frequency
         }
         return list
+    }
+
+
+    fun processFile(file: File) {
+        val text = file.readText(Charsets.UTF_8)
+        processText(text)
     }
 }
