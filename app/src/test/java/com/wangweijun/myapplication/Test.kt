@@ -28,6 +28,8 @@ import kotlin.reflect.KClass
  * 并且编译后都生成了静态的成员
  *
  * Any? (是所有可为空类型根类型) 与  Any (是所有不可为空类型根类型)
+ *
+ * Any  --> java object
  */
 
 

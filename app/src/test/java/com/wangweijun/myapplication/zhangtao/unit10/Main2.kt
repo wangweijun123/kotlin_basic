@@ -31,13 +31,15 @@ class Main2 {
         animals.forEach {
             println(it.eat())
         }
+        val animal = animals[0]
     }
 
     @Test
     fun main() {
 // 需要MutableList<Animal>，实际传MutableList<Cat> 编译出错
-        var list = mutableListOf(Cat())
-//        foo(list)
+//        var list = mutableListOf(Cat()) // build error
+        var list = mutableListOf<Animal>() // build success
+        foo(list)
         // 实际上，编译器在这里就会提示错误，我们现在假设编译器不阻止我们，会出什么问题
     }
 
@@ -51,12 +53,15 @@ class Main2 {
     }
 
 
-
+    /**
+     * 需要什么集合就只能传什么集合
+     */
     @Test
     fun main2() {
         // 需要MutableList<Cat>，实际传MutableList<Animal>,编译出错
-        var list = mutableListOf(Animal())
-//        foo2(list)
+//        var list = mutableListOf<Animal>(Animal()) // 编译出错
+        var list = mutableListOf<Cat>(Cat())
+        foo2(list)
         // 实际上，编译器在这里就会提示错误，我们现在假设编译器不阻止我们，
     // 会出什么问题
     }
