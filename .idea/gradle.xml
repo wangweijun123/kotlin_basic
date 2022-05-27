@@ -12,8 +12,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/module-libray" />
-            <option value="$PROJECT_DIR$/module-libray/testlibrary" />
+            <option value="$PROJECT_DIR$/module-libraynew" />
+            <option value="$PROJECT_DIR$/module-libraynew/testlibrary" />
             <option value="$PROJECT_DIR$/testdeeplink" />
           </set>
         </option>

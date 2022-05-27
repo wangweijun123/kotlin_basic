@@ -9,12 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.wangweijun.Library1Util
 import com.wangweijun.myapplication.tip.RecycleViewActivity
 import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
 import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
 import com.wangweijun.myapplication.tip.TipTimeActivity
 import com.wangweijun.myapplication.web.WebActivity
-import com.wangweijun.testlibrary.TestLibraryUtil
 import com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity
 import kotlinx.coroutines.*
 import org.json.JSONArray
@@ -352,6 +352,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun testLibrary() {
-        TestLibraryUtil.testLibray()
+        Library1Util.test1()
     }
 }
