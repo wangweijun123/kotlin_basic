@@ -14,7 +14,7 @@ class JavaConvertExample {
     // 可空类型
     private var name: String? = null
     fun init() {
-        name = ""
+        name = "duanxia"
     }
 
     fun foo() {
@@ -34,9 +34,9 @@ class JavaConvertExample {
         name?.let {
             foo()
             println("call foo() --> $name")
-            println("use let $it")
+            println("first use let $it")
 
-            println("use let ${it.length}")
+            println("second use let ${it.length}")
         }
     }
 

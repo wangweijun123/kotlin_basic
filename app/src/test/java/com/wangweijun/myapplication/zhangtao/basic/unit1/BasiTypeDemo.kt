@@ -1,5 +1,6 @@
 package com.wangweijun.myapplication.zhangtao.basic.unit1
 
+import org.junit.Assert
 import org.junit.Test
 
 /**
@@ -26,6 +27,14 @@ class BasiTypeDemo {
     fun test03() {
         val result = myAdd(1, 3)
         println("myAdd = $result")
+    }
+
+    @Test
+    fun testNullToString() {
+        val name: String? = null
+        println(name.toString())
+        Assert.assertEquals("null", name.toString())
+        println(name.toString())
     }
 
 }

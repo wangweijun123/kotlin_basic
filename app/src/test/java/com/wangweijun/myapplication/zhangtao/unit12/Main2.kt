@@ -26,7 +26,13 @@ class Main2 {
     @Test
     fun testPlatformType() {
         val nullableMsg: String? = NullJava.getNullableString(null)
-        val notNullMsg: String = NullJava.getNotNullString("Hey,")
+        val notNullMsg: String = NullJava.getNotNullString("Hey,") //
+    // 其实很简单，kt 中有是否为空类型， 而java中没有，通过注解@Nullable, @NotNUll来告诉kt
+    // 如果java中没有标注，那就是都可以传，null,或者 "hello"
+    // build error, kt 调用java不为空的参数，实际上传null，build error
+//        val notNullMsg2: String = NullJava.getNotNullString(null)
+
+
         // String! 可以当作String?， 也可以当作String，所以注意了，空指针问题？？？？
         val platformMsg1: String? = NullJava.getMsg(null)
         val platformMsg2: String = NullJava.getMsg("Hello")

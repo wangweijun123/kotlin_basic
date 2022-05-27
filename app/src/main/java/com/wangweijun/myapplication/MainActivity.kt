@@ -52,6 +52,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         mainActivity = this
         setMultiColor()
+        testRetunLamb()
+    }
+
+    fun testRetunLamb() {
+        findViewById<Button>(R.id.testlamba).setOnClickListener{
+            val re =  try {
+                1/0
+            } catch (e: Exception) {
+                Log.i("wwwww", "Exception")
+                100
+//                return@setOnClickListener // click 方法结束
+            }
+
+            Log.i("wwwww", "xxx = $re")
+            return@setOnClickListener
+            Log.i("wwwww", "xxx")
+        }
     }
 
     fun gaojie() {
@@ -72,8 +89,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         findViewById<Button>(R.id.bt).setOnClickListener{
             gotoPre()
             Log.i("ww", "xxx")
+            return@setOnClickListener
+            Log.i("ww", "xxx")
         }
+
+
     }
+
+
 
     fun gotoPre() {}
 
@@ -326,4 +349,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun setOnclickListener(l: (View) -> Unit) {
         mOnClickListener = l
     }
+
 }
