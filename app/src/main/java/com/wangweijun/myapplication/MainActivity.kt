@@ -14,6 +14,7 @@ import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
 import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
 import com.wangweijun.myapplication.tip.TipTimeActivity
 import com.wangweijun.myapplication.web.WebActivity
+import com.wangweijun.testlibrary.TestLibraryUtil
 import com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity
 import kotlinx.coroutines.*
 import org.json.JSONArray
@@ -350,4 +351,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mOnClickListener = l
     }
 
+    fun testLibrary() {
+        TestLibraryUtil.testLibray()
+    }
 }
