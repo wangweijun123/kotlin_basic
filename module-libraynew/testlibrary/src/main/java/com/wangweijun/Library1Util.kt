@@ -1,5 +1,7 @@
 package com.wangweijun
 
+import com.wangweijun.camera.CameraUtil
+
 /**
  * author : user
  * email : xxx@xx.com
@@ -11,5 +13,7 @@ object Library1Util {
 
     fun test1() {
         println("test1 in lib 1")
+
+        CameraUtil.testCamera()
     }
 }

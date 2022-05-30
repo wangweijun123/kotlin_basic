@@ -14,7 +14,7 @@ class Main2 {
     @Test
     fun main() {
         val nullableString = NullJava.getNullableString(null)
-        val notNullString = NullJava.getNotNullString("Hey,")
+        val notNullString = NullJava.getNotNullString("Hey,") // null build error
 
         // 这里是 String!, 不知道是不是为空类型
         val msg = NullJava.getMsg(null)

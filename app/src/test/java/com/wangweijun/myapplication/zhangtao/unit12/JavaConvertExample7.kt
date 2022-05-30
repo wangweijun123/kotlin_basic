@@ -9,15 +9,31 @@ class JavaConvertExample7 {
 //   ↓                      ↓
     fun <T> saveSomething(data: T) { // data 是可空类型  T 等价于 Any?
         val set = sortedSetOf<T>() // Java TreeSet
+        // 范型没有限制的话，他是可空类型,所以需要判空
+        data?.let {
+            set.add(it)
+        }
+        println("set size=${set.size}")
+    }
+
+    // 定义范型时，最好定义是否可空类型
+    // 泛型定义处              泛型使用处
+//   ↓  不为空的任何类型                    ↓
+    fun <T: Any> saveSomething2(data: T) { //
+        val set = sortedSetOf<T>() // Java TreeSet
         set.add(data)
         println("set size=${set.size}")
     }
 
-    // 泛型定义处              泛型使用处
-//   ↓  不为空的任何类型                    ↓
-    fun <T: Any> saveSomething2(data: T) { // data 是可空类型  T 等价于 Any?
+    /**
+     * Any 是所有非空类型的根类型， Any? 是所有可空类型的根类型
+     * @param data T
+     */
+    fun <T: Any?> saveSomething3(data: T) { // T: Any?, data是可空类型
         val set = sortedSetOf<T>() // Java TreeSet
-        set.add(data)
+        data?.let {
+            set.add(data)
+        }
         println("set size=${set.size}")
     }
 
@@ -35,6 +51,20 @@ class JavaConvertExample7 {
 //                        ↓
         saveSomething("Hello world!")
 //        saveSomething2(null) // build error
+        saveSomething3(null)
+    }
+
+    @Test
+    fun testAny() {
+//        saveAny(null)
+        saveAny2(null)
+    }
+    fun saveAny(any: Any) { // 不为null的any，所以传null编译出错
+
+    }
+
+    fun saveAny2(any: Any?) {
+
     }
 
 }

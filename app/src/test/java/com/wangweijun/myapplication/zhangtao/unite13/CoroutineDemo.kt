@@ -105,34 +105,35 @@ Get4
     // 看不懂代码没关系，目前咱们只需要关心代码的执行结果
     @Test
     fun main3() = runBlocking {
+        println("生产者与消费者开始,一个线程上运行了两个协程(生成者与消费者协程) ... ${getThreadInfo()}")
         val channel = getProducer(this)
         testConsumer(channel)
     }
 
     fun getProducer(scope: CoroutineScope) = scope.produce {
-        println("Send:1")
+        println("Send:1 ${getThreadInfo()}") // Send:1 , tid = 13,tname = Test worker @coroutine#2
         send(1)
-        println("Send:2")
+        println("Send:2 ${getThreadInfo()}")
         send(2)
-        println("Send:3")
+        println("Send:3 ${getThreadInfo()}")
         send(3)
-        println("Send:4")
+        println("Send:4 ${getThreadInfo()} ")
         send(4)
     }
 
     suspend fun testConsumer(channel: ReceiveChannel<Int>) {
         delay(100)
         val i = channel.receive()
-        println("Receive$i")
+        println("Receive $i ${getThreadInfo()}") // Receive 1 , tid = 13,tname = Test worker @coroutine#1
         delay(100)
         val j = channel.receive()
-        println("Receive$j")
+        println("Receive $j ${getThreadInfo()}")
         delay(100)
         val k = channel.receive()
-        println("Receive$k")
+        println("Receive $k ${getThreadInfo()}")
         delay(100)
         val m = channel.receive()
-        println("Receive$m")
+        println("Receive $m ${getThreadInfo()}")
     }
 
 /*
@@ -165,6 +166,33 @@ Receive4
 main
 Thread-0
 */
+
+
+    // 代码中一共启动了两个协程
+    @Test
+    fun main44() = runBlocking {
+        // Thread.currentThread().name就能会包含：协程的名字@coroutine#1
+        // runBlocking -> , tid = 13,tname = Test worker @coroutine#1
+        println("runBlocking -> " + getThreadInfo())
+
+        launch {
+            // launch -> , tid = 13,tname = Test worker @coroutine#1
+            println("launch -> " + getThreadInfo())
+            delay(100L)
+        }
+
+        Thread.sleep(1000L)
+    }
+
+/*
+输出结果：
+main @coroutine#1
+main @coroutine#2
+
+这里要配置特殊的VM参数：-Dkotlinx.coroutines.debug
+这样一来，Thread.currentThread().name就能会包含：协程的名字@coroutine#1
+*/
+
 
 
     // 代码中在一个线程上一共启动了两个协程,也就是一个进程多个线程，一个线程多个携程，
@@ -243,6 +271,8 @@ error
     @Test
     fun main8() = runBlocking(Dispatchers.IO) {
         repeat(3) {
+            // 每launch一次，就会创建一个携程，所以会出现3个携程,但是一个携程可能运行在不通线程之上
+            // 这里可以理解携程就是一个任务，多个任务执行在线程池之上，所以，任务是可以在不通线程上运行
             launch {
                 repeat(3) {
                     println(Thread.currentThread().name)
@@ -294,11 +324,14 @@ Print-2:main
 */
 
     // 这里一个线程上运行三个携程，也就是三个任务，但是任务之间不阻塞哦
+    // 协程比线程多出了线程内部异步的能力
     @Test
     fun main10() = runBlocking {
         println("Print-0:${Thread.currentThread().name}")
+        // launch 1 与 launch 2 是并行，连个携程运行在同一个线程之上，但是不是顺序执行，但是不能Thread.sleep()
         launch {
             repeat(3) {
+                // delay 是一个挂起函数 suspend
                 delay(1000L)
                 println("Print-1:${Thread.currentThread().name}")
             }

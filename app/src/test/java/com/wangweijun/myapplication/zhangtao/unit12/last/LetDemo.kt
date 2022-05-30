@@ -18,8 +18,8 @@ class LetDemo {
             println(user === it) // true
             println("user.hashCode() == it.hashCode() ? ${user.hashCode() == it.hashCode()}") // true
             user = null
-            println("user = $user")
-            println("it = $it")
+            println("user = $user") // user = null
+            println("it = $it") // it = User(name=wangweijun)
             it.name
         }
         println(r1)

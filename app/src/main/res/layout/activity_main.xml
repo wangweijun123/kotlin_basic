@@ -32,6 +32,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="test lib 库"
+        android:id="@+id/testlibray"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="test lambda"
         android:id="@+id/testlamba"/>
 

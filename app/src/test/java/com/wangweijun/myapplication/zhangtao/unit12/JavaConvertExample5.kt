@@ -17,7 +17,9 @@ class JavaConvertExample5 {
         name = "tom"
     }
 
+    @Test
     fun test() {
+//        init()
         if (this::name.isInitialized) {
             val count = name.length
             println("count=$count")

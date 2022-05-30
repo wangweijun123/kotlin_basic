@@ -54,6 +54,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mainActivity = this
         setMultiColor()
         testRetunLamb()
+        testlibray()
+    }
+
+    fun testlibray() {
+        findViewById<View>(R.id.testlibray).setOnClickListener {
+            Library1Util.test1()
+        }
     }
 
     fun testRetunLamb() {
