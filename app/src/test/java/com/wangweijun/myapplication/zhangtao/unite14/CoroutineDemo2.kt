@@ -2,6 +2,7 @@ package com.wangweijun.myapplication.zhangtao.unite14
 
 import kotlinx.coroutines.*
 import org.junit.Test
+import java.lang.Thread.sleep
 import kotlin.concurrent.thread
 
 /**
@@ -18,11 +19,12 @@ class CoroutineDemo2 {
     @Test
     fun main() {
         GlobalScope.launch(Dispatchers.IO) {
+            // Coroutine started:DefaultDispatcher-worker-1 @coroutine#1
             println("Coroutine started:${Thread.currentThread().name}")
             delay(1000L)
             println("Hello World!")
         }
-
+        // After launch:Test worker
         println("After launch:${Thread.currentThread().name}")
         Thread.sleep(10000L)
     }
@@ -64,13 +66,14 @@ Hello World!
     @Test
     fun main3() {
         // launch 返回不了结果
+        // GlobalScope 单利，兄弟S  CoroutineScope
         GlobalScope.launch {
             println("Coroutine started!")
 
             delay(1000L)
             println("Hello World!") // 主线程退出，携程中的hello world不会打印
         }
-
+        sleep(2000L)
         println("Process end!")
     }
 /*

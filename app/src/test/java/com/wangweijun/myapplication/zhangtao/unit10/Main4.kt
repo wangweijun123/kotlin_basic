@@ -63,5 +63,16 @@ class Main4 {
         // 使用in就可以使用实参Controller<TV>传递Controller<XiaoMiTV1>
 //        buy2(controller) // build error
     }
+    @Test
+    fun modifyMemory() {
+        val num  = 1
+        println(num)
+        val flag = true
+        if (flag) {
+            println("is true")
+        } else {
+            println("is false")
+        }
+    }
 
 }
