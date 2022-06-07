@@ -66,7 +66,12 @@ class Main4 {
     @Test
     fun modifyMemory() {
         val num  = 1
-        println(num)
+        if (num == 1) {
+            println("not modify num = $num")
+        } else {
+            println("modify num = $num ")
+        }
+
         val flag = true
         if (flag) {
             println("is true")
