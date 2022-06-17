@@ -361,4 +361,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun testLibrary() {
         Library1Util.test1()
     }
+
+    fun testGif(view: View) {
+        startActivity(Intent(applicationContext, GifActivity::class.java))
+    }
 }

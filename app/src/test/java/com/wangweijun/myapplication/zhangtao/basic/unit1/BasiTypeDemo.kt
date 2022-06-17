@@ -1,7 +1,10 @@
 package com.wangweijun.myapplication.zhangtao.basic.unit1
 
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import org.junit.Assert
 import org.junit.Test
+import java.lang.Exception
 
 /**
  * author : user
@@ -37,4 +40,31 @@ class BasiTypeDemo {
         println(name.toString())
     }
 
+    @Test
+    fun testNull() {
+        val kycCommonConfigResp = KycCommonConfigResp(FaceKycAndroidConfig("1a"))
+        success(kycCommonConfigResp)
+    }
+
+    fun success(result: KycCommonConfigResp?) {
+        if (result?.faceKycAndroidConfig?.abTestId != null) {
+            val abTestId = try {
+                result.faceKycAndroidConfig.abTestId.toInt()
+            } catch (e: Exception) {
+                println("catch Exception")
+                return
+            }
+            println("not null abTestId = $abTestId")
+        } else {
+            println("is null")
+        }
+    }
+
+    data class KycCommonConfigResp(
+        val faceKycAndroidConfig: FaceKycAndroidConfig?
+    )
+
+    data class FaceKycAndroidConfig(
+        val abTestId: String?
+    )
 }

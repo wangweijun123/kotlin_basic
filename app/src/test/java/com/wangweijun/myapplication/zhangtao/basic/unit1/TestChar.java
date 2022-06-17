@@ -17,4 +17,6 @@ public class TestChar {
         System.out.println(a);
 //        Integer aa = 'c'; // build error
     }
+
+
 }

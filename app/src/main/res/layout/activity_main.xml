@@ -32,6 +32,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="test gif 动画"
+        android:onClick="testGif"
+        android:id="@+id/testGif"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="test lib 库"
         android:id="@+id/testlibray"/>
 

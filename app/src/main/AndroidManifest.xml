@@ -79,6 +79,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".GifActivity"/>
     </application>
 
 </manifest>

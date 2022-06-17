@@ -105,9 +105,9 @@ fun main() {
 //    echo4.invoke()
 
     // 调用高阶函数
-    onlyif(true) {
-        println("这是高阶函数")
-    }
+//    onlyif(true) {
+//        println("这是高阶函数")
+//    }
     // 这样也是可以的
     /*onlyif(true, {
         println("这是高阶函数")
@@ -124,7 +124,7 @@ fun main() {
    // StringUtils.isEmp("xx") // 编译出错
 //    val su = StringUtils()
 //    println(su.isEmp("xx"))
-    println(StringUtils.isEmp2(""))
+//    println(StringUtils.isEmp2(""))
 
 //    proxyTest()
 //    beanTest()
@@ -136,7 +136,7 @@ fun main() {
 //    functionScope()
 //    dengyu()
 //    testVarVal()
-//    lambdaReturn()
+    lambdaReturn()
 //    lambdaReturnWithInline()
 //    kotlinSingleTest()
 //    genericTest()
