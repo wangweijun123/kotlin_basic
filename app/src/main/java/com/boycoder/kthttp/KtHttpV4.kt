@@ -41,22 +41,22 @@ import kotlin.system.measureTimeMillis
 //        })
 //    }
 
-//suspend fun <T : Any> KtCall<T>.await(): T =
-//    suspendCoroutine { continuation ->
-//        call(object : Callback<T> {
-//            override fun onSuccess(data: T) {
-//                println("Request success!")
-//                continuation.resume(data)
-//            }
-//
-//            override fun onFail(throwable: Throwable) {
-//                println("Request fail!：$throwable")
-//                continuation.resumeWithException(throwable)
-//            }
-//        })
-//    }
-
 suspend fun <T : Any> KtCall<T>.await(): T =
+    suspendCoroutine { continuation ->
+        call(object : Callback<T> {
+            override fun onSuccess(data: T) {
+                println("Request success!")
+                continuation.resume(data)
+            }
+
+            override fun onFail(throwable: Throwable) {
+                println("Request fail!：$throwable")
+                continuation.resumeWithException(throwable)
+            }
+        })
+    }
+
+suspend fun <T : Any> KtCall<T>.awaitCancellable(): T =
     suspendCancellableCoroutine { continuation ->
         val call = call(object : Callback<T> {
             override fun onSuccess(data: T) {
@@ -76,21 +76,21 @@ suspend fun <T : Any> KtCall<T>.await(): T =
         }
     }
 
-fun testKtHttpV4() = runBlocking {
+fun testKtHttpV4Cancellable() = runBlocking {
     val start = System.currentTimeMillis()
     val deferred = async {
         KtHttpV3.create(ApiServiceV3::class.java)
             .repos(lang = "Kotlin", since = "weekly")
-            .await()
+            .awaitCancellable()
     }
 
     deferred.invokeOnCompletion {
         println("invokeOnCompletion!")
     }
-//    delay(50L)
+    delay(50L)
 //
-//    deferred.cancel()
-//    println("Time cancel: ${System.currentTimeMillis() - start}")
+    deferred.cancel()
+    println("Time cancel: ${System.currentTimeMillis() - start}")
 
     try {
         println(deferred.await())
@@ -103,10 +103,12 @@ fun testKtHttpV4() = runBlocking {
 }
 
 
-//fun main() = runBlocking {
-//    val ktCall = KtHttpV3.create(ApiServiceV3::class.java)
-//        .repos(lang = "Kotlin", since = "weekly")
-//
-//    val result = ktCall.await()
-//    println(result)
-//}
+fun testKtHttpV4() = runBlocking {
+    val start = System.currentTimeMillis()
+    val ktCall = KtHttpV3.create(ApiServiceV3::class.java)
+        .repos(lang = "Kotlin", since = "weekly")
+
+    val result = ktCall.await()
+    println(result)
+    println("Time total: ${System.currentTimeMillis() - start}")
+}

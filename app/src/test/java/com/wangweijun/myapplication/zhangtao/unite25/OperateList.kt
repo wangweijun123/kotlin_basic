@@ -155,6 +155,19 @@ class OperateList {
         println(sum3)
     }
 
+    @Test
+    fun testListFold() {
+        val list = class3.map {
+            it.score
+        }
+        println(list)
+
+        val result = list.fold(0) { initial, score ->
+            initial + score
+        }
+        println()
+    }
+
 
 
 /*
@@ -188,6 +201,12 @@ class OperateList {
         Student("大刚", 92),
         Student("大强", 58),
         Student("大林", 88)
+    )
+
+    val class3 = listOf(
+        Student("大明", 10),
+        Student("大红", 30),
+        Student("大李", 60),
     )
 
 }

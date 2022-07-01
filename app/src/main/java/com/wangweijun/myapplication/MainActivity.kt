@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.wangweijun.Library1Util
+import com.wangweijun.myapplication.mycoroutines.last.getLoginInfo
 import com.wangweijun.myapplication.tip.RecycleViewActivity
 import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
 import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
@@ -338,6 +339,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * 在android中使用携程scrcope，你提供了LifecycleScope、ViewModelScope。如果是其他端，则可以自己创建CoroutineScope。
+     * @param view View
+     */
     fun testlifecycleScope(view: android.view.View) {
         Log.d("wangweijundx", "generateQrcodeAndDisplay id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
         lifecycleScope.launch(Dispatchers.IO) {
@@ -350,6 +355,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    fun testlifecycleScope2(view: android.view.View) {
+        Log.d("wangweijundx", "generateQrcodeAndDisplay id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+        lifecycleScope.launch(Dispatchers.Main) {
+            // 底下这句在main thread
+            Log.d("wangweijundx", "launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+            // 挂起函数，并不是挂起或者阻塞当前调用线程，
+            // 每一次从主线程到 IO 线程，都是一次协程挂起
+            // 每一次从 IO 线程到主线程，都是一次协程恢复。
+            val msg = getLoginInfo()
+            Log.d("wangweijundx", "withContext id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}, msg = $msg")
+        }
+    }
+
+    fun testlifecycleScope3(view: android.view.View) {
+        Log.d("wangweijundx", "testlifecycleScope3 click")
+    }
+
 
     // 定义一个变量，不过这个变量代表着一个函数(函数替代接口)
     var mOnClickListener: ((View) -> Unit)? = null
@@ -364,5 +387,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun testGif(view: View) {
         startActivity(Intent(applicationContext, GifActivity::class.java))
+    }
+
+    private fun xxxx() {
+        runBlocking {
+
+        }
     }
 }

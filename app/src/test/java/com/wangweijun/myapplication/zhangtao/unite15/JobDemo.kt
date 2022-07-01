@@ -383,16 +383,20 @@ Time: 3018
     /**
      * 很多异步任务之间都是没有互相依赖的，这样的代码结合挂起函数后
      * 再通过 async 并发来执行，是可以大大提升代码运行效率的
+     *
+     * 1 协程是有生命周期的 === job, 1 job 自然有生命周期，也就是任务的状态，还是源码: start,cancel,finished,active
+     * 2 协程其实是结构化 === job任务之间是有依赖的(父子关系,一个父亲有多个儿子)，像阿里的开源项目...
      */
     @Test
     fun main9() = runBlocking {
         val results: List<String>
         val time = measureTimeMillis {
-            val result1 = async { getResult1() } // async 产生了新的协程
+            val result1 = async { getResult1() } // async 产生了新的协程，但是只有一个线程
             val result2 = async { getResult2() }
             val result3 = async { getResult3() }
             results = listOf(result1.await(), result2.await(), result3.await())
         }
+        // 一个线程内并发三个协程
         println("Time: $time") // Time: 1030，这里是并发，开启了三个协程，尽管在一个线程上，三个协程是并发的
         println(results)
     }

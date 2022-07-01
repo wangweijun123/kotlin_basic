@@ -3,6 +3,7 @@ package com.wangweijun.myapplication.zhangtao.unit11
 import com.boycoder.kthttp.testKtHttpV3Async
 import com.boycoder.kthttp.testKtHttpV3Sync
 import com.boycoder.kthttp.testKtHttpV4
+import com.boycoder.kthttp.testKtHttpV4Cancellable
 import com.wangweijun.myapplication.zhangtao.unit11.annotations.testOkhttpClient
 import com.wangweijun.myapplication.zhangtao.unit11.annotations.testOkhttpClient2
 import org.junit.Test
@@ -39,9 +40,11 @@ class HttpTest {
 
     @Test
     fun testHttp5() {
-        testKtHttpV4()
+        testKtHttpV4Cancellable()
     }
 
-
-
+    @Test
+    fun testHttp6() {
+        testKtHttpV4()
+    }
 }

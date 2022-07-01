@@ -7,7 +7,8 @@ import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 
 fun testOkhttpClient2() {
-    // create() 函数的范行由调用端定义的变量类型决定ApiService2决定哈
+    // create() 函数的范型由调用端定义的变量类型决定ApiService2决定哈
+    // 居然定义一个变量的类型就能生产这个类型的对象
     val api: ApiService2 = KtHttpV2.create()
     val data: RepoList = api.repos(lang = "Kotlin", since = "weekly")
     println(data)

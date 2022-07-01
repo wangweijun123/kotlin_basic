@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
  * version: 1.0
  * desc   :
  */
-class SuspendDemo {
+class SuspendDemoLast {
 
     @Test
     fun mainRunBlocking() {
@@ -23,6 +23,14 @@ class SuspendDemo {
             // val user 定义运行主线程，getUserInfo()挂起函数运行子线程，因为suspend修饰getUserInfo()是挂起函数
             //
             // 这里有依赖，所以getUserInfo()与getFriendList()是同一个协程
+            // 需求，getUserInfo我需要子线程执行网络请求呀，我只能调用suspend挂起函数，
+            // 挂起的意思什么？指定耗时代码运行在其他线程，其他线程运行完耗时代码后，
+            // 挂起函数只能在协程中被调用, suspend 作用挂起(main线程 -> io线程)和恢复(io线程 -> main线程)
+            // 协程的作用: 以同步的方式来写异步代码
+            // 为什么运行到了getUserInfo()(getUserInfo函数的在io线程调用)，getFriendList()没有并发执行,因为
+            // 底下的代码被包装成了一个callback,挂起点剩下的代码会留在之后执行
+            // 挂起函数只能在协程中被调用: 是携程提供了环境: 就是Continuation还有上下文环境CoroutineContext
+            // "=" 等号左边的定义在main 线程运行，"="右边的代码在 getUserInfo()在开启的新线程运行
             val user = getUserInfo()
             val friendList = getFriendList(user)
             val feedList = getFeedList(friendList)
@@ -69,8 +77,8 @@ class SuspendDemo {
     suspend fun getUserInfo(): String {
         // getUserInfo..., tid = 13,tname = Test worker @coroutine#1
         println("getUserInfo...${getThreadInfo()}")
-        // 指定线程池 Dispatchers.IO
-
+        // 切换线程::: 指定这块耗时代码运行在线程池 Dispatchers.IO,因为他耗时
+        // 如果不定义成suspend函数，你是切换不了线程的
         withContext(Dispatchers.IO) {
             // 指定这块代码运行在Dispatchers.IO tid = 16,tname = DefaultDispatcher-worker-1 @coroutine#1
             println("getUserInfo...withContext start...${getThreadInfo()}")
@@ -147,6 +155,8 @@ Thread name:${Thread.currentThread().name}, tid:${Thread.currentThread().id}
     }
 // 代码段2
 
+    // block: suspend CoroutineScope.() -> T
+    // block 是一个挂起函数类型
     @Test
     fun main2() = runBlocking {
         val user = getUserInfo2()

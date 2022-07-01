@@ -11,6 +11,15 @@ class ListDemo {
 class Main {
 
     @Test
+    fun testList00() {
+        val list1 = listOf(1, 3, 5, 7)
+        val list2 = listOf(11, 33, 55, 77)
+        val list3 = list1 + list2
+        // [1, 3, 5, 7, 11, 33, 55, 77]
+        println(list3)
+    }
+
+    @Test
     fun testList() {
         /**
          * 一个class的功能的,不只是class本身的功能,还有更加nb的就是对class的扩展
