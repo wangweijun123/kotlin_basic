@@ -386,14 +386,17 @@ Time: 3018
      *
      * 1 协程是有生命周期的 === job, 1 job 自然有生命周期，也就是任务的状态，还是源码: start,cancel,finished,active
      * 2 协程其实是结构化 === job任务之间是有依赖的(父子关系,一个父亲有多个儿子)，像阿里的开源项目...
+     *
+     * 单线程并发,
      */
     @Test
     fun main9() = runBlocking {
         val results: List<String>
         val time = measureTimeMillis {
+            // 一共产生了三个协程，但是只有一个线程，但是这个三个任务是并发的，总时间Time: 1044
             val result1 = async { getResult1() } // async 产生了新的协程，但是只有一个线程
-            val result2 = async { getResult2() }
-            val result3 = async { getResult3() }
+            val result2 = async { getResult2() } // async 产生了新的协程，但是只有一个线程
+            val result3 = async { getResult3() } // async 产生了新的协程，但是只有一个线程
             results = listOf(result1.await(), result2.await(), result3.await())
         }
         // 一个线程内并发三个协程
@@ -510,5 +513,94 @@ Time: 3018
         }
         job2.join()
         logX("Process end!")
+    }
+
+    @Test
+    fun mainDXAsync9() = runBlocking {
+        val results: List<String>
+        val time = measureTimeMillis {
+            // 一共产生了三个协程，但是只有一个线程，但是这个三个任务是并发的，总时间Time: 1044
+            val result1 = async { getResultDX1() } // async 产生了新的协程，但是只有一个线程
+            val result2 = async { getResultDX2() } // async 产生了新的协程，但是只有一个线程
+            val result3 = async { getResultDX3() } // async 产生了新的协程，但是只有一个线程
+            results = listOf(result1.await(), result2.await(), result3.await())
+        }
+        // 一个线程内并发三个协程
+        println("mainDXAsync9 Time: $time") //async spend time = Time: 42
+        println(results)
+    }
+
+    @Test
+    fun mainDX9() = runBlocking {
+        val results: List<String>
+        val time = measureTimeMillis {
+            val result1 = getResultDX1()
+            val result2 = getResultDX2()
+            val result3 = getResultDX3()
+            results = listOf(result1, result2, result3)
+        }
+        // 一个线程内并发三个协程
+        println("mainDX9 Time: $time") //async spend time = Time: 42
+        println(results)
+    }
+
+    val COUNT = 100000
+    suspend fun getResultDX1(): String {
+        logX("getResult1()")
+         var num = 0
+         repeat(COUNT) {
+             num += 1
+         } // 模拟耗时操作,感觉模拟的不好
+        return "Result1"
+    }
+
+    suspend fun getResultDX2(): String {
+        logX("getResult2()")
+         var num = 0
+         repeat(COUNT) {
+             num += 1
+         } // 模拟耗时操作
+        return "Result2"
+    }
+
+    suspend fun getResultDX3(): String {
+        logX("getResult3()")
+         var num = 0
+        repeat(COUNT) {
+            num += 1
+        } // 模拟耗时操作
+        return "Result3"
+    }
+
+    @Test
+    fun mainDX10() = runBlocking {
+        val results: List<String>
+        var num = 0
+        val time = measureTimeMillis {
+            // 一共产生了三个协程，但是只有一个线程，不存在同步问题, 但是这个三个任务是并发的
+            val result1 = async {
+                repeat(COUNT) {
+                    num++
+                }
+                "result1"
+            } // async 产生了新的协程，但是只有一个线程
+            val result2 = async {
+                repeat(COUNT) {
+                    num++
+                }
+                return@async "result2"
+            } // async 产生了新的协程，但是只有一个线程
+            val result3 = async {
+                repeat(COUNT) {
+                    num++
+                }
+                // return@async 可以不用加哈
+               return@async "result3"
+            } // async 产生了新的协程，但是只有一个线程
+            results = listOf(result1.await(), result2.await(), result3.await())
+        }
+        // 一个线程内并发三个协程
+        println("mainDXAsync9 Time: $time, num = $num") //async spend time = Time: 42
+        println(results)
     }
 }
