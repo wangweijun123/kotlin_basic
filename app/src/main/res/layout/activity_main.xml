@@ -57,13 +57,32 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="携程test 22"
+        android:text="从携程中调用挂起耗时函数(io)的正确姿势"
         android:onClick="testlifecycleScope2"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="启动携程test 2 后不断点击按钮"
+        android:text="携程NotDispatcher (不会anr)"
+        android:onClick="testlifecycleScopeNotDispatcher"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用协程但是不使用挂起函数call耗时(anr)"
+        android:onClick="testlifecycleScopeNotSuspend"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不用协程与也不用挂起函数call耗时(anr)"
+        android:onClick="testlifecycleScopeNotSuspendNotlaunch"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动携程后不断点击按钮测试是否anr"
         android:onClick="testlifecycleScope3"/>
 
     <Button

@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.wangweijun.Library1Util
 import com.wangweijun.myapplication.mycoroutines.last.getLoginInfo
+import com.wangweijun.myapplication.mycoroutines.last.getLoginInfoNotDispatcher
+import com.wangweijun.myapplication.mycoroutines.last.getLoginInfoNotSuspend
 import com.wangweijun.myapplication.tip.RecycleViewActivity
 import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
 import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
@@ -354,23 +356,62 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d("wangweijundx", "withContext id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
             }
         }
+        // 最后一句运行在 launch block前面哦
+        Log.d("wangweijundx", "testlifecycleScope finished")
     }
 
     fun testlifecycleScope2(view: android.view.View) {
         Log.d("wangweijundx", "generateQrcodeAndDisplay id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+        // 创建一个协程,注意block块是函数运行完之后运行的哦
         lifecycleScope.launch(Dispatchers.Main) {
             // 底下这句在main thread
             Log.d("wangweijundx", "launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
             // 挂起函数，并不是挂起或者阻塞当前调用线程，
             // 每一次从主线程到 IO 线程，都是一次协程挂起
             // 每一次从 IO 线程到主线程，都是一次协程恢复。
+            // 粗略的说， 等号=左边运行main thread，等号右边运行在io thread
             val msg = getLoginInfo()
             Log.d("wangweijundx", "withContext id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}, msg = $msg")
         }
+        // 最后一句运行在 launch block前面哦(不管block块代码指定在哪个线程)
+        Log.d("wangweijundx", "testlifecycleScope2 finished")
+    }
+
+    fun testlifecycleScopeNotDispatcher(view: android.view.View) {
+        Log.d("wangweijundx", "testlifecycleScopeNotDispatcher id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+        // block 中的代码执行在 最后一行代码运行完之后, 虽然都是在同一个线程
+        lifecycleScope.launch(Dispatchers.Main) {
+            // 底下这句在main thread
+            Log.d("wangweijundx", "launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+            val msg = getLoginInfoNotDispatcher()
+            Log.d("wangweijundx", "withContext id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}, msg = $msg")
+        }
+        Log.d("wangweijundx", "after launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}");
+    }
+
+    fun testlifecycleScopeNotSuspend(view: android.view.View) {
+        Log.d("wangweijundx", "getLoginInfoNotSuspend id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+        // 1 launch创建了一个协程
+        // 2 指定 launch block 块运行的线程(所以这里要注意耗时操作)
+        // 3 很重要, 函数运行完(也就是在最后一句代码前) 才会运行 launch block
+        // 携程运行时机一定是在函数的最后一行
+        lifecycleScope.launch(Dispatchers.Main) {
+            // 底下这句在main thread
+            Log.d("wangweijundx", "launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+            val msg = getLoginInfoNotSuspend()
+            Log.d("wangweijundx", "launch finished id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}, msg = $msg")
+        }
+        Log.d("wangweijundx", "after launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}");
+    }
+
+    fun testlifecycleScopeNotSuspendNotlaunch(view: android.view.View) {
+        Log.d("wangweijundx", "testlifecycleScopeNotSuspendNotlaunch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+        val msg = getLoginInfoNotSuspend()
+        Log.d("wangweijundx", "after launch id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}");
     }
 
     fun testlifecycleScope3(view: android.view.View) {
-        Log.d("wangweijundx", "testlifecycleScope3 click")
+        Log.d("wangweijundx", "testlifecycleScope3 click id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
     }
 
 

@@ -21,13 +21,31 @@ import kotlinx.coroutines.withContext
  */
 suspend fun getLoginInfo(): String {
     Log.d("wangweijundx", "getLoginInfo -> ${getLastThreadInfo()}")
+    // withContext 是一个挂起函数, 虽然指定io线程运行，但是后面的代码等待(线程不一样哦，这就是挂起的魅力:异步代码同步写)
     withContext(Dispatchers.IO) {
         // 协程挂起: 每一次从主线程切换到io线程
         // 协程恢复: 每一次从io线程切换到主线程
-        // 自线程运行
+        // io线程运行
         Log.d("wangweijundx", "withContext Dispatchers.IO -> ${getLastThreadInfo()}")
-        delay(5000)
+        delay(10000)
     }
+    // 如下代码 main 线程运行，并且运行在 withContext block 之后
+    Log.d("wangweijundx", "getLoginInfo finished -> ${getLastThreadInfo()}")
+    return "i am logined"
+}
+
+suspend fun getLoginInfoNotDispatcher(): String {
+    // 测试不会 main thread调用过来不会anr，但是最好是使用withContext指定线程 delay
+    Log.d("wangweijundx", "delay 10000 -> ${getLastThreadInfo()}")
+    delay(10000)
+    Log.d("wangweijundx", "getLoginInfo finished -> ${getLastThreadInfo()}")
+    return "i am logined"
+}
+
+
+fun getLoginInfoNotSuspend(): String {
+    Log.d("wangweijundx", "Thread sleep 10000 -> ${getLastThreadInfo()}")
+    Thread.sleep(10000)
     Log.d("wangweijundx", "getLoginInfo finished -> ${getLastThreadInfo()}")
     return "i am logined"
 }
