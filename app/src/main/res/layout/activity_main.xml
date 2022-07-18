@@ -51,6 +51,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="跳转 CoroutineActivity"
+        android:onClick="jumpCoroutineActivity"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="携程test"
         android:onClick="testlifecycleScope"/>
 

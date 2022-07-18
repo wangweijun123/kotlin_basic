@@ -341,6 +341,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+
+    fun jumpCoroutineActivity(view: android.view.View) {
+        startActivity(Intent(applicationContext, CoroutineActivity::class.java))
+    }
+
     /**
      * 在android中使用携程scrcope，你提供了LifecycleScope、ViewModelScope。如果是其他端，则可以自己创建CoroutineScope。
      * @param view View
@@ -359,6 +364,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // 最后一句运行在 launch block前面哦
         Log.d("wangweijundx", "testlifecycleScope finished")
     }
+
+    /**
+     *
+     * @param view View
+     */
 
     fun testlifecycleScope2(view: android.view.View) {
         Log.d("wangweijundx", "generateQrcodeAndDisplay id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")

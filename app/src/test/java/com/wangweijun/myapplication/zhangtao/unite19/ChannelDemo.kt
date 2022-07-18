@@ -1,8 +1,6 @@
 package com.wangweijun.myapplication.zhangtao.unite19
 
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -12,7 +10,7 @@ import org.junit.Test
  * email : xxx@xx.com
  * time   : 2022/04/04 11:13 下午
  * version: 1.0
- * desc   :
+ * desc   : channel 是管道，管道有什么： 容量，超过容量怎么办, 策略, 像生产者与消费者
  */
 class ChannelDemo {
     /**
@@ -33,7 +31,7 @@ Thread name:${Thread.currentThread().name}, tid:${Thread.currentThread().id}
         val channel = Channel<Int>()
 
         launch {
-            // 2，在一个单独的协程当中发送管道消息
+            // 2，在一个单独的协程@coroutine#2, tid:13当中发送管道消息
             (1..3).forEach {
                 channel.send(it) // 挂起函数
                 logX("Send: $it")
@@ -41,7 +39,7 @@ Thread name:${Thread.currentThread().name}, tid:${Thread.currentThread().id}
         }
 
         launch {
-            // 3，在一个单独的协程当中接收管道消息
+            // 3，在一个单独的协程@coroutine#3, tid:13当中接收管道消息
             for (i in channel) {  // 挂起函数
                 logX("Receive: $i")
             }
@@ -223,12 +221,12 @@ Receive: 3
     @Test
     fun main6() = runBlocking {
         // 无限容量的管道
-        val channel = Channel<Int>(Channel.UNLIMITED) {
+        val channel = Channel<Int>(capacity = Channel.UNLIMITED) {
             println("onUndeliveredElement = $it")
         }
 
         // 等价这种写法
-//    val channel = Channel<Int>(Channel.UNLIMITED, onUndeliveredElement = { println("onUndeliveredElement = $it") })
+//    val channel2 = Channel<Int>(Channel.UNLIMITED, onUndeliveredElement = { println("onUndeliveredElement = $it") })
 
         // 放入三个数据
         (1..3).forEach {
@@ -271,4 +269,57 @@ Send 2
 Send 3
 程序结束
 */
+
+// 代码段9
+
+    @Test
+    fun main8() = runBlocking {
+        // 变化在这里
+        val channel: ReceiveChannel<Int> = produce {
+            (1..3).forEach {
+                send(it)
+                logX("Send: $it")
+            }
+        }
+
+        launch {
+            // 3，接收数据
+            for (i in channel) {
+                logX("Receive: $i")
+            }
+        }
+
+        logX("end")
+    }
+
+
+
+    @Test
+    fun main9() = runBlocking {
+        val model = ChannelModel()
+        launch {
+            logX(" init ... ")
+            model.init()
+        }
+        logX(" consumeEach ... ")
+        model.channel.consumeEach {
+            println(it)
+        }
+    }
+
+// 代码段19
+
+    class ChannelModel {
+        // 对外只提供读取功能
+        val channel: ReceiveChannel<Int> by ::_channel
+        private val _channel: Channel<Int> = Channel()
+
+        suspend fun init() {
+            (1..3).forEach {
+                _channel.send(it)
+            }
+        }
+    }
+
+
 }

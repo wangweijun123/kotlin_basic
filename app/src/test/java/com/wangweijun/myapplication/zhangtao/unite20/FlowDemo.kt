@@ -16,6 +16,10 @@ import org.junit.Test
  */
 class FlowDemo {
 
+    fun main0() {
+
+    }
+
 // 代码段1
     @Test
     fun main() = runBlocking {
