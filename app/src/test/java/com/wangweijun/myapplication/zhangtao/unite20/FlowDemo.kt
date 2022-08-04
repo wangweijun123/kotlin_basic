@@ -35,6 +35,7 @@ class FlowDemo {
             .collect{           // 下游
                 println(it)
             }
+
     }
 
 /*
@@ -50,14 +51,14 @@ class FlowDemo {
         flowOf(1, 2, 3, 4, 5).filter { it > 2 }
             .map { it * 2 }
             .take(2)
-            .collect {
+            .collect { // 遍历flow
                 println(it)
             }
 
         listOf(1, 2, 3, 4, 5).filter { it > 2 }
             .map { it * 2 }
             .take(2)
-            .forEach {
+            .forEach { // 遍历list
                 println(it)
             }
     }

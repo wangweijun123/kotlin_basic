@@ -445,4 +445,34 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
+
+    fun testAnr(view: View) {
+        val msg = wrapper()
+        Log.d("wangweijundx",msg)
+    }
+
+    private fun wrapper(): String {
+        return getLoginInfoNotSuspend()
+    }
+    private fun exceptionTest(): Int {
+        return 1/0
+    }
+
+    fun tryCatchThread(view: View) {
+        try {
+            Thread {
+                try {
+                    exceptionTest()
+                } catch (innerEx: java.lang.Exception) {
+                    // 同一个线程里面是可以catch到异常的
+                    Log.e("wangweijundx","catch inner exception")
+                }
+            }.start()
+
+        }catch (e: java.lang.Exception) {
+            // 这里是catch不到另外的线程的异常的
+            Log.e("wangweijundx","catch outter exception")
+        }
+    }
+
 }

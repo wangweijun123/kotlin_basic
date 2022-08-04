@@ -186,6 +186,18 @@
         android:text="json 测试(标准的json)"
         android:onClick="startJsonTest2"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="模拟anr"
+        android:onClick="testAnr"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="能子try线程的crash吗(无法catch子线程的crash)"
+        android:onClick="tryCatchThread"/>
+
 </LinearLayout>
 
 </ScrollView>
