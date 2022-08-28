@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
 //        )
 
-        val content = Html.fromHtml(getString(R.string.text_multi_color))
+        val content = Html.fromHtml(getString(R.string.camera_selfie_tip))
         findViewById<TextView>(R.id.appeal_tv).text = content
     }
 

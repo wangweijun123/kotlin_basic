@@ -35,5 +35,7 @@
 
     <string name="text_multi_color"><![CDATA[<font color=\'#ffffff\'>Can\'t verify? </font><font color=\'#FFF7B0\'>Contact xxx</font>]]></string>
 
+    <string name="camera_selfie_tip"><![CDATA[<font color=\'#EAECEF\'>Keep your </font><font color=\'#FCD535\'>whole face</font><font color=\'#EAECEF\'>in the frame</font>]]></string>
+
     <string name="kyc_can_not_ver_tip">If you can\'t complete, please click "Appeal" to submit a manual review </string>
 </resources>
