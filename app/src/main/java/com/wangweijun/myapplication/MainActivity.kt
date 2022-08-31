@@ -10,9 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.wangweijun.Library1Util
-import com.wangweijun.myapplication.mycoroutines.last.getLoginInfo
-import com.wangweijun.myapplication.mycoroutines.last.getLoginInfoNotDispatcher
-import com.wangweijun.myapplication.mycoroutines.last.getLoginInfoNotSuspend
+import com.wangweijun.myapplication.mycoroutines.last.*
 import com.wangweijun.myapplication.tip.RecycleViewActivity
 import com.wangweijun.myapplication.tip.RecycleViewDiffUtilActivity
 import com.wangweijun.myapplication.tip.RecycleViewMulitActivity
@@ -422,6 +420,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun testlifecycleScope3(view: android.view.View) {
         Log.d("wangweijundx", "testlifecycleScope3 click id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+    }
+
+
+    fun testMultiNet(view: android.view.View) {
+        Log.d(DX_TAG, "testMultiNet click id = ${Thread.currentThread().id}, name=${Thread.currentThread().name}")
+        lifecycleScope.launch(Dispatchers.Main) {
+            // 异步1
+            val userInfo = getLoginInfo2()
+            Log.d(DX_TAG, "userInfo = $userInfo ,  ${getLastThreadInfo()}")
+            // 异步2
+            val friends: List<UserInfo2> = getFrientList2(userInfo.id)
+            Log.d(DX_TAG, "friends = $friends ,  ${getLastThreadInfo()}")
+        }
+        Log.d(DX_TAG, "testMultiNet finished ${getLastThreadInfo()}")
+
     }
 
 

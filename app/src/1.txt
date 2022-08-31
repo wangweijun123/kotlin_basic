@@ -1,5 +1,7 @@
 二遍进度: 15 挂起函数suspend
 
+跳过:  kthttp flow 没有写完
+
 
 
 abstract class SimpleDataBlock<T> : MutableLiveData<T>()

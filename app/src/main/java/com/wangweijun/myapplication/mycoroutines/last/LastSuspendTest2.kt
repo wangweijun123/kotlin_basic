@@ -13,15 +13,28 @@ import kotlinx.coroutines.withContext
  * desc   :
  */
 
-
+const val DX_TAG = "wangweijundx"
 /**
  * suspend 函数就是里面的耗时代码能切换线程
  * @return String
  */
-suspend fun getLoginInfo2(): String {
-    withContext(Dispatchers.IO) {
-        // 自线程运行
-        Log.d("wangweijundx", "withContext Dispatchers.IO -> ${getLastThreadInfo()}")
+suspend fun getLoginInfo2(): UserInfo2 {
+    Log.d(DX_TAG, " getLoginInfo2 -> ${getLastThreadInfo()}")
+    return withContext(Dispatchers.IO) {
+        delay(1000)
+        // 子线程运行
+        Log.d(DX_TAG, "withContext getLoginInfo2 -> ${getLastThreadInfo()}")
+//        return@withContext UserInfo2("dx", 18)
+        UserInfo2(1, "dx", 18)
     }
-    return "i am logined"
+}
+
+suspend fun getFrientList2(userId: Int): List<UserInfo2> {
+    Log.d(DX_TAG, "getFrientList2 -> ${getLastThreadInfo()}")
+    return withContext(Dispatchers.IO) {
+        delay(1000)
+        // 子线程运行
+        Log.d(DX_TAG, "userId = $userId, withContext getFrientList2 -> ${getLastThreadInfo()}")
+        listOf(UserInfo2(2, "wwj", 18))
+    }
 }

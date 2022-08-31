@@ -279,7 +279,7 @@ Process end!
         // 大白话，就是外层携程等待里面的携程执行完成
         // deferred.await() 运行在Test worker @coroutine#1中，@coroutine#1被@coroutine#2阻塞了，只有@coroutine#2
         // 返回，@coroutine#1 才能继续走下去,也就是才能打印Result
-        val result = deferred.await()
+        val result = deferred.await() // 相当于js 里面的 await()
         println("Result is: $result   tname=${Thread.currentThread().name}")
     }
     /*

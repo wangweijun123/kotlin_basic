@@ -18,7 +18,7 @@ fun launchTest() {
         //  main, id=1 , 说明这些协程全部运行主线程
         println("runBlocking ...  " + Thread.currentThread().name + ", id="+Thread.currentThread().id)
         // 主协程启动协程2
-        val job2 = launch {
+        val job2: Job = launch {
             //  main, id=1
             println("launch ...  " + Thread.currentThread().name + ", id="+Thread.currentThread().id)
             repeat(10) {

@@ -20,6 +20,18 @@ class Main {
     }
 
     @Test
+    fun testMap00() {
+        val map1 = mapOf(1 to "dx")
+        val map2 = mapOf(2 to "dx2") // key相同覆盖
+        val map3 = map1 + map2
+        println(map3)
+        println(map3.get(1))
+        println(map3[1])
+        println("map3.get(1) == map3[1] ? ${map3.get(1) == map3[1]}")
+
+    }
+
+    @Test
     fun testList() {
         /**
          * 一个class的功能的,不只是class本身的功能,还有更加nb的就是对class的扩展

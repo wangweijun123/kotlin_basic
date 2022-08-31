@@ -1,11 +1,9 @@
 package com.wangweijun.myapplication.zhangtao.unite20
 
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.junit.Test
+import java.util.concurrent.Executors
 
 /**
  * author : user
@@ -175,7 +173,7 @@ filter: 2
             }
             .take(2)
             .collect {
-                println("collect: $it")
+                println("collect: $it") // 必须有 流 的终结者
             }
     }
 
@@ -203,7 +201,7 @@ onCompletion
                 .collect {
                     println("collect: $it")
                     if (it == 2) {
-                        cancel()            // 1
+                        cancel()            // 1 控制上游不再发送 3
                         println("cancel")
                     }
                 }
@@ -228,4 +226,210 @@ onCompletion first: JobCancellationException: // 3
 collect: 4
 onCompletion second: IllegalStateException    // 4
 */
+
+
+    // 代码段8
+    @Test
+    fun main8() = runBlocking {
+        val flow = flow {
+            emit(1)
+            emit(2)
+            throw IllegalStateException()
+            emit(3)
+        }
+
+        flow.map { it * 2 }
+            .catch { println("catch: $it") } // 注意这里， catch能抓上游的异常
+            .collect {
+                println(it)
+            }
+    }
+/*
+输出结果：
+2
+4
+catch: java.lang.IllegalStateException
+*/
+
+
+    // 代码段9
+    @Test
+    fun main9() = runBlocking {
+        val flow = flow {
+            emit(1)
+            emit(2)
+            emit(3)
+        }
+
+        flow.map { it * 2 }
+            .catch { println("catch: $it") }
+            .filter { it / 0 > 1}  // 故意制造异常, catch 没有抓到下游的异常
+            .collect {
+                println(it)
+            } // 终止操作符
+    }
+
+/*
+输出结果
+Exception in thread "main" ArithmeticException: / by zero
+*/
+
+
+// 代码段10
+
+    @Test
+    fun main10() = runBlocking {
+        flowOf(4, 5, 6)
+            .onCompletion { println("onCompletion second: $it") }
+            .collect {
+                try {
+                    println("collect: $it")
+                    throw IllegalStateException()
+                } catch (e: Exception) {
+                    println("Catch $e")
+                }
+            }
+    }
+
+
+    // 代码段11
+    @Test
+    fun main11() = runBlocking {
+        val flow = flow {
+            logX("Start")
+            emit(1)
+            logX("Emit: 1")
+            emit(2)
+            logX("Emit: 2")
+            emit(3)
+            logX("Emit: 3")
+        }
+
+        flow.filter {
+            logX("Filter: $it")
+            it > 2
+        }
+        flow.flowOn(Dispatchers.IO)  // 注意这里: 上游全部在其他线程， collect终结者运行在main线程
+            .collect {
+                logX("Collect $it")
+            }
+    }
+
+/*
+输出结果
+================================
+Start
+Thread:DefaultDispatcher-worker-1 @coroutine#2
+================================
+================================
+Filter: 1
+Thread:DefaultDispatcher-worker-1 @coroutine#2
+================================
+================================
+Emit: 1
+Thread:DefaultDispatcher-worker-1 @coroutine#2
+================================
+================================
+Filter: 2
+Thread:DefaultDispatcher-worker-1 @coroutine#2
+================================
+================================
+Emit: 2
+Thread:DefaultDispatcher-worker-1 @coroutine#2
+================================
+================================
+Filter: 3
+Thread:DefaultDispatcher-worker-1 @coroutine#2
+================================
+================================
+Emit: 3
+Thread:DefaultDispatcher-worker-1 @coroutine#2
+================================
+================================
+Collect 3
+Thread:main @coroutine#1
+================================
+
+ */
+
+
+// 代码段21
+
+    @Test
+    fun main21() = runBlocking {
+        fun loadData() = flow {
+            repeat(3){
+                delay(100L)
+                emit(it)
+                logX("emit $it")
+            }
+        }
+        // 请留意 Dispatcher 当中的isDaemon = true
+        val mySingleDispatcher = Executors.newSingleThreadExecutor {
+            Thread(it, "MySingleThread").apply { isDaemon = true }
+        }.asCoroutineDispatcher()
+        // 模拟Android、Swing的UI
+        val uiScope = CoroutineScope(mySingleDispatcher)
+
+        loadData()
+            .map { it * 2 }
+            .flowOn(Dispatchers.IO) // 1，耗时任务
+            .onEach {
+                logX("onEach $it")
+            }
+            .launchIn(uiScope)      // 2，UI任务
+
+        delay(1000L)
+    }
+
+
+// 代码段22
+
+    @Test
+    fun main22() = runBlocking {
+        fun loadData() = flow {
+            repeat(3) {
+                delay(100L)
+                emit(it)
+                logX("emit $it")
+            }
+        }
+        fun updateUI(it: Int) { logX(" updateUI it= $it ") }
+        fun showLoading() { logX("Show loading") }
+        fun hideLoading() { logX("Hide loading") }
+
+        val mySingleDispatcher = Executors.newSingleThreadExecutor {
+            Thread(it, "MySingleThread").apply { isDaemon = true }
+        }.asCoroutineDispatcher()
+        val uiScope = CoroutineScope(mySingleDispatcher)
+
+        loadData()
+            .map { it * 2 }
+            .flowOn(Dispatchers.IO)
+            .catch { throwable ->
+                println(throwable)
+                hideLoading()                   // 隐藏加载弹窗
+                emit(-1)                   // 发生异常以后，指定默认值
+            }
+            .onEach { updateUI(it) }            // 更新UI界面
+            .onStart { showLoading() }          // 显示加载弹窗
+            .onCompletion { hideLoading() }     // 隐藏加载弹窗
+            .launchIn(uiScope)
+
+        delay(10000L)
+    }
+
+
+    /**
+     * 控制台输出带协程信息的log
+     */
+    fun logX(any: Any?) {
+        println("""
+================================
+$any
+Thread name:${Thread.currentThread().name}, tid:${Thread.currentThread().id}
+================================""".trimIndent())
+    }
+
+
 }

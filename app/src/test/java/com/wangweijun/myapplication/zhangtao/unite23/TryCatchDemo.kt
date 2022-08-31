@@ -12,7 +12,16 @@ import java.util.concurrent.Executors
  * desc   :
  */
 class TryCatchDemo {
+    @Test
+    fun cancelLaunch() = runBlocking {
+        val job = launch {
+            delay(1000L)
+            println("job finished")
+        }
 
+        job.cancel()    // 调用cancel后，不会输出 job finished
+        delay(1500L)
+    }
 
 // 代码段1
     @Test
