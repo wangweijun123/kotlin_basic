@@ -1,5 +1,5 @@
 package com.wangweijun.myapplication.zhangtao.unit05
-// 私有构造，外部无法调用
+// 私有构造private constructor，外部无法调用
 // 工厂模式
 class UUUser private constructor(name: String){
 

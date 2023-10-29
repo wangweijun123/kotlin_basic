@@ -27,13 +27,13 @@
         </activity>
         <activity android:name=".SecondActivity" android:exported="false"/>
         <activity android:name=".CoroutineActivity" android:exported="false"/>
-        <activity android:name=".tip.TipTimeActivity"/>
-        <activity android:name=".tip.RecycleViewActivity"/>
-        <activity android:name=".tip.RecycleViewMulitActivity"/>
-        <activity android:name="com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity"/>
-        <activity android:name=".tip.RecycleViewDiffUtilActivity"/>
+        <activity android:name=".tip.TipTimeActivity" android:exported="true"/>
+        <activity android:name=".tip.RecycleViewActivity" android:exported="true"/>
+        <activity android:name=".tip.RecycleViewMulitActivity" android:exported="true"/>
+        <activity android:name="com.yqritc.recyclerviewmultipleviewtypesadapter.sample.MulitTypeUseBaseActivity" android:exported="true"/>
+        <activity android:name=".tip.RecycleViewDiffUtilActivity" android:exported="true"/>
 
-        <activity android:name=".web.WebActivity">
+        <activity android:name=".web.WebActivity" android:exported="true">
         </activity>
 
 
@@ -79,7 +79,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GifActivity"/>
+        <activity android:name=".GifActivity" android:exported="true"/>
     </application>
 
 </manifest>

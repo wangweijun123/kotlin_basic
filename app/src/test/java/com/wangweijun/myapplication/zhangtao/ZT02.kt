@@ -10,7 +10,11 @@ class ZT02 {
     @Test
     fun testClass() {
         val person = Person("dx", 18)
+        person.age = 22 // var  可以修改
+//        person.name = 'xxx' // val 不
+
         println(person.isAdult())
+        println(person.name)
 
         val person2 = Person2("dx", 18)
         println(person2.isAdult)
@@ -45,7 +49,7 @@ class ZT02 {
     class Person3(val name: String) {
         var age: Int = 0
             //  这就是age属性的setter方法，自定义他
-            private set(value) {
+            private set(value: Int) {
                 println("set value $value")
                 field = value
             }
@@ -99,7 +103,7 @@ class ZT02 {
      *
      */
     interface Behavior {
-        // 接口内可以有属性
+        // 接口内可以有属性 , 不能设置初始值
         var canWalk: Boolean
 
         // 接口有默认实现
@@ -118,9 +122,6 @@ class ZT02 {
     class BehaviorImpl : Behavior {
         // 重写接口的属性
         override var canWalk: Boolean = false
-            get() {
-                return field
-            }
 
         override fun walk2() {
             println(" has not impl")
@@ -266,8 +267,9 @@ class ZT02 {
         class Error : MyRes()
     }
 
-    // 密封类
-    sealed class Result<out R> {
+
+    // 密封类, 可以传参数的枚举类,  请注意：枚举类没办法和数据类进行结合，来承载我们的网络请求数据。但是密封类可以。
+    sealed class Result<out T> {
         data class Success<out T>(val data: T, val message: String = "") : Result<T>()
 
         data class Error(val exception: Exception) : Result<Nothing>()
@@ -275,11 +277,47 @@ class ZT02 {
         data class Loading(val time: Long = System.currentTimeMillis()) : Result<Nothing>()
     }
 
-//    fun display(data: Result) = when(data) {
-//        Result.Success -> displaySuccessUI(data)
-//        Result.Error -> showErrorMsg(data)
-//        Result.Loading -> showLoading()
-//    }
+    fun displayxxxx(data: Result<List<String>>) = when(data) {
+        is Result.Success -> println("success ${data.data}")
+        is Result.Error -> println("error ${data.exception.message}")
+        is Result.Loading -> println("loading ${data.time}")
+        else -> {}
+    }
+
+    @Test
+    fun  testSealedClass() {
+        val success = Result.Success(listOf("1", "2"))
+        val loading = Result.Loading()
+        val error = Result.Error(java.lang.Exception("xxx"))
+        displayxxxx(success)
+        displayxxxx(loading)
+        displayxxxx(error)
+    }
+
+
+    // 密封类: 子类固定
+    sealed interface MyModelUiState {
+        object Loading : MyModelUiState
+        data class Error(val throwable: Throwable) : MyModelUiState
+        data class Success(val data: List<String>) : MyModelUiState
+    }
+
+    @Test
+    fun  testSealedInterface() {
+        val loading = MyModelUiState.Loading
+        val error = MyModelUiState.Error(Throwable("xxx"))
+        val success = MyModelUiState.Success(listOf("1", "2"))
+        displayMyModelUiState(loading)
+        displayMyModelUiState(error)
+        displayMyModelUiState(success)
+    }
+
+    private fun displayMyModelUiState(data: MyModelUiState) = when(data) {
+        is MyModelUiState.Loading -> println("loading")
+        is MyModelUiState.Error -> println("error ${data.throwable.message}")
+        is MyModelUiState.Success -> println("success ${data.data}")
+    }
+
 
     @Test
     fun testBoolean() {

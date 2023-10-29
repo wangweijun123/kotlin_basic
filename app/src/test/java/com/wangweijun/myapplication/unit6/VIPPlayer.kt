@@ -5,6 +5,7 @@ val MSG = "VIP 消息"
 
 // 写在class上的构造叫主构造函数(两个参数的构造函数),还有次级构造函数
 class VIPPlayer(var title: String?, var msg: String?) : PlayerView {
+    // init 代码块会在构造函数执行之后执行
     init {
         println("init ...")
     }

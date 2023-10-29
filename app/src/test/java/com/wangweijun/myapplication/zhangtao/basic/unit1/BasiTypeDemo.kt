@@ -17,8 +17,25 @@ import java.lang.Exception
 // 1 第一 class没法集成，
 class BasiTypeDemo {
 
+    class MyBean {
+        var age: Int = 0
+
+        val height = 100
+    }
+
     // public final，默认没法复写
     fun test01() {
+        var price = 100
+        var price2: Int = 100
+
+        val myBean = MyBean()
+        myBean.age = 100
+
+//        myBean = MyBean() 不可变
+
+//        val myBean2 = MyBean()
+//        myBean.height = 100
+
         println("test01")
     }
     @Test

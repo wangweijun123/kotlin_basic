@@ -56,6 +56,8 @@ class ObjectTest {
     fun testSingleton2() {
         PPPerson.InnerSingleTon.foo()
         PPPerson.InnerSingleTon2.foo2()
+
+        PPPerson.foo3()
     }
 //    @Test
     fun testSingleton3() {

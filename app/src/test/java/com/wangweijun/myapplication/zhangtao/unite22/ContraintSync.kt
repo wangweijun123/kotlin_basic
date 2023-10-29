@@ -29,6 +29,7 @@ class ContraintSync {
         launch(Dispatchers.Default) {
             repeat(1000) {
                 i++
+                println("i++ 后 = $i -> ${getLastThreadInfo()}")
             }
             println("launch end -> ${getLastThreadInfo()}")
         }

@@ -11,7 +11,7 @@ class MyViewModel : ViewModel(){
         // 如果viewmodel销毁, 则在viewModelScope内启动的协程自动取消
         viewModelScope.launch {
             // Coroutine that will be canceled when the ViewModel is cleared.
-
+            println("xxxxxxxxxx")
         }
     }
 

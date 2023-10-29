@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         findViewById<Button>(R.id.bt).setOnClickListener(object: View.OnClickListener{
             override fun onClick(p0: View?) {
                 TODO("Not yet implemented")
+                gotoPre()
             }
         })
         // lambda表达式 = { gotoPre() }这一块

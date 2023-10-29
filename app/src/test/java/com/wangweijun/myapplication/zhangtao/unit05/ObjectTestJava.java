@@ -16,4 +16,10 @@ public class ObjectTestJava {
         PPPerson.InnerSingleTon.INSTANCE.foo();
         PPPerson.InnerSingleTon2.foo2();
     }
+
+    @Test
+    public void testSingleton3() {
+    }
+
+//
 }

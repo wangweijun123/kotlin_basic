@@ -12,7 +12,7 @@ package com.wangweijun.myapplication.zhangtao.unit06.last
 // 不为空的接收者类型
 //     ↓
 fun String.lastElement2(): Char? {
-    if (length == 0) {
+    if (isEmpty()) {
         return null
     }
     return this[length-1]

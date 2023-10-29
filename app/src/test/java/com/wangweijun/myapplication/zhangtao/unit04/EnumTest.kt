@@ -139,4 +139,7 @@ class EnumTest {
     @Test
     fun testCC() {
     }
+
+    // create a enum class
+
 }

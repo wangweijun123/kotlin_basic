@@ -1,7 +1,7 @@
 package com.wangweijun.myapplication.zhangtao.unit05
 
 /**
- * 单例
+ * 单例, static 静态代码块实例化
  */
 object UserManager {
     // 对外暴露的 user, 属性上使用 by lazy 将s其包裹起来,实现懒加载, 同时来实现单利
