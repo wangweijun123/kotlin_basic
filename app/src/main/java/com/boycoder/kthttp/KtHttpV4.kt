@@ -24,7 +24,7 @@ import kotlin.system.measureTimeMillis
 
 // https://trendings.herokuapp.com/repo?lang=java&since=weekly
 
-//suspend fun <T> KtCall<T>.await(): T =
+//suspend fun <T: Any> KtCall<T>.await(): T =
 //    suspendCoroutine { continuation ->
 //        call(object : Callback<T> {
 //            override fun onSuccess(data: T) {

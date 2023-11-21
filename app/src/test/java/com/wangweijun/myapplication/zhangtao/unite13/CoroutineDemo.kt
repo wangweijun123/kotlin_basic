@@ -108,6 +108,7 @@ Get4
         println("生产者与消费者开始,一个线程上运行了两个协程(生成者与消费者协程) ... ${getThreadInfo()}")
         val channel = getProducer(this)
         testConsumer(channel)
+        println("main3 finished ${getThreadInfo()}")
     }
 
     fun getProducer(scope: CoroutineScope) = scope.produce {
@@ -285,6 +286,8 @@ error
     }
 
 /*
+协程 运行在 线程之上，但是不绑定线程，所以携程可以在线程之间切换
+
 输出结果：
 前面是线程名字，后面是携程名字，
 DefaultDispatcher-worker-3 @coroutine#2
@@ -343,6 +346,8 @@ Print-2:main
                 println("Print-2:${Thread.currentThread().name}")
             }
         }
+
+        println("end Print-0:${Thread.currentThread().name}")
         delay(3000L)
     }
 
@@ -358,6 +363,7 @@ Print-1:main @coroutine#2
 
     @Test
     fun main11() = runBlocking {
+        println("Print-0:${Thread.currentThread().name}")
         launch {
             repeat(3) {
                 Thread.sleep(1000L) // Thread 阻塞了Print-2语句，阻塞了下个携程,尽量使用 delay，而不是 sleep。
@@ -371,6 +377,7 @@ Print-1:main @coroutine#2
                 println("Print-2:${Thread.currentThread().name}")
             }
         }
+        println("end Print-0:${Thread.currentThread().name}")
         delay(3000L)
     }
 
@@ -383,4 +390,23 @@ Print-2:main @coroutine#3
 Print-2:main @coroutine#3
 Print-2:main @coroutine#3
 */
+
+
+
+    // 代码中一共启动了两个线程
+    @Test
+    fun main13() {
+        println(Thread.currentThread().name)
+        thread {
+            println(Thread.currentThread().name)
+            Thread.sleep(100)
+        }
+        Thread.sleep(1000L)
+    }
+
+    /*
+    输出结果：
+    main
+    Thread-0
+    */
 }

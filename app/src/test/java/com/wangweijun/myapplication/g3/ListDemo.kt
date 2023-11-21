@@ -38,7 +38,7 @@ class Main {
          */
         val numbers = listOf(1, 3, 5, 7)
         println("List: $numbers")
-        println("List: ${numbers[1]}")
+        println("List: ${numbers[1]}, ===== ${numbers.get(1)}")
         println("List: ${numbers.last()}")
         println("${numbers.contains(5)}")
 
@@ -47,6 +47,15 @@ class Main {
 
 
 //        numbers[0] = 2
+    }
+
+    @Test
+    fun testList2() {
+
+        val numbers1 = listOf(1, 3, 5, 7)
+        val numbers2 = listOf(9, 11)
+        val n3 = numbers1 + numbers2
+        println(n3)
     }
 
     @Test
@@ -155,6 +164,10 @@ class Main {
         println(params)
         for ((myIndex, myValue) in params.withIndex()) {
             println("myIndex = $myIndex , myValue=$myValue")
+        }
+
+        for (item in params) {
+            println(item)
         }
     }
 

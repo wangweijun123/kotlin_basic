@@ -91,10 +91,14 @@ class SuspendDemoLast {
         return "BoyCoder"
     }
 
+//    1. 一个是当前线程不会被阻塞，可以执行其他任务。
+//    2.挂起点剩下的代码，会留到之后再执行。
     //挂起函数
 // ↓
     suspend fun getFriendList(user: String): String {
         println("getFriendList...${getThreadInfo()}")
+
+        // 控制协程执行的线程池
         withContext(Dispatchers.IO) {
             println("getFriendList...withContext start...${getThreadInfo()}")
             delay(1000L)
@@ -366,4 +370,11 @@ true
 Thread:MySingleThread @coroutine#2
 ================================
 */
+
+    @Test
+    fun main33() = runBlocking(Dispatchers.Default) {
+        logX("runBlocking ...")
+        val user = getUserInfo()
+        logX(user)
+    }
 }

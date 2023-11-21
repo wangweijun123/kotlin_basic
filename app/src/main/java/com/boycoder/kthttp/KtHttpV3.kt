@@ -17,6 +17,7 @@ import java.lang.reflect.Proxy
 import java.lang.reflect.Type
 
 // https://trendings.herokuapp.com/repo?lang=java&since=weekly
+// https://api.github.com/?lang=Kotlin&since=weekly
 
 interface Callback<T: Any> {
     fun onSuccess(data: T)
@@ -54,6 +55,7 @@ interface ApiServiceV3 {
         @Field("since") since: String
     ): KtCall<RepoList>
 
+
     @GET("/repo")
     fun reposSync(
         @Field("lang") lang: String,
@@ -66,6 +68,7 @@ object KtHttpV3 {
     private var okHttpClient: OkHttpClient = OkHttpClient()
     private var gson: Gson = Gson()
     var baseUrl = "https://trendings.herokuapp.com"
+    // https://api.github.com/?lang=Kotlin&since=weekly
 
     fun <T: Any> create(service: Class<T>): T {
         return Proxy.newProxyInstance(
@@ -112,6 +115,8 @@ private fun <T: Any> invoke(path: String, method: Method, args: Array<Any>): Any
 
     return if (isKtCallReturn(method)) {
         val genericReturnType = getTypeArgument(method)
+        println("genericReturnType: $genericReturnType")
+        // genericReturnType: class com.wangweijun.myapplication.zhangtao.unit11.annotations.RepoList
         KtCall<T>(call, gson, genericReturnType)
     } else {
         val response = okHttpClient.newCall(request).execute()

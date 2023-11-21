@@ -269,7 +269,9 @@ class ZT02 {
 
 
     // 密封类, 可以传参数的枚举类,  请注意：枚举类没办法和数据类进行结合，来承载我们的网络请求数据。但是密封类可以。
-    sealed class Result<out T> {
+    sealed class Result<out R> {
+
+        // 注意： 这里的data是val，不是var(build error)，只读属性,本质上是一个getter方法，返回T类型(所以也是返回值)
         data class Success<out T>(val data: T, val message: String = "") : Result<T>()
 
         data class Error(val exception: Exception) : Result<Nothing>()

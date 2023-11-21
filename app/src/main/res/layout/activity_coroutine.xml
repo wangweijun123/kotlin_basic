@@ -8,6 +8,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="获取用户信息,好友列表，xxx"
+        android:onClick="getUserTest"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动多个携程"
+        android:onClick="startMultipartCountirent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="java线程请求网络"
         android:onClick="useJavaThreadForNetwork"/>
 

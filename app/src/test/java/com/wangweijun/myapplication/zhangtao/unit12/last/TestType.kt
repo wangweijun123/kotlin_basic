@@ -41,6 +41,9 @@ class TestType {
 
     @Test
     fun testGetObjectClass() {
+        // a is Unit
+         val a = println("Hello World.")
+
         val objectClass = getObjectClass()
         val objectClass2 = getObjectClass()
         Assert.assertEquals(objectClass, objectClass2)
@@ -57,6 +60,9 @@ class TestType {
     //       函数返回值类型是Int，实际上却抛出了异常，没有返回Int
 //                ↓       ↓
     fun calculate(): Int = throw NotImplementedError() // 不会报错
+
+    // throw 这个表达式的返回值是 Nothing 类型。而既然 Nothing
+    // 是所有类型的子类型，那么它当然是可以赋值给任意其他类型的
 
     //       函数返回值类型是Any，实际上却抛出了异常，没有返回Any
 //                ↓       ↓
@@ -98,6 +104,19 @@ class TestType {
 
 
     val ff: (String) -> Unit = ::println
+
+
+    interface Task<T> {
+        fun excute(any: Any): T
+    }
+
+    class PrintTask: Task<Unit> {
+        override fun excute(any: Any) {
+            println(any)
+            // 这里写不写return都可以
+//            return Unit
+        }
+    }
 
 
 

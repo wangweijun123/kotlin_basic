@@ -51,6 +51,8 @@ class LastTextProcessorV2 {
         val text = "Kotlin is my favorite language. I love Kotlin!"
         println(processText2(text))
     }
+
+    // 1 清洗文本 2 分割文本 3 统计词频 4 排序
     private fun processText2(text: String): List<WordFreq> {
         return text
             .clean()
@@ -64,4 +66,6 @@ class LastTextProcessorV2 {
             }
             .sortedByDescending { it.frequency }
     }
+
+
 }

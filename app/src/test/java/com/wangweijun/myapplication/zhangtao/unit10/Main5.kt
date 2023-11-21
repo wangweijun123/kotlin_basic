@@ -9,6 +9,7 @@ class Main5 {
     class KFC: Food() {}
 
 
+    // 声明处加上out, 或者使用处加上out， 就可以了
     class Restaurant<out T: Food> {
         fun orderFood(): T? { return null }
     }
@@ -26,7 +27,7 @@ class Main5 {
 //                  找到一家肯德基
 //                        ↓
         val kfc = Restaurant<KFC>()
-// 需要普通饭店，传入了肯德基，编译器报错
+// 需要普通饭店，传入了肯德基，如果不加Restaurant<out T: Food> out(为什么不是in，因为泛型是返回值) 编译器报错
         orderFood(kfc)
     }
 

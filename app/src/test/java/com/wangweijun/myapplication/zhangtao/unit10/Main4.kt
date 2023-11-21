@@ -6,7 +6,9 @@ class Main4 {
 
 
      open class TV {
-         open fun turnOn(){}
+         open fun turnOn(){
+             println("tv turnOn")
+         }
     }
 
     class XiaoMiTV1 : TV() {
@@ -15,10 +17,11 @@ class Main4 {
         }
     }
 
-    class Controller<in T> {
-        fun turnOn(tv: T){
-//            tv.turnOn()
-            println(tv!!::class.simpleName)
+    // 为什么是in， 因为 泛型T是参数
+    class Controller<in T: TV> {
+        fun turnOn(tv: T){ // 这里的T是参数
+            tv.turnOn()
+            println(tv::class.simpleName)
         }
     }
 
@@ -49,8 +52,15 @@ class Main4 {
 //                             实参
 //                              ↓
         val controller = Controller<TV>()
-        // 使用in就可以使用实参Controller<TV>传递Controller<XiaoMiTV1>
+        // 使用in就可以使用实参Controller<TV>传递 参数 Controller<XiaoMiTV1>,否则build error
+        // 定义泛型的时候，请考虑泛型使用在哪里吧，加上in 或者out
         buy(controller)
+
+        buy2(controller)
+
+//        val controller2 = Controller<XiaoMiTV1>()
+//        buy2(controller2) // build error
+//        buy(controller2)
     }
 
     @Test

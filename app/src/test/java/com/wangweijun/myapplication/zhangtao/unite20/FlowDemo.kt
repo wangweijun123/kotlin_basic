@@ -1,6 +1,7 @@
 package com.wangweijun.myapplication.zhangtao.unite20
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.*
 import org.junit.Test
 import java.util.concurrent.Executors
@@ -11,11 +12,14 @@ import java.util.concurrent.Executors
  * time   : 2022/04/05 11:19 上午
  * version: 1.0
  * desc   :
+ * Flow 数据流是啥意思，
+ * 1 一个一个的数据处理，并不是把所有数据都产生完之后才处理 --》 冷
+ * 2 必须有终止操作符，才会触发上游的数据产生 ----》 懒
+ *
  */
 class FlowDemo {
 
     fun main0() {
-
     }
 
 // 代码段1
@@ -30,10 +34,9 @@ class FlowDemo {
         }.filter { it > 2 }     // 中转站1
             .map { it * 2 }     // 中转站2
             .take(2)            // 中转站3
-            .collect{           // 下游
+            .collect {           // 下游
                 println(it)
             }
-
     }
 
 /*
@@ -46,6 +49,7 @@ class FlowDemo {
 // 代码段2
     @Test
     fun main2() = runBlocking {
+        // flow 与 list 类似
         flowOf(1, 2, 3, 4, 5).filter { it > 2 }
             .map { it * 2 }
             .take(2)
@@ -309,11 +313,44 @@ Exception in thread "main" ArithmeticException: / by zero
             logX("Filter: $it")
             it > 2
         }
-        flow.flowOn(Dispatchers.IO)  // 注意这里: 上游全部在其他线程， collect终结者运行在main线程
+        flow.flowOn(Dispatchers.IO)  // 注意这里: 上游全部在其他线程(io线程池)， collect终结者运行在main线程
             .collect {
                 logX("Collect $it")
             }
     }
+
+
+    // 代码段19
+
+    @Test
+    fun main19() = runBlocking {
+        // 冷数据流(只有调用了终止操作符之后，上游才会开始工作)
+        val flow = flow {
+            (1..3).forEach {
+                println("Before send $it")
+                emit(it)
+                println("Send $it")
+            }
+        }
+
+        // 热数据流
+        val channel = produce<Int>(capacity = 0) {
+            (1..3).forEach {
+                println("Before send $it")
+                send(it)
+                println("Send $it")
+            }
+        }
+
+        println("end")
+    }
+
+    /*
+    输出结果：
+    end
+    Before send 1
+    // Flow 当中的代码并未执行
+    */
 
 /*
 输出结果
@@ -373,11 +410,11 @@ Thread:main @coroutine#1
 
         loadData()
             .map { it * 2 }
-            .flowOn(Dispatchers.IO) // 1，耗时任务
+            .flowOn(Dispatchers.IO) // 1，耗时任务,指定loaddata运行在io线程池中
             .onEach {
                 logX("onEach $it")
             }
-            .launchIn(uiScope)      // 2，UI任务
+            .launchIn(uiScope)      // 2，UI任务, 这也是制定线程上游代码的运行线程，这里是onEach
 
         delay(1000L)
     }
@@ -414,7 +451,7 @@ Thread:main @coroutine#1
             .onEach { updateUI(it) }            // 更新UI界面
             .onStart { showLoading() }          // 显示加载弹窗
             .onCompletion { hideLoading() }     // 隐藏加载弹窗
-            .launchIn(uiScope)
+            .launchIn(uiScope)                  // 指定运行在mySingleDispatcher线程池中
 
         delay(10000L)
     }

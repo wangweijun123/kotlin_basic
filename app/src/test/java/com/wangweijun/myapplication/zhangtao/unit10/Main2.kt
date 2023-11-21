@@ -25,8 +25,10 @@ class Main2 {
     @Test
     fun main0() {
         val animals = mutableListOf<Animal>()
+        // 添加dog和cat
         animals.add(Dog())
         animals.add(Cat())
+
         println(animals.size)
         animals.forEach {
             println(it.eat())
@@ -46,10 +48,10 @@ class Main2 {
 
 // 需要父类集合，传入子类集合,编译出错
     private fun foo(list: MutableList<Animal>) {
-        // 出错，Cat集合不能存Dog对象
         list.add(Dog())
+        list.add(Cat())
         // 通过
-        val animal: Animal = list[0] // 取出的Cat对象
+        val animal = list[0]
     }
 
 
@@ -60,20 +62,18 @@ class Main2 {
     fun main2() {
         // 需要MutableList<Cat>，实际传MutableList<Animal>,编译出错
 //        var list = mutableListOf<Animal>(Animal()) // 编译出错
-        var list = mutableListOf<Cat>(Cat())
+        var list = mutableListOf(Cat())
         foo2(list)
         // 实际上，编译器在这里就会提示错误，我们现在假设编译器不阻止我们，
     // 会出什么问题
     }
 
-    // 需要子类集合，传入父类集合
-
+    // MutableList<Cat> 与 MutableList<Animal> 有什么关系，没有关系
+    // 两者没有任何关系，只是两个不同的集合而已,需要什么传什么
     fun foo2(list: MutableList<Cat>) {
-        // 通过
         list.add(Cat())
-//        list.add(Animal())// 出错
-        // 出错
-        val cat: Cat = list[0] // 实际取出来的是Animal对象
+        val cat: Cat = list[0]
+        println(cat.eat())
     }
 
 }

@@ -7,7 +7,7 @@ class JavaConvertExample7 {
 
     // 泛型定义处              泛型使用处
 //   ↓                      ↓
-    fun <T> saveSomething(data: T) { // data 是可空类型  T 等价于 Any?
+    fun <T> saveSomething(data: T) { // data 是可空类型  T 等价于Any?
         val set = sortedSetOf<T>() // Java TreeSet
         // 范型没有限制的话，他是可空类型,所以需要判空
         data?.let {
@@ -50,6 +50,7 @@ class JavaConvertExample7 {
 //                 泛型实参自动推导为String
 //                        ↓
         saveSomething("Hello world!")
+        saveSomething(null)
 //        saveSomething2(null) // build error
         saveSomething3(null)
     }

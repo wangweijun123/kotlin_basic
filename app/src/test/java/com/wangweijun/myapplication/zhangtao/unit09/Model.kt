@@ -10,9 +10,12 @@ import org.junit.Test
  *
  */
 class Model {
-    // 阻止外部对集合的修改，使用list, 内部通过其他属性(_data可变列表)直接委托 ::
-    val data: List<String> by ::_data
+    // 阻止外部对集合的修改，使用list(只读), 内部通过其他属性(_data可变列表)直接委托 ::
+
     private val _data = mutableListOf<String>()
+    // 只读list
+    val data: List<String> by ::_data
+
     fun load() {
         _data.add("Hello")
     }
@@ -39,6 +42,23 @@ class Model3 {
     // 变化在这里
     fun getData(): List<String> = data
 }
+
+
+class Model4 {
+    private val data: MutableList<String> = mutableListOf()
+
+    fun load() {
+        data.add("Hello")
+    }
+
+    //                                 变化在这里
+    //                                    ↓
+    fun getData(): List<String> = data.toList()
+}
+
+// 改完以后的输出结果
+//Before:[]
+//After:[]
 
 
 

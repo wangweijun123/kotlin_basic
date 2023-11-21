@@ -1,6 +1,7 @@
 package com.wangweijun.myapplication.zhangtao.unite19
 
 import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -16,25 +17,20 @@ class ChannelDemo {
     /**
      * 控制台输出带协程信息的log
      */
-    fun logX(any: Any?) {
-        println("""
-================================
-$any
-Thread name:${Thread.currentThread().name}, tid:${Thread.currentThread().id}
-================================""".trimIndent())
-    }
+
 
 // 代码段1
     @Test
     fun main() = runBlocking {
-        // 1，创建管道
+        // 1，创建管道 (capacity 容量至关重要如果是 Channel.UNLIMITED，需要等全部发送完成哈)
         val channel = Channel<Int>()
 
+        // 两个携程共享一个通道，一个携程发送消息，另外一个携程接收消息
         launch {
             // 2，在一个单独的协程@coroutine#2, tid:13当中发送管道消息
             (1..3).forEach {
-                channel.send(it) // 挂起函数
                 logX("Send: $it")
+                channel.send(it) // 挂起函数
             }
         }
 
@@ -84,6 +80,9 @@ Thread:main @coroutine#2
 // 代码段2
     @Test
     fun main2() = runBlocking {
+        // 单线程实现了生产者与消费者模型，在java中是无法实现的，在java中需要两个线程
+        // 需要注意channel中容量，默认capacity=0，就是说没有buffer，当发送一个int，就会挂起，直到接收者接收到
+        // 如果是无限容量,只有当全部发送完成后，receiver才会接收到
         val channel = Channel<Int>()
 
         launch {
@@ -301,9 +300,9 @@ Send 3
             logX(" init ... ")
             model.init()
         }
-        logX(" consumeEach ... ")
+        logX(" consumeEach xxx ... ")
         model.channel.consumeEach {
-            println(it)
+            logX("consume it = $it")
         }
     }
 
@@ -316,10 +315,46 @@ Send 3
 
         suspend fun init() {
             (1..3).forEach {
+                logX("send it = $it")
                 _channel.send(it)
+                delay(1000)
             }
         }
     }
 
 
+    @Test
+    fun main10() = runBlocking {
+        // 无限容量的管道
+        val channel = Channel<Int>(Channel.UNLIMITED) {
+            println("onUndeliveredElement = $it")
+        }
+
+        // 等价这种写法
+//    val channel2 = Channel<Int>(Channel.UNLIMITED, onUndeliveredElement = { println("onUndeliveredElement = $it") })
+
+        // 放入三个数据
+        (1..3).forEach {
+            channel.send(it)
+        }
+
+        // 取出一个，剩下两个
+        channel.receive()
+
+        // 取消当前channel
+        println(channel.isClosedForReceive)
+        println(channel.isClosedForSend)
+        channel.cancel()
+        println(channel.isClosedForReceive)
+        println(channel.isClosedForSend)
+        channel.send(4)
+    }
+}
+
+fun logX(any: Any?) {
+    println("""
+================================
+$any
+Thread name:${Thread.currentThread().name}, tid:${Thread.currentThread().id}
+================================""".trimIndent())
 }

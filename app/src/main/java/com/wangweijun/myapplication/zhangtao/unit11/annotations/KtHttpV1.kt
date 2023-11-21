@@ -53,6 +53,9 @@ data class Repo(
 object KtHttpV1 {
     private var okHttpClient = OkHttpClient()
     private var gson = Gson()
+    // https://api.github.com/?lang=Kotlin&since=weekly
+
+
     var baseUrl = "https://trendings.herokuapp.com"
     // java 中 的object == kotlin中的Any
     // InvocationHandler 接口只有一个方法，InvocationHandler 符合sam转换 ，使用lambda表示
@@ -104,7 +107,7 @@ object KtHttpV1 {
         val genericReturnType = method.genericReturnType
         val body = response.body
         val json = body?.string()
-        println(json)
+        println("json = $json")
         val result = gson.fromJson<Any?>(json, genericReturnType)
 
         return result

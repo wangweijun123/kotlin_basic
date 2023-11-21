@@ -76,4 +76,7 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    // viewModels 引入
+//    implementation 'androidx.activity:activity-ktx:1.8.0'
 }

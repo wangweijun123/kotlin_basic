@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
  */
 class MyFragment : Fragment(){
 
-//    val viewModel: MyViewModel by viewModel()
+//    val viewModel: MyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

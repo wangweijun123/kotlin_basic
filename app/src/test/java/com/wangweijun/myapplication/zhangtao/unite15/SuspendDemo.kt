@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 import org.junit.Test
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.coroutines.coroutineContext
 
 /**
  * author : user
@@ -148,7 +149,7 @@ Thread name:${Thread.currentThread().name}, tid:${Thread.currentThread().id}
 // 代码段2
 
     @Test
-    fun main2() = runBlocking {
+    fun main2() = runBlocking(context = Dispatchers.Default) {
         val user = getUserInfo2()
         logX(user)
     }
@@ -356,4 +357,23 @@ true
 Thread:MySingleThread @coroutine#2
 ================================
 */
+
+
+// 代码段21
+
+//    import kotlinx.coroutines.*
+//    import kotlin.coroutines.coroutineContext
+
+    //                        挂起函数能可以访问协程上下文吗？
+//                                 ↓
+    suspend fun testContext() = coroutineContext
+
+    @Test
+    fun main8() = runBlocking {
+
+        coroutineContext
+
+//        println("main8 = " +testContext())
+    }
+
 }

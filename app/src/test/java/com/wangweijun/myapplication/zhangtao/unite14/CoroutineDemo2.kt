@@ -10,6 +10,7 @@ import kotlin.concurrent.thread
  * email : xxx@xx.com
  * time   : 2022/04/03 2:26 下午
  * version: 1.0
+ * launch 一个携程，就是一个任务
  * desc   : 三种启动携程方式
  */
 class CoroutineDemo2 {
@@ -35,7 +36,7 @@ class CoroutineDemo2 {
         }
         // After launch:Test worker
         println("After launch:${Thread.currentThread().name}")
-        Thread.sleep(10000L)
+        Thread.sleep(2000L)
     }
 
 /*
@@ -206,12 +207,7 @@ Process end!
     }
 
 
-//  这里的代码只能写在顶层文件中，不能写在class中
-//    private fun CoroutineScope.func2(num: Int): Double {
-//        return num.toDouble()
-//    }
-    // 这个函数应该是 CoroutineScope 类的成员方法或是扩展方法，并且，它的参数类型必须是 Int，返回值类型必须是 Double
-//    val f2: CoroutineScope.(Int) -> Double = CoroutineScope::func2
+
 
 
     suspend fun func3(num: Int): Double {
@@ -305,3 +301,11 @@ Process end!
     }
 
 }
+
+
+//  这里的代码只能写在顶层文件中，不能写在class中
+    private fun CoroutineScope.func2(num: Int): Double {
+        return num.toDouble()
+    }
+// 这个函数应该是 CoroutineScope 类的成员方法或是扩展方法，并且，它的参数类型必须是 Int，返回值类型必须是 Double
+    val f2: CoroutineScope.(Int) -> Double = CoroutineScope::func2

@@ -29,6 +29,10 @@ class CalculatorV3 {
 }
 
 class TestAnnotation {
+    @Test
+    fun annotatxxx() {
+        println("result = xxx")
+    }
 
     @Test
     fun annotationTest() {
